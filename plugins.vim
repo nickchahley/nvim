@@ -136,7 +136,9 @@ endif
 	let g:wheel#map#down='<C-y>'
 " }}}
 " {{{ Simplenote 
-	source $VIMHOME/simplenoterc
+	if filereadable("$VIMHOME/simplenoterc")
+		source $VIMHOME/simplenoterc
+	endif
 	let g:SimplenoteFiletype = "markdown"
 	" Single window mode
 	let g:SimplenoteSingleWindow = 1
