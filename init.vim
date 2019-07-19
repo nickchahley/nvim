@@ -5,8 +5,11 @@
 		" '.' is a join operator for let statements?
 		" not necessarily the cannonical Windows vimdir location
 		let $VIMHOME = $HOME.'/Neovim/nvim'
+		let $VIMRC = $VIMHOME.'/init.vim'
 		let $VIMSHARE = $HOME.'/Neovim/share/nvim'
 		let $BACKUNDOSWAP = $HOME.'/Neovim/vim-backundoswap/'
+		" Don't know what I'm doing here.
+		set runtimepath+='$VIMSHARE/runtime'
 	else 
 		" This is nix
 		let $VIMHOME = $HOME.'/.config/nvim'
