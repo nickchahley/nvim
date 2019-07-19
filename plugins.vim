@@ -41,10 +41,7 @@ endif
 		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
 		Plug 'ryanoasis/vim-devicons'
-		Plug 'skielbasa/vim-material-monokai'
 		Plug 'jacoborus/tender.vim'
-		Plug 'crusoexia/vim-dracula'
-		Plug 'crusoexia/vim-dream'  
 
 		" Writing prose 
 		Plug 'junegunn/goyo.vim'
@@ -65,7 +62,7 @@ endif
 
 	" material-monokai
 	let g:materialmonokai_italic = 0
-	let g:airline_theme = 'materialmonokaiedit'
+	let g:airline_theme = 'materialmonokai'
 " }}}
 " {{{ Airline
 	let g:airline#extensions#tabline#enabled    = 1
