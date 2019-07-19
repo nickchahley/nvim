@@ -38,10 +38,12 @@ endif
 		Plug 'vim-scripts/indentpython.vim'
 
 		" Themes, Apperance, Colors
+		Plug 'itchyny/lightline.vim'
 		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
 		Plug 'ryanoasis/vim-devicons'
 		Plug 'jacoborus/tender.vim'
+		Plug 'skielbasa/vim-material-monokai'
 
 		" Writing prose 
 		Plug 'junegunn/goyo.vim'
@@ -62,7 +64,7 @@ endif
 
 	" material-monokai
 	let g:materialmonokai_italic = 0
-	let g:airline_theme = 'materialmonokai'
+	let g:airline_theme = 'materialmonokaiedit'
 " }}}
 " {{{ Airline
 	let g:airline#extensions#tabline#enabled    = 1
