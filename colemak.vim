@@ -43,22 +43,6 @@
 	" jt/jb mv current line to top/bottom of screen
 	nnoremap jj zz|
 " }}}
-" Cursor to start/end of line {{{
-	" ^ = mv to first non-blank char of line; 0 = mv to start of line
-  " start of line text
-	nnoremap B ^
-	vnoremap B ^
-	onoremap B ^
-  " end of line  
-	" undecided on where we want this exactly
-	nnoremap b $
-	vnoremap b $
-	onoremap b $
-	" don't map f for now so we can still us 'go to prev occurance of'
-	"nnoremap f $
-	"vnoremap f $
-	"onoremap f $
-" }}}
 " Indexed Line Jumping {{{
 	" 123<CR> will now jump to  line 123, instead of jumping down 123 lines
 	" '' = return to prev loc in file (for when you accidently hit <CR>)

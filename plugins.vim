@@ -41,10 +41,8 @@ endif
 		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
 		Plug 'ryanoasis/vim-devicons'
-		Plug 'skielbasa/vim-material-monokai'
 		Plug 'jacoborus/tender.vim'
-		Plug 'crusoexia/vim-dracula'
-		Plug 'crusoexia/vim-dream'  
+		Plug 'skielbasa/vim-material-monokai'
 
 		" Writing prose 
 		Plug 'junegunn/goyo.vim'

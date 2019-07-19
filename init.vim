@@ -156,6 +156,10 @@ source $VIMHOME/plugins.vim
 " }}}
 " {{{ Keybindings
 
+	" Open a list of buffers, tab completion to switch. 
+	" :sb split, :vert sb vsplit
+	nnoremap <leader>b :ls<cr>:b<space>
+
 	" Hopefully override global <C-j> mapping from vim-latex-suite
 	nmap <Leader>j <Plug>IMAP_JumpForward
 	nmap <Leader>j <Plug>IMAP_JumpForward
