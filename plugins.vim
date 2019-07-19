@@ -38,7 +38,6 @@ endif
 		Plug 'vim-scripts/indentpython.vim'
 
 		" Themes, Apperance, Colors
-		Plug 'itchyny/lightline.vim'
 		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
 		Plug 'ryanoasis/vim-devicons'
