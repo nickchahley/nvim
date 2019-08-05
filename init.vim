@@ -43,19 +43,6 @@ source $VIMHOME/plugins.vim
 	else 
 		" This is console Vim.
 		set noeb vb t_vb= " Disable error bell (vim only)
-		
-		"" Cursor_config:
-		" 1 or 0 -> blinking block
-		" 2 -> solid block
-		" 3 -> blinking underscore
-		" 4 -> solid underscore
-		" Recent versions of xterm (282 or above) also support
-		" 5 -> blinking vertical bar
-		" 6 -> solid vertical bar
-		let &t_SI = "\<Esc>[5 q"
-		let &t_SR = "\<Esc>[3 q"
-		let &t_EI = "\<Esc>[1 q"
-
 	endif
 " }}}
 " {{{ General Configuration
@@ -73,6 +60,7 @@ source $VIMHOME/plugins.vim
 	set backspace=2       " backspace in i mode, even tho it's 'suboptimal'
 	set wrapmargin=8      " unsure why we have this set..
 	set number            " Line numbers
+	set relativenumber    " Line numbers above/below cursor are relative
 	if &tabstop == 8      " Then probs on initial vimrc load, el don't overwrite
 		set tabstop=4       " Tab width to 4
 		set shiftwidth=4    " indent/outdent by 4
@@ -107,6 +95,10 @@ source $VIMHOME/plugins.vim
 		nnoremap <Leader>C :call ToggleCursorLine()<CR>
 		call ToggleCursorLine()
 	" }}}
+	" try to get cursor to bilnk again in terminator
+	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+				\,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr
+				\,sm:block-blinkwait175-blinkoff150-blinkon175
 	
 	" Spelling
 	" To add a one-off spellfile use :setlocal spellfile+=.oneoff.utf-8.add
