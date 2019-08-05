@@ -56,11 +56,17 @@ source $VIMHOME/plugins.vim
 	set termguicolors     " enable truecolor support, sometimes...
 	colorscheme material-monokai-edit
 
+	" Absolute line numbers in insert mode, else hybrid relative
+	set relativenumber 
+	augroup numbertoggle
+	  autocmd!
+	  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber nonumber
+	  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
+	augroup END
+
 	set title             " Don't forget what you're editing
 	set backspace=2       " backspace in i mode, even tho it's 'suboptimal'
 	set wrapmargin=8      " unsure why we have this set..
-	set number            " Line numbers
-	set relativenumber    " Line numbers above/below cursor are relative
 	if &tabstop == 8      " Then probs on initial vimrc load, el don't overwrite
 		set tabstop=4       " Tab width to 4
 		set shiftwidth=4    " indent/outdent by 4
@@ -95,7 +101,7 @@ source $VIMHOME/plugins.vim
 		nnoremap <Leader>C :call ToggleCursorLine()<CR>
 		call ToggleCursorLine()
 	" }}}
-	" try to get cursor to bilnk again in terminator
+	" Cursor- blinking line in insert, underline for remove, bar otherwise
 	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 				\,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr
 				\,sm:block-blinkwait175-blinkoff150-blinkon175
