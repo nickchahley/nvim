@@ -146,6 +146,7 @@ source $VIMHOME/plugins.vim
 	set dir=$BACKUNDOSWAP/swapfiles
 " }}}
 " {{{ Line Return
+	" What does this do? Return to the previous line when reopening a file?
 	augroup line_return
 		au!
 		au BufReadPost *
