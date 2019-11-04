@@ -43,19 +43,6 @@ source $VIMHOME/plugins.vim
 	else 
 		" This is console Vim.
 		set noeb vb t_vb= " Disable error bell (vim only)
-		
-		"" Cursor_config:
-		" 1 or 0 -> blinking block
-		" 2 -> solid block
-		" 3 -> blinking underscore
-		" 4 -> solid underscore
-		" Recent versions of xterm (282 or above) also support
-		" 5 -> blinking vertical bar
-		" 6 -> solid vertical bar
-		let &t_SI = "\<Esc>[5 q"
-		let &t_SR = "\<Esc>[3 q"
-		let &t_EI = "\<Esc>[1 q"
-
 	endif
 " }}}
 " {{{ General Configuration
@@ -69,10 +56,17 @@ source $VIMHOME/plugins.vim
 	set termguicolors     " enable truecolor support, sometimes...
 	colorscheme material-monokai-edit
 
+	" Absolute line numbers in insert mode, else hybrid relative
+	set relativenumber 
+	augroup numbertoggle
+	  autocmd!
+	  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber nonumber
+	  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
+	augroup END
+
 	set title             " Don't forget what you're editing
 	set backspace=2       " backspace in i mode, even tho it's 'suboptimal'
 	set wrapmargin=8      " unsure why we have this set..
-	set number            " Line numbers
 	if &tabstop == 8      " Then probs on initial vimrc load, el don't overwrite
 		set tabstop=4       " Tab width to 4
 		set shiftwidth=4    " indent/outdent by 4
@@ -95,16 +89,22 @@ source $VIMHOME/plugins.vim
 	set wildmenu
 	set wildmode=longest,list,full
 
+	" Hilighting
+	hi MatchParen gui=NONE cterm=NONE guibg=NONE  guifg=YELLOW ctermfg=YELLOW
 	" {{{ Highlight current line and allow toggling
-	" Function b/c xml files don't respect our color changes?
-	function! ToggleCursorLine()
-		hi CursorLineNr guifg=#FF5C57 guibg=NONE ctermbg=NONE
-		hi CursorLine guibg=NONE ctermbg=NONE
-		set cursorline! " toggle highlight current line
-	endfunction
-	nnoremap <Leader>C :call ToggleCursorLine()<CR>
-	call ToggleCursorLine()
+		" Function b/c xml files don't respect our color changes?
+		function! ToggleCursorLine()
+			hi CursorLineNr guifg=#FF5C57 guibg=NONE ctermbg=NONE
+			hi CursorLine guibg=NONE ctermbg=NONE
+			set cursorline! " toggle highlight current line
+		endfunction
+		nnoremap <Leader>C :call ToggleCursorLine()<CR>
+		call ToggleCursorLine()
 	" }}}
+	" Cursor- blinking line in insert, underline for remove, bar otherwise
+	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+				\,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr
+				\,sm:block-blinkwait175-blinkoff150-blinkon175
 	
 	" Spelling
 	" To add a one-off spellfile use :setlocal spellfile+=.oneoff.utf-8.add
@@ -126,7 +126,6 @@ source $VIMHOME/plugins.vim
 	" Clear search highlighting on screen redraw
 	nnoremap <C-l> :nohls<CR><C-l> 
 	
-
 	" Softwrap text, except comments. See :h fo-table
 	set wrap
 	set linebreak
