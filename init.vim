@@ -66,7 +66,6 @@ source $VIMHOME/plugins.vim
 
 	set title             " Don't forget what you're editing
 	set backspace=2       " backspace in i mode, even tho it's 'suboptimal'
-	set wrapmargin=8      " unsure why we have this set..
 	if &tabstop == 8      " Then probs on initial vimrc load, el don't overwrite
 		set tabstop=4       " Tab width to 4
 		set shiftwidth=4    " indent/outdent by 4
@@ -127,9 +126,12 @@ source $VIMHOME/plugins.vim
 	nnoremap <C-l> :nohls<CR><C-l> 
 	
 	" Softwrap text, except comments. See :h fo-table
+	set wrapmargin=8 " unsure why we have this set..
 	set wrap
 	set linebreak
-	set nolist 		"list disables linebreak
+	set breakindent  " preserve indent when wrapping lines
+	set showbreak=..
+	set nolist       " list disables linebreak
 	set formatoptions=cqlj
 	set formatoptions-=o
 
