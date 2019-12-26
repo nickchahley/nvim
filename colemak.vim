@@ -16,18 +16,13 @@
 	" Always go down/up one line regardless of "set wrap". Is that a sane default?
 	nnoremap e gj|xnoremap e gj|onoremap e gj|
 	nnoremap i gk|xnoremap i gk|onoremap i gk|
-	" Default vim mvmt b/h
-	"nnoremap e j|xnoremap e j|onoremap e j|
-	"nnoremap i k|xnoremap i k|onoremap i k|
 	" Turbo Navigation
 	" Works with counts, see ":help complex-repeat"
 	nnoremap <silent> N @='5h'<CR>|xnoremap <silent> N @='5h'<CR>|onoremap <silent> N @='5h'<CR>|
+	nnoremap <silent> O @='5l'<CR>|xnoremap <silent> O @='5l'<CR>|onoremap <silent> O @='5l'<CR>|
 	" Always go down/up 5 line regardless of "set wrap". Is that a sane default?
 	nnoremap <silent> E @='5gj'<CR>|xnoremap <silent> E @='5gj'<CR>|onoremap <silent> E @='5gj'<CR>|
 	nnoremap <silent> I @='5gk'<CR>|xnoremap <silent> I @='5gk'<CR>|onoremap <silent> I @='5gk'<CR>|
-	"nnoremap <silent> E @='5j'<CR>|xnoremap <silent> E @='5j'<CR>|onoremap <silent> E @='5j'<CR>|
-	"nnoremap <silent> I @='5k'<CR>|xnoremap <silent> I @='5k'<CR>|onoremap <silent> I @='5k'<CR>|
-	nnoremap <silent> O @='5l'<CR>|xnoremap <silent> O @='5l'<CR>|onoremap <silent> O @='5l'<CR>|
 " }}}
 " Scrolling --- Buffer Gross Cursor movements we never use {{{
 	" Scroll [n] lines u/d <C-(u/d)>

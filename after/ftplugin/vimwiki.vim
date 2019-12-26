@@ -4,8 +4,7 @@ setlocal shiftwidth=4
 setlocal tabstop=4
 setlocal nonumber
 setlocal norelativenumber
-setlocal nowrap
-setlocal fo+=t
+setlocal fo-=t
 
 " Override vimwiki's default o/O vimwiki#lst#kbd_o(), see ftplugin/vimwiki.vim 487
 " Restore the o/O maps to movement
