@@ -16,6 +16,7 @@ endif
 	call plug#begin('$VIMSHARE/plugged')
 
 		" Utility
+		Plug 'vim-scripts/BufOnly.vim'
 		Plug 'vimwiki/vimwiki'
 		Plug 'tpope/vim-commentary'
 		Plug 'tpope/vim-eunuch' " Sugar for shell commands
