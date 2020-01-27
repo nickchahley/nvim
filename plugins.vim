@@ -87,17 +87,18 @@ endif
 	
 	" Registered wikis, can open by list index w/ [1,2,etc]<Leader>w<Space>
 	" What are templates and how do we use them
+	let $CONVWIKI = $HOME.'/vimwiki-conversion'
 	let g:vimwiki_list = [
 		\{
 		\ 'path': '$WIKIHOME/wiki-DJG',
-		\ 'syntax': 'markdown',
 		\ 'ext': '.wiki',
-		\ 'path_html': '$WIKIHOME/wiki-DJG/site_html/'
+		\ 'path_html': '$WIKIHOME/wiki-DJG/site_html/',
+		\ 'auto_diary_index' : 1
 		\ },{ 
 		\ 'path': '$WIKIHOME',
-		\ 'syntax': 'markdown',
 		\ 'ext': '.wiki',
-		\ 'path_html': '$WIKIHOME/site_html/'
+		\ 'path_html': '$WIKIHOME/site_html/',
+		\ 'auto_diary_index' : 1
 		\ },{
 		\ 'path': '/home/nikoli/Clone/McGill/Courses/NEUR 630/Term Paper/wiki',
 		\ 'syntax': 'markdown',
