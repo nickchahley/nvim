@@ -24,17 +24,7 @@
 	nnoremap <silent> E @='5gj'<CR>|xnoremap <silent> E @='5gj'<CR>|onoremap <silent> E @='5gj'<CR>|
 	nnoremap <silent> I @='5gk'<CR>|xnoremap <silent> I @='5gk'<CR>|onoremap <silent> I @='5gk'<CR>|
 " }}}
-" Scrolling --- Buffer Gross Cursor movements we never use {{{
-	" Scroll [n] lines u/d <C-(u/d)>
-	nnoremap <C-u> <C-y>
-	nnoremap <C-y> <C-e>
-	" mv screen up/down half page
-	nnoremap <C-f> <C-u>
-	nnoremap <C-p> <C-d>
-	" PgUp/PgDn >> just use PgUp/PgDn! can liberate C-p and C-f too
-	" TODO can change this latter if finding a better use for C-p/g
-	nnoremap <C-p> <C-b>
-	nnoremap <C-g> <C-f>
+" Scrolling --- Buffer Gross Cursor movements  {{{
 	" jt/jb mv current line to top/bottom of screen
 	nnoremap jj zz|
 " }}}
