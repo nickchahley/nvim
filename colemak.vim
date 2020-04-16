@@ -84,7 +84,7 @@
 	nnoremap jv gp|
 	nnoremap jV gP|
 	" Open newline, then put. Opt: prefix w/ reg ["+,(v/V)] (above/below) 
-	nnoremap <expr> ,v 'o<ESC>"'.v:register.v:count1.'p'
+	nnoremap <expr> <leader>v 'o<ESC>"'.v:register.v:count1.'p'
 " }}}
 " Undo/redo {{{
 	nnoremap z u|xnoremap z :<C-u>undo<CR>|
