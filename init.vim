@@ -157,6 +157,10 @@ source $VIMHOME/plugins.vim
 			\ endif
 	augroup END
 " }}}
+" {{{ Load local functions (bite sized plugins)
+	let $FUNCTIONS = $VIMHOME.'/functions'
+	source $FUNCTIONS/ToggleStatusline.vim
+" }}}
 " {{{ Keybindings
 
 	" Open a list of buffers, tab completion to switch. 
