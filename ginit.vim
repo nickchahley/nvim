@@ -6,3 +6,5 @@ if has('win32') || has('win64')
 	GuiFont! Hack:h10
 endif
 
+set linespace=3
+

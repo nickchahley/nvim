@@ -1,6 +1,8 @@
 " {{{ Linux and Windows specific hooks
 if has('win32') || has('win64')
 	let $WIKIHOME = $HOME.'/Dropbox/vimwiki'
+	" Added 200420 for ultisnips
+	let g:python3_host_prog = $HOME.'/miniconda3/python.exe'
 else
 	let $WIKIHOME = $HOME.'/vimwiki'
 	" Automatically install vim-plug if DNE	
@@ -15,8 +17,13 @@ endif
 " {{{ Plugins to load/install
 	call plug#begin('$VIMSHARE/plugged')
 
-		" Utility
+		" New/still figuring out
+		if has('python3')
+			Plug 'SirVer/ultisnips'
+		endif
 		Plug 'yuki-ycino/fzf-preview.vim'
+
+		" Utility
 		Plug 'vim-scripts/BufOnly.vim'
 		Plug 'vimwiki/vimwiki'
 		Plug 'tpope/vim-commentary'
@@ -28,6 +35,7 @@ endif
 		Plug 'reedes/vim-wheel'
 
 		" Filetypes and Services
+		Plug 'nickchahley/mediawiki.vim'
 		Plug 'gabrielelana/vim-markdown'
 		Plug 'mrtazz/simplenote.vim'
 		Plug 'mboughaba/i3config.vim'
@@ -125,6 +133,21 @@ endif
 " {{{ goyo
 	let g:goyo_width = 85
 	let g:goyo_height = 90
+
+	function! s:goyo_enter()
+		set norelativenumber
+		" This group will be unrecoverable after but w/e
+		autocmd! numbertoggle 
+		set linespace=7
+	endfunction
+
+	function! s:goyo_leave()
+		set relativenumber 
+		set linespace=0
+	endfunction
+
+	autocmd! User GoyoEnter nested call <SID>goyo_enter()
+	autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " }}}
 " {{{ gabrielelana/vim-markdown
 	let g:markdown_enable_spell_checking = 0
@@ -169,4 +192,9 @@ endif
 	nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
 	nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
 	nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
+" }}}
+" {{{ ultisnips
+		if has('python3')
+			"
+		endif
 " }}}

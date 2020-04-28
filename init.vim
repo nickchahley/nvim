@@ -75,6 +75,7 @@ source $VIMHOME/plugins.vim
 	set foldmethod=marker " will be overwritten by modelines, ftplugins
 	set autoread          " Update file on change. DTEW?
 	set scrolloff=5       " Keep 5 lines above and below cursor
+	set mouse=a           " Enable mouse click and scroll, if supported
 
 	" Open planes to right and bottom, feels more natural than default
 	set splitbelow
