@@ -76,11 +76,26 @@ endif
 	let g:airline_theme = 'materialmonokaiedit'
 " }}}
 " {{{ Airline
-	let g:airline#extensions#tabline#enabled    = 1
+	let g:airline#extensions#tabline#enabled    = 0
 	let g:airline#extensions#whitespace#enabled = 0
 	" show functin name + params
 	let g:airline#extensions#tagbar#enabled = 1
 	let g:airline#extensions#tagbar#flags = 's'
+	" exclude from these buffers
+	let g:airline_exclude_filetypes = [
+				\ 'vimwiki', 'wiki', 'mediawiki', 
+				\ 'netrw', 'diff', 'undotree', 'tagbar',
+				\ ]
+
+	" customize symbols
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+	" unicode symbols
+	let g:airline_symbols.linenr = ''
+	let g:airline_symbols.maxlinenr = ''
+	
+	" customize statusline
 " }}}
 " {{{ Semshi - python
 	let g:semshi#error_sign_delay = 4
