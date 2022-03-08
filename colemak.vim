@@ -16,6 +16,12 @@
 	" Always go down/up one line regardless of "set wrap". Is that a sane default?
 	nnoremap e gj|xnoremap e gj|onoremap e gj|
 	nnoremap i gk|xnoremap i gk|onoremap i gk|
+	" Add maps for down/up count lines, ignoring wraps
+	" Unsure why I need to add vmaps for these and not the above
+	nnoremap <leader>e j
+	nnoremap <leader>i k
+	vnoremap <leader>e j
+	vnoremap <leader>i k
 	" Turbo Navigation
 	" Works with counts, see ":help complex-repeat"
 	nnoremap <silent> N @='5h'<CR>|xnoremap <silent> N @='5h'<CR>|onoremap <silent> N @='5h'<CR>|
@@ -41,17 +47,9 @@
 	nnoremap <C-d> <C-i>
 " }}}
 " Words forward/backward {{{
-	" l/L = back word/WORD
 	" u/U = forward end of word/WORD
-	" y/Y = forward word/WORD
-	nnoremap l b|xnoremap l b|onoremap l b|
-	nnoremap L B|xnoremap L B|onoremap L B|
-	nnoremap u e|xnoremap u e|onoremap u e|
-	nnoremap U E|xnoremap U E|onoremap U E|
-	nnoremap y w|xnoremap y w|onoremap y w|
-	nnoremap Y W|xnoremap Y W|onoremap Y W|
-	cnoremap <C-l> <C-Left> 
-	cnoremap <C-y> <C-Right>
+	nnoremap l e|xnoremap l e|onoremap l e| 
+	nnoremap L E|xnoremap L E|onoremap L E|
 " }}}
 " inSert/Replace/append (T) {{{
 	nnoremap s i|
@@ -63,9 +61,9 @@
 	nnoremap gs gi
 " }}}
 " Change {{{
-	nnoremap w c|xnoremap w c|
-	nnoremap W C|xnoremap W C|
-	nnoremap ww cc|
+	" nnoremap w c|xnoremap w c|
+	" nnoremap W C|xnoremap W C|
+	" nnoremap ww cc|
 " }}}
 " Cut/copy/paste {{{
 	" Note: "0 reg is always your last YANK command (c C cc), so c and x don't
@@ -73,13 +71,13 @@
 	" TODO consider mapping a 'yank and delete' command so we can del text into
 	" the special "0 register (although for a similar amount of thought could
 	" just delete into a specific register like "k?)
+	" nnoremap c y|xnoremap c y|
+	" nnoremap C y$|xnoremap C y|
+	" nnoremap cc yy|
 	nnoremap x x|xnoremap x d|
-	nnoremap c y|xnoremap c y|
-	nnoremap v p|xnoremap v p|
 	nnoremap X d$|xnoremap X d|
-	nnoremap C y$|xnoremap C y|
+	nnoremap v p|xnoremap v p|
 	nnoremap V P|xnoremap V P|
-	nnoremap cc yy|
 	" Like "v/V" but leave cursor just after/before new text
 	nnoremap jv gp|
 	nnoremap jV gP|
