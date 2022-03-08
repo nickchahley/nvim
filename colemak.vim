@@ -54,8 +54,6 @@
 " inSert/Replace/append (T) {{{
 	nnoremap s i|
 	nnoremap S I|
-	nnoremap t a|
-	nnoremap T A|
 	" gi should be gs for us since we use 's' for insert
 	" Goes to the last insertion point and gets in insert mode
 	nnoremap gs gi
@@ -66,23 +64,15 @@
 	" nnoremap ww cc|
 " }}}
 " Cut/copy/paste {{{
-	" Note: "0 reg is always your last YANK command (c C cc), so c and x don't
+	" Note: "0 reg is always your last YANK command, so y and x don't
 	" have the same relationship as copy and cut.
 	" TODO consider mapping a 'yank and delete' command so we can del text into
 	" the special "0 register (although for a similar amount of thought could
 	" just delete into a specific register like "k?)
-	" nnoremap c y|xnoremap c y|
-	" nnoremap C y$|xnoremap C y|
-	" nnoremap cc yy|
-	nnoremap x x|xnoremap x d|
-	nnoremap X d$|xnoremap X d|
-	nnoremap v p|xnoremap v p|
-	nnoremap V P|xnoremap V P|
-	" Like "v/V" but leave cursor just after/before new text
-	nnoremap jv gp|
-	nnoremap jV gP|
+	" nnoremap x x|xnoremap x d|
+	" nnoremap X d$|xnoremap X d|
 	" Open newline, then put. Opt: prefix w/ reg ["+,(v/V)] (above/below) 
-	nnoremap <expr> <leader>v 'o<ESC>"'.v:register.v:count1.'p'
+	nnoremap <expr> <leader>p 'o<ESC>"'.v:register.v:count1.'p'
 " }}}
 " Undo/redo {{{
 	nnoremap z u|xnoremap z :<C-u>undo<CR>|
@@ -90,16 +80,11 @@
 	nnoremap Z <C-R>|xnoremap Z :<C-u>redo<CR>|
 " }}}
 " Visual mode {{{
-	nnoremap a v|xnoremap a v|
-	nnoremap A V|xnoremap A V|
-	" reselect last visual selection
-	nnoremap ga gv
-	nnoremap <C-a> <C-v>|xnoremap <C-a> <C-a>
 	" Make insert/add work also in visual line mode like in visual block mode
 	xnoremap <silent> <expr> s (mode() =~# "[V]" ? "\<C-v>0o$I" : "I")
 	xnoremap <silent> <expr> S (mode() =~# "[V]" ? "\<C-v>0o$I" : "I")
-	xnoremap <silent> <expr> t (mode() =~# "[V]" ? "\<C-v>0o$A" : "A")
-	xnoremap <silent> <expr> T (mode() =~# "[V]" ? "\<C-v>0o$A" : "A")
+	" xnoremap <silent> <expr> t (mode() =~# "[V]" ? "\<C-v>0o$A" : "A")
+	" xnoremap <silent> <expr> T (mode() =~# "[V]" ? "\<C-v>0o$A" : "A")
 " }}}
 " Search {{{
 	" Next/prev search match
@@ -107,16 +92,9 @@
 	nnoremap k n|xnoremap k n|onoremap k n|
 	nnoremap K N|xnoremap K N|onoremap K N|
 	
-	" To/Till_before (f/t) [count]'th occurrence of char p/P :
-	" exclusive/inclusive
-	" This works for most commands with motions: e.g., dp" will delete up to
-	" excluding the next occurance of '"', 2dP" will delete up to including the
-	" 2nd next '"'
-	nnoremap p t|xnoremap p t|onoremap p t|
-	nnoremap P T|xnoremap P T|onoremap P T|
 " }}}
 " inneR text objects {{{
-	" e.g. dip (delete inner paragraph) is now drp
+	" e.g. drp equivilant to dip (delete inner paragraph)
 	onoremap r i
 " }}}
 " Folds {{{
@@ -128,11 +106,10 @@
 	nnoremap je zk|xnoremap je zk|
 " }}}
 " Overridden keys must be prefixed with g {{{
+	" WTF are these doing?
 	nnoremap gX X|xnoremap gX X|
 	nnoremap gK K|xnoremap gK K|
 	nnoremap gL L|xnoremap gL L|
-	nnoremap gv gp|xnoremap gv gp|
-	nnoremap gV gP|xnoremap gV gP|
 " }}}
 " Window and Split handling {{{
 	nnoremap <C-w>n <C-w>h|xnoremap <C-w>n <C-w>h|
