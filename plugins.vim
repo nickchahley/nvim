@@ -16,7 +16,11 @@ endif
 	call plug#begin('$VIMSHARE/plugged')
 
 		" Utility
-		Plug 'yuki-ycino/fzf-preview.vim'
+		" ctrlp seems way simpler to use than fzf preview. Works out of box on
+		" windows
+		" Plug 'yuki-ycino/fzf-preview.vim'
+		Plug 'tpope/vim-surround'
+		Plug 'ctrlpvim/ctrlp.vim'
 		Plug 'vim-scripts/BufOnly.vim'
 		Plug 'vimwiki/vimwiki'
 		Plug 'tpope/vim-commentary'
@@ -28,13 +32,15 @@ endif
 		Plug 'reedes/vim-wheel'
 
 		" Filetypes and Services
+		Plug 'vim-scripts/autoit.vim--Breland'
 		Plug 'gabrielelana/vim-markdown'
 		Plug 'mrtazz/simplenote.vim'
 		Plug 'mboughaba/i3config.vim'
 		Plug 'nickchahley/vim-manpager'
+		Plug 'tpope/vim-fugitive'
 
 		" Python
-		Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+		" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 		Plug 'nickchahley/pydoc.vim'
 		Plug 'tmhedberg/SimpylFold'
 		Plug 'vim-scripts/indentpython.vim'
@@ -115,7 +121,8 @@ endif
 	" Oh my god do shift mappings work in terminal now? No.
 	:nmap <leader>s <Plug>VimwikiToggleListItem
 	:nmap <C-J> <Plug>VimwikiSplitLink
-	:nmap <C-V> <Plug>VimwikiVSplitLink
+	" reson for commenting: to restore visual block mode map
+	" :nmap <C-V> <Plug>VimwikiVSplitLink
 
 	" Foldmethod, list, expr (headers and sections), syntax
 	let g:vimwiki_folding = 'syntax'
@@ -152,21 +159,21 @@ endif
 	set title titlestring=
 " }}}
 " {{{ fzf-preview
-	nmap <Leader>f [fzf-p]
-	xmap <Leader>f [fzf-p]
-	nnoremap <silent> [fzf-p]d     :<C-u>FzfPreviewDirectoryFiles <CR>
-	nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
-	nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
-	nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
-	nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
-	nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
-	nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
-	nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
-	nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
-	nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-	nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
-	xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
-	nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
-	nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
-	nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
+	" nmap <Leader>f [fzf-p]
+	" xmap <Leader>f [fzf-p]
+	" nnoremap <silent> [fzf-p]d     :<C-u>FzfPreviewDirectoryFiles <CR>
+	" nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
+	" nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
+	" nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
+	" nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
+	" nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
+	" nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
+	" nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
+	" nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
+	" nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+	" nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
+	" xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+	" nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
+	" nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
+	" nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
 " }}}

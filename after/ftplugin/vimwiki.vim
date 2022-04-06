@@ -6,6 +6,8 @@ setlocal nonumber
 setlocal norelativenumber
 setlocal fo-=t
 setlocal foldlevel=99 " Folds open by default
+setlocal linespace=4 " windows gui req resize window to see command bar
+redraw
 
 " Override vimwiki's default o/O vimwiki#lst#kbd_o(), see ftplugin/vimwiki.vim 487
 " Restore the o/O maps to movement
