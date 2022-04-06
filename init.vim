@@ -188,6 +188,10 @@ source $VIMHOME/plugins.vim
 	nnoremap <leader>hb :botright split<CR>
 	nnoremap <leader>ha :topleft split<CR>
 
+	syn match myExNonWords +\<\p*[^A-Za-z \t]\p*\>+ contains=@NoSpell
+	set spellfile=$VIMHOME/spell/en.utf-8.add 
+	nmap <leader>cs :setlocal spell!<CR>
+
 	" Do this AFTER PLUGINS to override any mapping changes
 	"source $VIMHOME/nikoli/date.vim
 	source $VIMHOME/colemak.vim
