@@ -16,6 +16,12 @@
 	" Always go down/up one line regardless of "set wrap". Is that a sane default?
 	nnoremap e gj|xnoremap e gj|onoremap e gj|
 	nnoremap i gk|xnoremap i gk|onoremap i gk|
+	" Add maps for down/up count lines, ignoring wraps
+	" Unsure why I need to add vmaps for these and not the above
+	nnoremap <leader>e j
+	nnoremap <leader>i k
+	vnoremap <leader>e j
+	vnoremap <leader>i k
 	" Turbo Navigation
 	" Works with counts, see ":help complex-repeat"
 	nnoremap <silent> N @='5h'<CR>|xnoremap <silent> N @='5h'<CR>|onoremap <silent> N @='5h'<CR>|
@@ -41,50 +47,32 @@
 	nnoremap <C-d> <C-i>
 " }}}
 " Words forward/backward {{{
-	" l/L = back word/WORD
 	" u/U = forward end of word/WORD
-	" y/Y = forward word/WORD
-	nnoremap l b|xnoremap l b|onoremap l b|
-	nnoremap L B|xnoremap L B|onoremap L B|
-	nnoremap u e|xnoremap u e|onoremap u e|
-	nnoremap U E|xnoremap U E|onoremap U E|
-	nnoremap y w|xnoremap y w|onoremap y w|
-	nnoremap Y W|xnoremap Y W|onoremap Y W|
-	cnoremap <C-l> <C-Left> 
-	cnoremap <C-y> <C-Right>
+	nnoremap l e|xnoremap l e|onoremap l e| 
+	nnoremap L E|xnoremap L E|onoremap L E|
 " }}}
 " inSert/Replace/append (T) {{{
 	nnoremap s i|
 	nnoremap S I|
-	nnoremap t a|
-	nnoremap T A|
 	" gi should be gs for us since we use 's' for insert
 	" Goes to the last insertion point and gets in insert mode
 	nnoremap gs gi
 " }}}
 " Change {{{
-	nnoremap w c|xnoremap w c|
-	nnoremap W C|xnoremap W C|
-	nnoremap ww cc|
+	" nnoremap w c|xnoremap w c|
+	" nnoremap W C|xnoremap W C|
+	" nnoremap ww cc|
 " }}}
 " Cut/copy/paste {{{
-	" Note: "0 reg is always your last YANK command (c C cc), so c and x don't
+	" Note: "0 reg is always your last YANK command, so y and x don't
 	" have the same relationship as copy and cut.
 	" TODO consider mapping a 'yank and delete' command so we can del text into
 	" the special "0 register (although for a similar amount of thought could
 	" just delete into a specific register like "k?)
-	nnoremap x x|xnoremap x d|
-	nnoremap c y|xnoremap c y|
-	nnoremap v p|xnoremap v p|
-	nnoremap X d$|xnoremap X d|
-	nnoremap C y$|xnoremap C y|
-	nnoremap V P|xnoremap V P|
-	nnoremap cc yy|
-	" Like "v/V" but leave cursor just after/before new text
-	nnoremap jv gp|
-	nnoremap jV gP|
+	" nnoremap x x|xnoremap x d|
+	" nnoremap X d$|xnoremap X d|
 	" Open newline, then put. Opt: prefix w/ reg ["+,(v/V)] (above/below) 
-	nnoremap <expr> <leader>v 'o<ESC>"'.v:register.v:count1.'p'
+	nnoremap <expr> <leader>p 'o<ESC>"'.v:register.v:count1.'p'
 " }}}
 " Undo/redo {{{
 	nnoremap z u|xnoremap z :<C-u>undo<CR>|
@@ -92,16 +80,11 @@
 	nnoremap Z <C-R>|xnoremap Z :<C-u>redo<CR>|
 " }}}
 " Visual mode {{{
-	nnoremap a v|xnoremap a v|
-	nnoremap A V|xnoremap A V|
-	" reselect last visual selection
-	nnoremap ga gv
-	nnoremap <C-a> <C-v>|xnoremap <C-a> <C-a>
 	" Make insert/add work also in visual line mode like in visual block mode
 	xnoremap <silent> <expr> s (mode() =~# "[V]" ? "\<C-v>0o$I" : "I")
 	xnoremap <silent> <expr> S (mode() =~# "[V]" ? "\<C-v>0o$I" : "I")
-	xnoremap <silent> <expr> t (mode() =~# "[V]" ? "\<C-v>0o$A" : "A")
-	xnoremap <silent> <expr> T (mode() =~# "[V]" ? "\<C-v>0o$A" : "A")
+	" xnoremap <silent> <expr> t (mode() =~# "[V]" ? "\<C-v>0o$A" : "A")
+	" xnoremap <silent> <expr> T (mode() =~# "[V]" ? "\<C-v>0o$A" : "A")
 " }}}
 " Search {{{
 	" Next/prev search match
@@ -109,16 +92,9 @@
 	nnoremap k n|xnoremap k n|onoremap k n|
 	nnoremap K N|xnoremap K N|onoremap K N|
 	
-	" To/Till_before (f/t) [count]'th occurrence of char p/P :
-	" exclusive/inclusive
-	" This works for most commands with motions: e.g., dp" will delete up to
-	" excluding the next occurance of '"', 2dP" will delete up to including the
-	" 2nd next '"'
-	nnoremap p t|xnoremap p t|onoremap p t|
-	nnoremap P T|xnoremap P T|onoremap P T|
 " }}}
 " inneR text objects {{{
-	" e.g. dip (delete inner paragraph) is now drp
+	" e.g. drp equivilant to dip (delete inner paragraph)
 	onoremap r i
 " }}}
 " Folds {{{
@@ -130,11 +106,10 @@
 	nnoremap je zk|xnoremap je zk|
 " }}}
 " Overridden keys must be prefixed with g {{{
+	" WTF are these doing?
 	nnoremap gX X|xnoremap gX X|
 	nnoremap gK K|xnoremap gK K|
 	nnoremap gL L|xnoremap gL L|
-	nnoremap gv gp|xnoremap gv gp|
-	nnoremap gV gP|xnoremap gV gP|
 " }}}
 " Window and Split handling {{{
 	nnoremap <C-w>n <C-w>h|xnoremap <C-w>n <C-w>h|

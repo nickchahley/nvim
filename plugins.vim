@@ -1,8 +1,6 @@
 " {{{ Linux and Windows specific hooks
 if has('win32') || has('win64')
 	let $WIKIHOME = $HOME.'/Dropbox/vimwiki'
-	" Added 200420 for ultisnips
-	let g:python3_host_prog = $HOME.'/miniconda3/python.exe'
 else
 	let $WIKIHOME = $HOME.'/vimwiki'
 	" Automatically install vim-plug if DNE	
@@ -17,13 +15,12 @@ endif
 " {{{ Plugins to load/install
 	call plug#begin('$VIMSHARE/plugged')
 
-		" New/still figuring out
-		if has('python3')
-			Plug 'SirVer/ultisnips'
-		endif
-		Plug 'yuki-ycino/fzf-preview.vim'
-
 		" Utility
+		" ctrlp seems way simpler to use than fzf preview. Works out of box on
+		" windows
+		" Plug 'yuki-ycino/fzf-preview.vim'
+		Plug 'tpope/vim-surround'
+		Plug 'ctrlpvim/ctrlp.vim'
 		Plug 'vim-scripts/BufOnly.vim'
 		Plug 'vimwiki/vimwiki'
 		Plug 'tpope/vim-commentary'
@@ -35,14 +32,15 @@ endif
 		Plug 'reedes/vim-wheel'
 
 		" Filetypes and Services
-		Plug 'nickchahley/mediawiki.vim'
+		Plug 'vim-scripts/autoit.vim--Breland'
 		Plug 'gabrielelana/vim-markdown'
 		Plug 'mrtazz/simplenote.vim'
 		Plug 'mboughaba/i3config.vim'
 		Plug 'nickchahley/vim-manpager'
+		Plug 'tpope/vim-fugitive'
 
 		" Python
-		Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+		" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 		Plug 'nickchahley/pydoc.vim'
 		Plug 'tmhedberg/SimpylFold'
 		Plug 'vim-scripts/indentpython.vim'
@@ -76,26 +74,11 @@ endif
 	let g:airline_theme = 'materialmonokaiedit'
 " }}}
 " {{{ Airline
-	let g:airline#extensions#tabline#enabled    = 0
+	let g:airline#extensions#tabline#enabled    = 1
 	let g:airline#extensions#whitespace#enabled = 0
 	" show functin name + params
 	let g:airline#extensions#tagbar#enabled = 1
 	let g:airline#extensions#tagbar#flags = 's'
-	" exclude from these buffers
-	let g:airline_exclude_filetypes = [
-				\ 'vimwiki', 'wiki', 'mediawiki', 
-				\ 'netrw', 'diff', 'undotree', 'tagbar',
-				\ ]
-
-	" customize symbols
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-	" unicode symbols
-	let g:airline_symbols.linenr = ''
-	let g:airline_symbols.maxlinenr = ''
-	
-	" customize statusline
 " }}}
 " {{{ Semshi - python
 	let g:semshi#error_sign_delay = 4
@@ -138,7 +121,8 @@ endif
 	" Oh my god do shift mappings work in terminal now? No.
 	:nmap <leader>s <Plug>VimwikiToggleListItem
 	:nmap <C-J> <Plug>VimwikiSplitLink
-	:nmap <C-V> <Plug>VimwikiVSplitLink
+	" reson for commenting: to restore visual block mode map
+	" :nmap <C-V> <Plug>VimwikiVSplitLink
 
 	" Foldmethod, list, expr (headers and sections), syntax
 	let g:vimwiki_folding = 'syntax'
@@ -148,21 +132,6 @@ endif
 " {{{ goyo
 	let g:goyo_width = 85
 	let g:goyo_height = 90
-
-	function! s:goyo_enter()
-		set norelativenumber
-		" This group will be unrecoverable after but w/e
-		autocmd! numbertoggle 
-		set linespace=7
-	endfunction
-
-	function! s:goyo_leave()
-		set relativenumber 
-		set linespace=0
-	endfunction
-
-	autocmd! User GoyoEnter nested call <SID>goyo_enter()
-	autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " }}}
 " {{{ gabrielelana/vim-markdown
 	let g:markdown_enable_spell_checking = 0
@@ -190,26 +159,21 @@ endif
 	set title titlestring=
 " }}}
 " {{{ fzf-preview
-	nmap <Leader>f [fzf-p]
-	xmap <Leader>f [fzf-p]
-	nnoremap <silent> [fzf-p]d     :<C-u>FzfPreviewDirectoryFiles <CR>
-	nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
-	nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
-	nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
-	nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
-	nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
-	nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
-	nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
-	nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
-	nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-	nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
-	xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
-	nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
-	nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
-	nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
-" }}}
-" {{{ ultisnips
-		if has('python3')
-			"
-		endif
+	" nmap <Leader>f [fzf-p]
+	" xmap <Leader>f [fzf-p]
+	" nnoremap <silent> [fzf-p]d     :<C-u>FzfPreviewDirectoryFiles <CR>
+	" nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
+	" nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
+	" nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
+	" nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
+	" nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
+	" nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
+	" nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
+	" nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
+	" nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+	" nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
+	" xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+	" nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
+	" nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
+	" nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
 " }}}

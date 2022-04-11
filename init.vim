@@ -38,7 +38,7 @@ source $VIMHOME/plugins.vim
 		set guioptions -=L
 		
 		set guifont=Iosevka\ Term\ Medium:h11
-		"set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+		" set guifont=Source\ Code\ Pro\ Regular:h11
 
 	else 
 		" This is console Vim.
@@ -181,13 +181,24 @@ source $VIMHOME/plugins.vim
 	nmap <F3> i<C-R>=strftime("%Y-%m-%d")<CR><Esc>
 	imap <F3> <C-R>=strftime("%Y-%m-%d")<CR>
 
-	" Do this LAST to override any mapping changes from plugins
-	"source $VIMHOME/nikoli/date.vim
-	source $VIMHOME/colemak.vim
-
 	" switch to alternative buffer
 	nnoremap <c-\> <c-^>
 
 	" cd to that of current buffer
 	nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+	" open full width/height splits besides preexisting splits 
+	nnoremap <leader>vr :botright vsplit<CR>
+	nnoremap <leader>vl :topleft vsplit<CR>
+	nnoremap <leader>hb :botright split<CR>
+	nnoremap <leader>ha :topleft split<CR>
+
+	syn match myExNonWords +\<\p*[^A-Za-z \t]\p*\>+ contains=@NoSpell
+	set spellfile=$VIMHOME/spell/en.utf-8.add 
+	nmap <leader>cs :setlocal spell!<CR>
+
+	" Do this AFTER PLUGINS to override any mapping changes
+	"source $VIMHOME/nikoli/date.vim
+	source $VIMHOME/colemak.vim
+
 " }}}
