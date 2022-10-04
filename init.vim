@@ -23,6 +23,7 @@
 	nmap \ <Leader>
 	vmap \ <Leader>
 " }}}
+source $VIMHOME/local.vim
 source $VIMHOME/plugins.vim
 " {{{ Terminal/GUI Specific
 	" Unsure if this is correct sign for nvim gui on Windows. IIRC it is not on
@@ -56,14 +57,6 @@ source $VIMHOME/plugins.vim
 	set termguicolors     " enable truecolor support, sometimes...
 	colorscheme material-monokai-edit
 
-	" Absolute line numbers in insert mode, else hybrid relative
-	set relativenumber 
-	augroup numbertoggle
-	  autocmd!
-	  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber nonumber
-	  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
-	augroup END
-
 	set title             " Don't forget what you're editing
 	set backspace=2       " backspace in i mode, even tho it's 'suboptimal'
 	if &tabstop == 8      " Then probs on initial vimrc load, el don't overwrite
@@ -88,6 +81,14 @@ source $VIMHOME/plugins.vim
 	set wildmenu
 	set wildmode=longest,list,full
 
+	" Absolute line numbers in insert mode, else hybrid relative
+	set relativenumber 
+	augroup numbertoggle
+	  autocmd!
+	  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber nonumber
+	  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
+	augroup END
+
 	" Hilighting
 	hi MatchParen gui=NONE cterm=NONE guibg=NONE  guifg=YELLOW ctermfg=YELLOW
 	" {{{ Highlight current line and allow toggling
@@ -108,8 +109,9 @@ source $VIMHOME/plugins.vim
 	" Spelling
 	" To add a one-off spellfile use :setlocal spellfile+=.oneoff.utf-8.add
 	set spelllang=en
-	set spellfile=$HOME/.vim/spell/en.utf-8.add " Default spellfile
+	set spellfile=$VIMHOME/spell/en.utf-8.add 
 	hi SpellBad cterm=underline	
+	nmap <leader>cs :setlocal spell!<CR>
 
 	" Copy and paste. Holy shit.
 	"set clipboard=unnamedplus " automatically use sys clipboard for c/p (linux)
@@ -194,9 +196,6 @@ source $VIMHOME/plugins.vim
 	nnoremap <leader>ha :topleft split<CR>
 
 	syn match myExNonWords +\<\p*[^A-Za-z \t]\p*\>+ contains=@NoSpell
-	set spellfile=$VIMHOME/spell/en.utf-8.add 
-	nmap <leader>cs :setlocal spell!<CR>
-
 	" Do this AFTER PLUGINS to override any mapping changes
 	"source $VIMHOME/nikoli/date.vim
 	source $VIMHOME/colemak.vim

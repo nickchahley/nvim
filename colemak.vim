@@ -47,7 +47,9 @@
 	nnoremap <C-d> <C-i>
 " }}}
 " Words forward/backward {{{
-	" u/U = forward end of word/WORD
+	" w/W = fwd start of Word/WORD
+	" l/L = fwd Last char of word/WORD
+	" b/B = Back start of word/WORD
 	nnoremap l e|xnoremap l e|onoremap l e| 
 	nnoremap L E|xnoremap L E|onoremap L E|
 " }}}

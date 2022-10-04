@@ -98,14 +98,14 @@ endif
 	let $CONVWIKI = $HOME.'/vimwiki-conversion'
 	let g:vimwiki_list = [
 		\{
-		\ 'path': '$WIKIHOME/wiki-DJG',
-		\ 'ext': '.wiki',
-		\ 'path_html': '$WIKIHOME/wiki-DJG/site_html/',
-		\ 'auto_diary_index' : 1
-		\ },{ 
 		\ 'path': '$WIKIHOME',
 		\ 'ext': '.wiki',
 		\ 'path_html': '$WIKIHOME/site_html/',
+		\ 'auto_diary_index' : 1
+		\ },{ 
+		\ 'path': '$WIKIHOME/wiki-DJG',
+		\ 'ext': '.wiki',
+		\ 'path_html': '$WIKIHOME/wiki-DJG/site_html/',
 		\ 'auto_diary_index' : 1
 		\ },{
 		\ 'path': '/home/nikoli/Clone/McGill/Courses/NEUR 630/Term Paper/wiki',
@@ -126,6 +126,21 @@ endif
 
 	" Foldmethod, list, expr (headers and sections), syntax
 	let g:vimwiki_folding = 'syntax'
+
+	" Find incomplete tasks
+	" Open a QuickFix window with incomplete tasks that are in a hyphenated list
+	function! VimwikiFindIncompleteTasks()
+		lvimgrep /- \[ \]/ %:p
+		lopen
+	endfunction
+
+	function! VimwikiFindAllIncompleteTasks()
+		VimwikiSearch /- \[ \]/
+		lopen
+	endfunction
+
+	nmap <Leader>wa :call VimwikiFindAllIncompleteTasks()<CR>
+	nmap <Leader>wx :call VimwikiFindIncompleteTasks()<CR>
 
 	
 " }}}
