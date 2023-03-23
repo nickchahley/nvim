@@ -127,21 +127,6 @@ endif
 	" Foldmethod, list, expr (headers and sections), syntax
 	let g:vimwiki_folding = 'syntax'
 
-	" Find incomplete tasks
-	" Open a QuickFix window with incomplete tasks that are in a hyphenated list
-	function! VimwikiFindIncompleteTasks()
-		lvimgrep /- \[ \]/ %:p
-		lopen
-	endfunction
-
-	function! VimwikiFindAllIncompleteTasks()
-		VimwikiSearch /- \[ \]/
-		lopen
-	endfunction
-
-	nmap <Leader>wa :call VimwikiFindAllIncompleteTasks()<CR>
-	nmap <Leader>wx :call VimwikiFindIncompleteTasks()<CR>
-
 	
 " }}}
 " {{{ goyo
