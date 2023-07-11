@@ -1,10 +1,11 @@
-" File:       matrial-monokai.vim
+" File:       matrial-monokai-edit.vim
 " Maintainer: skielbasa
-" URL:        https://github.com/skielbasa/vim-monokai
+" URL:        original https://github.com/skielbasa/vim-monokai
 " License:    MIT
 "
-" A vim port of the Material Monokai Atom theme
-" Uses the Monokai theme by crusoexia as a base
+" Minor personal edits to skielbasa material-monokai vim theme.
+" NTS if Airline, see/match to corresponding airline theme in
+" VIMHOME/autoload/airline/themes/materialmonokaiedit.vim
 
 " Initialisation
 " --------------
@@ -90,6 +91,8 @@ let s:grey        = { "gui": "#3F565F", "cterm": "238" }
 let s:lightgrey   = { "gui": "#575b61", "cterm": "241" }
 let s:darkgrey    = { "gui": "#282a36", "cterm": "236" }
 let s:coolgrey    = { "gui": "#506E79", "cterm": "241" }
+let s:splitfg  = { "gui": "#7396a2", "cterm": "236" }
+let s:splitbg  = { "gui": "#494c62", "cterm": "241" }
 
 let s:pink        = { "gui": "#FC3488", "cterm": "197" }
 let s:green       = { "gui": "#A6E22E", "cterm": "148" }
@@ -116,8 +119,8 @@ call s:h("ColorColumn",   {                     "bg": s:lightgrey })
 call s:h("CursorColumn",  {                     "bg": s:black })
 call s:h("CursorLine",    {                     "bg": s:black })
 call s:h("NonText",       { "fg": s:lightgrey })
-call s:h("StatusLine",    { "fg": s:white,      "bg": s:darkblack })
-call s:h("StatusLineNC",  { "fg": s:darkgrey,   "bg": s:coolgrey,     "format": "reverse" })
+call s:h("StatusLine",    { "fg": s:white,      "bg": s:splitbg })
+call s:h("StatusLineNC",  { "fg": s:splitfg,    "bg": s:splitbg })
 call s:h("WildMenu",      { "fg": s:white,      "bg": s:pink })
 call s:h("TabLine",       { "fg": s:white,      "bg": s:darkblack,    "format": "reverse" })
 call s:h("Visual",        {                     "bg": s:lightgrey })

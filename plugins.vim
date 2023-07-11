@@ -1,6 +1,7 @@
 " {{{ Linux and Windows specific hooks
 if has('win32') || has('win64')
 	let $WIKIHOME = $HOME.'/Dropbox/vimwiki'
+	let g:python3_host_prog = $HOME.'/miniconda3/python.exe'
 else
 	let $WIKIHOME = $HOME.'/vimwiki'
 	" Automatically install vim-plug if DNE	
@@ -19,6 +20,7 @@ endif
 		" ctrlp seems way simpler to use than fzf preview. Works out of box on
 		" windows
 		" Plug 'yuki-ycino/fzf-preview.vim'
+		Plug 'triglav/vim-visual-increment'
 		Plug 'tpope/vim-surround'
 		Plug 'ctrlpvim/ctrlp.vim'
 		Plug 'vim-scripts/BufOnly.vim'
@@ -95,9 +97,15 @@ endif
 	
 	" Registered wikis, can open by list index w/ [1,2,etc]<Leader>w<Space>
 	" What are templates and how do we use them
-	let $CONVWIKI = $HOME.'/vimwiki-conversion'
 	let g:vimwiki_list = [
 		\{
+		\ 'path': 'D:/Simmunome/vimwiki',
+		\ 'ext': '.wiki',
+		\ 'diary_rel_path': '',
+		\ 'nested_syntaxes': {'python': 'python', 'r': 'r'},
+		\ 'path_html': 'D:/Simmunome/vimwiki/site_html/',
+		\ 'auto_diary_index' : 1
+		\ },{ 
 		\ 'path': '$WIKIHOME',
 		\ 'ext': '.wiki',
 		\ 'path_html': '$WIKIHOME/site_html/',
@@ -107,15 +115,11 @@ endif
 		\ 'ext': '.wiki',
 		\ 'path_html': '$WIKIHOME/wiki-DJG/site_html/',
 		\ 'auto_diary_index' : 1
-		\ },{
-		\ 'path': '/home/nikoli/Clone/McGill/Courses/NEUR 630/Term Paper/wiki',
-		\ 'syntax': 'markdown',
-		\ 'ext': '.wiki'
-		\ },{
-		\ 'path': '/home/nikoli/OneDrive/McGill/Courses/BMDE 508/Grant Proposal/wiki',
-		\ 'syntax': 'markdown',
-		\ 'ext': '.wiki'
 		\ }]
+
+	" retired wikis
+	" {'path': '/home/nikoli/Clone/McGill/Courses/NEUR 630/Term Paper/wiki', 'syntax': 'markdown', 'ext': '.wiki'}
+	" {'path': '/home/nikoli/OneDrive/McGill/Courses/BMDE 508/Grant Proposal/wiki', 'syntax': 'markdown', 'ext': '.wiki'}
 
 	" Keymaps
 	" Oh my god do shift mappings work in terminal now? No.
@@ -192,3 +196,5 @@ endif
 	" nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
 	" nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
 " }}}
+" vim visual increment allow to increment letters as well
+set nrformats=alpha

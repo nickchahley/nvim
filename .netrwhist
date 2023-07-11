@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='D:/tmp/sby_loader_pack_13_545d/Loader5.45/ghost/Settings/animtools_positions'
+let g:netrw_dirhist_7='D:/tmp/sby_loader_pack_13_545d/Loader5.45/ghost/Settings'
+let g:netrw_dirhist_6='D:/tmp/sby_loader_pack_13_545d/Loader5.45/ghost'
+let g:netrw_dirhist_5='D:/tmp/sby_loader_pack_13_545d/Loader5.45/ghost/Mods'
+let g:netrw_dirhist_4='D:/tmp/sby_loader_pack_13_545d/Loader5.45/ghost/Mods/$INIT$'
+let g:netrw_dirhist_3='D:/tmp/sby_loader_pack_13_545d/Loader5.45/ghost/Mods'
+let g:netrw_dirhist_2='D:/tmp/sby_loader_pack_13_545d/Loader5.45/ghost/Mods/Ghost'
+let g:netrw_dirhist_1='D:/tmp/sby_loader_pack_13_545d/Loader5.45/ghost/Mods/Ghost/Ghost_Flore'
+let g:netrw_dirhist_0='D:/tmp/sby_loader_pack_13_545d/Loader5.45/Mods'
+let g:netrw_dirhist_9='D:/tmp/sby_loader_pack_13_545d/Loader5.45/Mods/armToggleV1'

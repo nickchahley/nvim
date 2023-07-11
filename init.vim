@@ -16,6 +16,8 @@
 		let $VIMSHARE = $HOME.'/.local/share/nvim'
 		let $BACKUNDOSWAP = $HOME.'/.vim-backundoswap/'
 	endif
+	" lazy aliases
+	let $VH = $VIMHOME
 " }}}
 " {{{ Remap Leader before we use it for anything else
 	let mapleader = "\<Space>"
@@ -38,7 +40,8 @@ source $VIMHOME/plugins.vim
 		set guioptions -=r
 		set guioptions -=L
 		
-		set guifont=Iosevka\ Term\ Medium:h11
+		" font selection seem to be handled fine in ginit.vim for now
+		" set guifont=Iosevka\ Term\ Medium:h11
 		" set guifont=Source\ Code\ Pro\ Regular:h11
 
 	else 
@@ -82,12 +85,12 @@ source $VIMHOME/plugins.vim
 	set wildmode=longest,list,full
 
 	" Absolute line numbers in insert mode, else hybrid relative
-	set relativenumber 
-	augroup numbertoggle
-	  autocmd!
-	  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber nonumber
-	  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
-	augroup END
+	" set relativenumber 
+	" augroup numbertoggle
+	"   autocmd!
+	"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber nonumber
+	"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
+	" augroup END
 
 	" Hilighting
 	hi MatchParen gui=NONE cterm=NONE guibg=NONE  guifg=YELLOW ctermfg=YELLOW
