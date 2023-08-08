@@ -58,7 +58,7 @@ source $VIMHOME/plugins.vim
 	set background=dark
 	set t_Co=256
 	set termguicolors     " enable truecolor support, sometimes...
-	colorscheme material-monokai-edit
+	colorscheme everforest
 
 	set title             " Don't forget what you're editing
 	set backspace=2       " backspace in i mode, even tho it's 'suboptimal'

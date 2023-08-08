@@ -2,8 +2,10 @@
 if has('win32') || has('win64')
 	let $WIKIHOME = $HOME.'/Dropbox/vimwiki'
 	let g:python3_host_prog = $HOME.'/miniconda3/python.exe'
+	let $SIMMUNOMEWIKI = 'D:/Simmunome/vimwiki'
 else
 	let $WIKIHOME = $HOME.'/vimwiki'
+	let $SIMMUNOMEWIKI = '/mnt/d/Simmunome/vimwiki'
 	" Automatically install vim-plug if DNE	
 	if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 		silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
@@ -17,12 +19,11 @@ endif
 	call plug#begin('$VIMSHARE/plugged')
 
 		" Utility
-		" ctrlp seems way simpler to use than fzf preview. Works out of box on
-		" windows
-		" Plug 'yuki-ycino/fzf-preview.vim'
+		" ctrlp seems way simpler to use than fzf preview. Works out of box
+		" Plug 'vijaymarupudi/nvim-fzf'
+		Plug 'ctrlpvim/ctrlp.vim'
 		Plug 'triglav/vim-visual-increment'
 		Plug 'tpope/vim-surround'
-		Plug 'ctrlpvim/ctrlp.vim'
 		Plug 'vim-scripts/BufOnly.vim'
 		Plug 'vimwiki/vimwiki'
 		Plug 'tpope/vim-commentary'
@@ -53,6 +54,16 @@ endif
 		Plug 'ryanoasis/vim-devicons'
 		Plug 'jacoborus/tender.vim'
 		Plug 'skielbasa/vim-material-monokai'
+		Plug 'sainnhe/everforest'
+		Plug 'sainnhe/sonokai'
+		Plug 'sainnhe/gruvbox-material'
+		Plug 'sainnhe/edge'
+		" Dracula and miasma req nvim > 8.0, but building from src results in
+		" a slow editor for me (on wsl 230804)
+		Plug 'Mofiqul/dracula.nvim'
+		Plug 'xero/miasma.nvim', {'branch': 'dev'}
+		Plug 'xero/sourcerer.vim'
+
 
 		" Writing prose 
 		Plug 'junegunn/goyo.vim'
@@ -62,18 +73,20 @@ endif
 	call plug#end()
 " }}}
 
-" PLUGIN OPTIONS
-
 " {{{ Colorscheme and Theme
 	" toggle italic support for certain colorschemes
-	let g:monokai_term_italic = 0
-	let g:monokai_gui_italic  = 1
 	let g:dream_italic   = 1
 	let g:dracula_italic = 1
 
-	" material-monokai
+	let g:monokai_term_italic = 0
+	let g:monokai_gui_italic  = 1
 	let g:materialmonokai_italic = 0
-	let g:airline_theme = 'materialmonokaiedit'
+	" let g:airline_theme = 'minimalist'
+
+	let g:everforest_background = 'soft'
+
+	let g:sonokai_style = 'andromeda'
+	let g:airline_theme = 'sonokai' 
 " }}}
 " {{{ Airline
 	let g:airline#extensions#tabline#enabled    = 1
@@ -94,16 +107,19 @@ endif
 
 	" Hilighting for checked list items
 	let g:vimwiki_hl_cb_checked = 2
+
+	" Trying to automatically add the date to the top of diary files >> nowork
+	" autocmd BufNewFile $SIMMUNOMEWIKI/[0-9].wiki :silent 0r !echo "`date -d +'\%a \%d \%B \%Y'`\n"
 	
 	" Registered wikis, can open by list index w/ [1,2,etc]<Leader>w<Space>
 	" What are templates and how do we use them
 	let g:vimwiki_list = [
 		\{
-		\ 'path': 'D:/Simmunome/vimwiki',
+		\ 'path': '$SIMMUNOMEWIKI',
 		\ 'ext': '.wiki',
 		\ 'diary_rel_path': '',
 		\ 'nested_syntaxes': {'python': 'python', 'r': 'r'},
-		\ 'path_html': 'D:/Simmunome/vimwiki/site_html/',
+		\ 'path_html': '$SIMMUNOMEWIKI/site_html/',
 		\ 'auto_diary_index' : 1
 		\ },{ 
 		\ 'path': '$WIKIHOME',

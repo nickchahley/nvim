@@ -5,7 +5,7 @@ setlocal shiftwidth=4
 setlocal tabstop=4
 setlocal nonumber
 setlocal norelativenumber
-setlocal fo-=t
+setlocal fo=
 set tw=0
 setlocal foldlevel=99 " Folds open by default
 setlocal linespace=2 " windows gui req resize window to see command bar
