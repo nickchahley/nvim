@@ -34,6 +34,13 @@ endif
 		Plug 'christoomey/vim-titlecase'
 		Plug 'reedes/vim-wheel'
 
+		" I want to try and implement a snippets plugin. Shortlist is ultisnips
+		" and luasnip
+		" pros of luasnip is that it might be a vector for me to learn lua syntax
+		" Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} " Replace <CurrentMajor> by the latest released major (first number of latest release)
+
+		" Plug 'SirVer/ultisnips'
+
 		" Filetypes and Services
 		Plug 'vim-scripts/autoit.vim--Breland'
 		Plug 'gabrielelana/vim-markdown'
@@ -72,7 +79,38 @@ endif
 
 	call plug#end()
 " }}}
+" {{{ luaSnip 
+	" this is also configurable using lua but I have no idea about any of that
+	" press <Tab> to expand or jump in a snippet. These can also be mapped separately
+	" via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
+	imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+	" -1 for jumping backwards.
+	inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
 
+	snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+	snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+
+	" For changing choices in choiceNodes (not strictly necessary for a basic setup).
+	imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+	smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+" }}}
+" {{{ ultisnips seems super powerful, but also a bit of a project to get
+	" working.
+
+	" Snippets are separated from the engine. Add this if you want them:
+	" Plug 'honza/vim-snippets'
+
+	" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+	" - https://github.com/Valloric/YouCompleteMe
+	" - https://github.com/nvim-lua/completion-nvim
+	let g:UltiSnipsExpandTrigger="<F9>"
+	let g:UltiSnipsListSnippets="<c-F9>"
+	let g:UltiSnipsJumpForwardTrigger="<c-b>"
+	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+	" If you want :UltiSnipsEdit to split your window.
+	let g:UltiSnipsEditSplit="vertical"
+" }}}
 " {{{ Colorscheme and Theme
 	" toggle italic support for certain colorschemes
 	let g:dream_italic   = 1
@@ -107,9 +145,9 @@ endif
 
 	" Hilighting for checked list items
 	let g:vimwiki_hl_cb_checked = 2
-
-	" Trying to automatically add the date to the top of diary files >> nowork
-	" autocmd BufNewFile $SIMMUNOMEWIKI/[0-9].wiki :silent 0r !echo "`date -d +'\%a \%d \%B \%Y'`\n"
+	
+	" Don't need vimwiki to take over tab in insert mode (clobbers snippets)
+	let g:vimwiki_table_mappings = 0
 	
 	" Registered wikis, can open by list index w/ [1,2,etc]<Leader>w<Space>
 	" What are templates and how do we use them
@@ -193,24 +231,7 @@ endif
 " {{{ vim-autoswap
 	set title titlestring=
 " }}}
-" {{{ fzf-preview
-	" nmap <Leader>f [fzf-p]
-	" xmap <Leader>f [fzf-p]
-	" nnoremap <silent> [fzf-p]d     :<C-u>FzfPreviewDirectoryFiles <CR>
-	" nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
-	" nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
-	" nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
-	" nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
-	" nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
-	" nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
-	" nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
-	" nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
-	" nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-	" nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
-	" xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
-	" nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
-	" nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
-	" nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
-" }}}
+" <c-p> is taken in vscode wsl. choose <c-t> to like fzf in shell
+let g:ctrlp_map = '<c-t>'
 " vim visual increment allow to increment letters as well
 set nrformats=alpha

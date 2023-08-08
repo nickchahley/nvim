@@ -204,3 +204,8 @@ source $VIMHOME/plugins.vim
 	source $VIMHOME/colemak.vim
 
 " }}}
+
+" Let me get my toes wet configuring in lua
+" this will load $VIMHOME/lua/<name>.lua
+" lua require('config')
+" lua require('luasnip')

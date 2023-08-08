@@ -25,3 +25,12 @@ nnoremap <silent> <buffer> H :<C-U>call vimwiki#lst#kbd_O()<CR>
 " This will do so for all buffers, but fuck it
 " autocmd! numbertoggle
 
+" Snips compatability. Use F9 to expand b/c tab is taken now.
+"ultisnips
+vmap <F9> :call UltiSnips#SaveLastVisualSelection()<CR>gvs
+imap <F9> <C-R>=UltiSnips#ExpandSnippet()<CR>
+
+
+imap <silent><expr> <F9> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<F9>' 
+inoremap <silent> <S-F9> <cmd>lua require'luasnip'.jump(-1)<Cr>
+"
