@@ -1,15 +1,13 @@
 local M = {
 	{
 		'L3MON4D3/LuaSnip',
-		-- follow latest release.
-		version = '2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-		-- install jsregexp (optional!).
-		build = 'make install_jsregexp',
+		name = 'luasnip',
+		version = '2.*', -- follow latest release (until 3.0, i guess)
+		build = 'make install_jsregexp', -- install jsregexp (optional!).
 		lazy = true,
 
 		config = function()
 			require('luasnip').setup({
-				
 				-- <filetype>.lua
 				require('luasnip.loaders.from_lua').load({paths = '~/.config/nvim/lua/snippets/'}),
 				-- allow snipmate-like snippets (<filetype>.snippets)

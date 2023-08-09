@@ -25,20 +25,12 @@ endif
 		Plug 'triglav/vim-visual-increment'
 		Plug 'tpope/vim-surround'
 		Plug 'vim-scripts/BufOnly.vim'
-		Plug 'vimwiki/vimwiki'
 		Plug 'tpope/vim-eunuch' " Sugar for shell commands
 		Plug 'wesQ3/vim-windowswap'
 		Plug 'gioele/vim-autoswap'
 		Plug 'godlygeek/tabular'
 		Plug 'christoomey/vim-titlecase'
 		Plug 'reedes/vim-wheel'
-
-		" I want to try and implement a snippets plugin. Shortlist is ultisnips
-		" and luasnip
-		" pros of luasnip is that it might be a vector for me to learn lua syntax
-		" Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} " Replace <CurrentMajor> by the latest released major (first number of latest release)
-
-		" Plug 'SirVer/ultisnips'
 
 		" Filetypes and Services
 		Plug 'vim-scripts/autoit.vim--Breland'
@@ -49,23 +41,16 @@ endif
 		Plug 'tpope/vim-fugitive'
 
 		" Python
-		" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 		Plug 'nickchahley/pydoc.vim'
 		Plug 'tmhedberg/SimpylFold'
 		Plug 'vim-scripts/indentpython.vim'
 
 		" Themes, Apperance, Colors
-		Plug 'vim-airline/vim-airline'
-		Plug 'vim-airline/vim-airline-themes'
-		Plug 'ryanoasis/vim-devicons'
 		Plug 'jacoborus/tender.vim'
 		Plug 'skielbasa/vim-material-monokai'
-		Plug 'sainnhe/everforest'
 		Plug 'sainnhe/sonokai'
 		Plug 'sainnhe/gruvbox-material'
 		Plug 'sainnhe/edge'
-		" Dracula and miasma req nvim > 8.0, but building from src results in
-		" a slow editor for me (on wsl 230804)
 		Plug 'Mofiqul/dracula.nvim'
 		Plug 'xero/miasma.nvim', {'branch': 'dev'}
 		Plug 'xero/sourcerer.vim'
@@ -105,8 +90,6 @@ endif
 	let g:materialmonokai_italic = 0
 	" let g:airline_theme = 'minimalist'
 
-	let g:everforest_background = 'soft'
-
 	let g:sonokai_style = 'andromeda'
 	let g:airline_theme = 'sonokai' 
 " }}}
@@ -122,7 +105,7 @@ endif
 	let g:semshi#excluded_hi_groups = []
 " }}}
 " {{{ vimwiki 
-	nmap <Leader>w<Space> <Plug>VimwikiIndex
+	" nmap <Leader>w<Space> <Plug>VimwikiIndex
 
 	" Color header levels
 	let g:vimwiki_hl_headers = 1

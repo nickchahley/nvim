@@ -1,31 +1,65 @@
---[[
-local X = {
-	{ 
-		'sainnhe/everforest',
+local M = {
+	{
+		'neanias/everforest-nvim',
+		name = 'everforest',
+		version = false,
 		lazy = false,
-		priority = 1000,
+		priority = 1000, -- make sure to load this before all the other start plugins
+		-- TODO adjust cusorline hilight to be diff color from vscode bg (/soft
+		-- bg)
 		config = function()
-			vim.g.everforest_background = 'soft'
-			vim.cmd.colorscheme('everforest')
+			require("everforest").setup({
+				background = 'soft',
+			})
+			-- require('lualine').setup {
+			-- 	options = { theme = 'everforest' }
+			-- }
 		end,
 	},
+	{
+		'folke/tokyonight.nvim',
+		name = 'tokyonight',
+		lazy = false,
+		priority = 1000,
+		opts = {},
+		config = function()
+			-- require('lualine').setup {
+			-- 	options = { theme = 'tokyonight' }
+			-- }
+		end,
+	},
+	{
+		'sainnhe/sonokai',
+		lazy = true,
+		init = function()
+			vim.g.sonokai_style = 'default'
+		end,
+	},
+	{
+		'sainnhe/gruvbox-material',
+		lazy = false,
+		init = function()
+			vim.g.gruvbox_material_background = 'soft'
+			vim.g.gruvbox_material_foreground = 'material'
+			vim.g.gruvbox_material_better_performance = 1
+		end,
+		config = function()
+			-- require('lualine').setup({
+			-- 	options = { theme = 'gruvbox-material' }
+			-- })
+		end,
+	},
+	{ 'catppuccin/nvim', name = "catppuccin", priority = 1000, },
+	{ 'rebelot/kanagawa.nvim', name = 'kanagawa', priority = 1000, },
+	{ 'shaunsingh/moonlight.nvim', name = 'moonlight', priority = 1000, },
+	{ 
+		'rhysd/vim-color-spring-night', name = 'spring-night', priority = 1000,
+		init = function()
+			vim.g.spring_night_high_contrast = 0
+		end,
+	},
+	{ 'karoliskoncevicius/sacredforest-vim', name = 'sacredforest', priority = 1000, },
 
-}
---]]
-
-local M = {
-	"neanias/everforest-nvim",
-	version = false,
-	lazy = false,
-	priority = 1000, -- make sure to load this before all the other start plugins
-	-- Optional; default configuration will be used if setup isn't called.
-	config = function()
-		require("everforest").setup({
-			-- Your config here
-			background = 'soft',
-		})
-		vim.cmd.colorscheme('everforest')
-	end,
 }
 
 return M

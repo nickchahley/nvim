@@ -14,17 +14,9 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ' ' -- set mapleader before lazy so mappings correct
 
--- Run Lazy: Load plugin specs and their configuration
--- lazy (lazy = true in plugins/<module>.lua) will not be loaded unless triggered
+-- load lazy Lazy: Load plugin specs and their configuration
 -- syntax: require('lazy').setup(plugins, opts)
-require('lazy').setup(
-	{
-		{
-			import = 'plugins'
-		},
-	}, 
-	{
+require('lazy').setup('plugins', {
 		defaults = {lazy = false},
-	}
-)
+})
 	

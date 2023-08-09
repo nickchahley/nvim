@@ -10,23 +10,10 @@
 		let $BACKUNDOSWAP = $HOME.'/Neovim/vim-backundoswap/'
 		" Don't know what I'm doing here.
 		set runtimepath+='$VIMSHARE/runtime'
-	else 
-		" This is nix
-		let $VIMHOME = $HOME.'/.config/nvim'
-		let $VIMSHARE = $HOME.'/.local/share/nvim'
-		let $BACKUNDOSWAP = $HOME.'/.vim-backundoswap/'
 	endif
-	" lazy aliases
-	let $VH = $VIMHOME
 " }}}
-" {{{ Remap Leader before we use it for anything else
-	let mapleader = "\<Space>"
-	" Keep \ leader b/h b/c it still confuses me sometimes. Hopefully tmp
-	nmap \ <Leader>
-	vmap \ <Leader>
-" }}}
-source $VIMHOME/local.vim
 " source $VIMHOME/plugins.vim
+lua require('config.env')
 lua require('config.lazy')
 lua require('config.options')
 " {{{ Terminal/GUI Specific
@@ -53,13 +40,9 @@ lua require('config.options')
 " }}}
 " {{{ General Configuration
 
-	" Added for vim-devicons
-	set encoding=UTF-8
-
 	" No idea what we're doing re: color support
 	set background=dark
 	set t_Co=256
-	set termguicolors     " enable truecolor support, sometimes...
 	"colorscheme everforest
 
 	set title             " Don't forget what you're editing
@@ -69,22 +52,7 @@ lua require('config.options')
 		set shiftwidth=4    " indent/outdent by 4
 	endif                 " to stop our ts getting messed up when reloading vimrc
 	set shiftround        " always indent/outdent to the nearest tabstop
-	set smarttab          " use tabs at the start of a line, spaces elsewhere
 	set foldmethod=marker " will be overwritten by modelines, ftplugins
-	set autoread          " Update file on change. DTEW?
-	set scrolloff=5       " Keep 5 lines above and below cursor
-	set mouse=a           " Enable mouse click and scroll, if supported
-
-	" Open planes to right and bottom, feels more natural than default
-	set splitbelow
-	set splitright
-
-	" Let me hide a buffer even if it is edited/unsaved
-	set hidden
-
-	" Handle tab-complete ambiguities like bash. 'wildmode' = 'wim'
-	set wildmenu
-	set wildmode=longest,list,full
 
 	" Absolute line numbers in insert mode, else hybrid relative
 	" set relativenumber 
@@ -111,12 +79,6 @@ lua require('config.options')
 				\,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr
 				\,sm:block-blinkwait175-blinkoff150-blinkon175
 	
-	" Spelling
-	" To add a one-off spellfile use :setlocal spellfile+=.oneoff.utf-8.add
-	set spelllang=en
-	set spellfile=$VIMHOME/spell/en.utf-8.add 
-	hi SpellBad cterm=underline	
-	nmap <leader>cs :setlocal spell!<CR>
 
 	" Copy and paste. Holy shit.
 	"set clipboard=unnamedplus " automatically use sys clipboard for c/p (linux)
