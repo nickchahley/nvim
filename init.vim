@@ -26,7 +26,9 @@
 	vmap \ <Leader>
 " }}}
 source $VIMHOME/local.vim
-source $VIMHOME/plugins.vim
+" source $VIMHOME/plugins.vim
+lua require('config.lazy')
+lua require('config.options')
 " {{{ Terminal/GUI Specific
 	" Unsure if this is correct sign for nvim gui on Windows. IIRC it is not on
 	" linux
@@ -58,7 +60,7 @@ source $VIMHOME/plugins.vim
 	set background=dark
 	set t_Co=256
 	set termguicolors     " enable truecolor support, sometimes...
-	colorscheme everforest
+	"colorscheme everforest
 
 	set title             " Don't forget what you're editing
 	set backspace=2       " backspace in i mode, even tho it's 'suboptimal'
@@ -205,7 +207,3 @@ source $VIMHOME/plugins.vim
 
 " }}}
 
-" Let me get my toes wet configuring in lua
-" this will load $VIMHOME/lua/<name>.lua
-" lua require('config')
-" lua require('luasnip')
