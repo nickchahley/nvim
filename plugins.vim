@@ -18,42 +18,20 @@ endif
 " {{{ Plugins to load/install
 	call plug#begin('$VIMSHARE/plugged')
 
-		" Utility
-		" ctrlp seems way simpler to use than fzf preview. Works out of box
-		" Plug 'vijaymarupudi/nvim-fzf'
-		Plug 'ctrlpvim/ctrlp.vim'
 		Plug 'triglav/vim-visual-increment'
-		Plug 'tpope/vim-surround'
-		Plug 'vim-scripts/BufOnly.vim'
-		Plug 'tpope/vim-eunuch' " Sugar for shell commands
-		Plug 'wesQ3/vim-windowswap'
-		Plug 'gioele/vim-autoswap'
-		Plug 'godlygeek/tabular'
 		Plug 'christoomey/vim-titlecase'
-		Plug 'reedes/vim-wheel'
+		" Plug 'reedes/vim-wheel'
+		Plug 'tpope/vim-eunuch' 
 
 		" Filetypes and Services
 		Plug 'vim-scripts/autoit.vim--Breland'
 		Plug 'gabrielelana/vim-markdown'
 		Plug 'mrtazz/simplenote.vim'
 		Plug 'mboughaba/i3config.vim'
-		Plug 'nickchahley/vim-manpager'
 		Plug 'tpope/vim-fugitive'
 
 		" Python
-		Plug 'nickchahley/pydoc.vim'
-		Plug 'tmhedberg/SimpylFold'
-		Plug 'vim-scripts/indentpython.vim'
-
-		" Themes, Apperance, Colors
-		Plug 'jacoborus/tender.vim'
-		Plug 'skielbasa/vim-material-monokai'
-		Plug 'sainnhe/sonokai'
-		Plug 'sainnhe/gruvbox-material'
-		Plug 'sainnhe/edge'
-		Plug 'Mofiqul/dracula.nvim'
-		Plug 'xero/miasma.nvim', {'branch': 'dev'}
-		Plug 'xero/sourcerer.vim'
+		" Plug 'tmhedberg/SimpylFold'
 
 
 		" Writing prose 
@@ -62,23 +40,6 @@ endif
 		Plug 'dbmrq/vim-redacted'
 
 	call plug#end()
-" }}}
-" {{{ ultisnips seems super powerful, but also a bit of a project to get
-	" working.
-
-	" Snippets are separated from the engine. Add this if you want them:
-	" Plug 'honza/vim-snippets'
-
-	" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
-	" - https://github.com/Valloric/YouCompleteMe
-	" - https://github.com/nvim-lua/completion-nvim
-	let g:UltiSnipsExpandTrigger="<F9>"
-	let g:UltiSnipsListSnippets="<c-F9>"
-	let g:UltiSnipsJumpForwardTrigger="<c-b>"
-	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-	" If you want :UltiSnipsEdit to split your window.
-	let g:UltiSnipsEditSplit="vertical"
 " }}}
 " {{{ Colorscheme and Theme
 	" toggle italic support for certain colorschemes
@@ -93,29 +54,8 @@ endif
 	let g:sonokai_style = 'andromeda'
 	let g:airline_theme = 'sonokai' 
 " }}}
-" {{{ Airline
-	let g:airline#extensions#tabline#enabled    = 1
-	let g:airline#extensions#whitespace#enabled = 0
-	" show functin name + params
-	let g:airline#extensions#tagbar#enabled = 1
-	let g:airline#extensions#tagbar#flags = 's'
-" }}}
-" {{{ Semshi - python
-	let g:semshi#error_sign_delay = 4
-	let g:semshi#excluded_hi_groups = []
-" }}}
 " {{{ vimwiki 
-	" nmap <Leader>w<Space> <Plug>VimwikiIndex
 
-	" Color header levels
-	let g:vimwiki_hl_headers = 1
-
-	" Hilighting for checked list items
-	let g:vimwiki_hl_cb_checked = 2
-	
-	" Don't need vimwiki to take over tab in insert mode (clobbers snippets)
-	let g:vimwiki_table_mappings = 0
-	
 	" Registered wikis, can open by list index w/ [1,2,etc]<Leader>w<Space>
 	" What are templates and how do we use them
 	let g:vimwiki_list = [
@@ -141,31 +81,6 @@ endif
 	" retired wikis
 	" {'path': '/home/nikoli/Clone/McGill/Courses/NEUR 630/Term Paper/wiki', 'syntax': 'markdown', 'ext': '.wiki'}
 	" {'path': '/home/nikoli/OneDrive/McGill/Courses/BMDE 508/Grant Proposal/wiki', 'syntax': 'markdown', 'ext': '.wiki'}
-
-	" Keymaps
-	" Oh my god do shift mappings work in terminal now? No.
-	:nmap <leader>s <Plug>VimwikiToggleListItem
-	:nmap <C-J> <Plug>VimwikiSplitLink
-	" reson for commenting: to restore visual block mode map
-	" :nmap <C-V> <Plug>VimwikiVSplitLink
-
-	" Foldmethod, list, expr (headers and sections), syntax
-	let g:vimwiki_folding = 'syntax'
-
-	" Find incomplete tasks
-	" Open a QuickFix window with incomplete tasks that are in a hyphenated list
-	function! VimwikiFindIncompleteTasks()
-		lvimgrep /- \[ \]/ %:p
-		lopen
-	endfunction
-
-	function! VimwikiFindAllIncompleteTasks()
-		VimwikiSearch /- \[ \]/
-		lopen
-	endfunction
-
-	nmap <Leader>wa :call VimwikiFindAllIncompleteTasks()<CR>
-	nmap <Leader>wx :call VimwikiFindIncompleteTasks()<CR>
 
 	
 " }}}

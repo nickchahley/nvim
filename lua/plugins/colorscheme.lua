@@ -50,7 +50,7 @@ local M = {
 		end,
 	},
 	{ 'catppuccin/nvim', name = "catppuccin", priority = 1000, },
-	{ 'rebelot/kanagawa.nvim', name = 'kanagawa', priority = 1000, },
+	{ 'rebelot/kanagawa.nvim', name = 'kanagawa', lazy = true, priority = 1000, },
 	{ 'shaunsingh/moonlight.nvim', name = 'moonlight', priority = 1000, },
 	{ 
 		'rhysd/vim-color-spring-night', name = 'spring-night', priority = 1000,
@@ -59,6 +59,19 @@ local M = {
 		end,
 	},
 	{ 'karoliskoncevicius/sacredforest-vim', name = 'sacredforest', priority = 1000, },
+	{ 'Mofiqul/dracula.nvim', name = 'dracula', lazy = false, priority = 1000, },
+	{ 
+		'xero/miasma.nvim', name = 'miasma', 
+		branch = 'dev',
+		dependencies = {
+			"rktjmp/lush.nvim",
+			"rktjmp/shipwright.nvim",
+		},
+		lazy = true,
+	},
+	{ 'xero/sourcerer.vim', name = 'sourcerer', lazy = true, priority = 1000, },
+	{ 'jacoborus/tender.vim', lazy = true, },
+		
 
 }
 
