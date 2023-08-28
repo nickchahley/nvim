@@ -168,11 +168,7 @@ lua require('config.options')
 
 " }}}
 
-" lua require('config.colemak')
-source $VIMHOME/colemak.vim
-
 " R insert pipe operator
-" let pipemap = '<C-M>' " does not work :(
 autocmd FileType r inoremap <buffer> >> <Esc>:normal! a%>%<CR>a 
 " autocmd FileType rnoweb inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 
 " autocmd FileType rmd inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 
