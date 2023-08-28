@@ -165,7 +165,14 @@ lua require('config.options')
 	syn match myExNonWords +\<\p*[^A-Za-z \t]\p*\>+ contains=@NoSpell
 	" Do this AFTER PLUGINS to override any mapping changes
 	"source $VIMHOME/nikoli/date.vim
-	source $VIMHOME/colemak.vim
 
 " }}}
 
+" lua require('config.colemak')
+source $VIMHOME/colemak.vim
+
+" R insert pipe operator
+" let pipemap = '<C-M>' " does not work :(
+autocmd FileType r inoremap <buffer> >> <Esc>:normal! a%>%<CR>a 
+" autocmd FileType rnoweb inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 
+" autocmd FileType rmd inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 

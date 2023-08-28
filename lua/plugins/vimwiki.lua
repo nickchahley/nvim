@@ -4,7 +4,7 @@ local M = {
 		-- lazy = true,
 		init = function()
 			vim.cmd([[nmap <Leader>w<Space> <Plug>VimwikiIndex]])
-			vim.cmd([[let $SIMMUNOMEWIKI = '/mnt/d/Simmunome/vimwiki']])
+			vim.cmd([[let $SIMMUNOMEWIKI = '/mnt/c/Users/nikoli/Simmunome/vimwiki']])
 			vim.cmd([[let g:vimwiki_list = [
 				\{
 				\ 'path': '$SIMMUNOMEWIKI',

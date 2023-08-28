@@ -12,6 +12,7 @@ local M = {
 	{ 'nickchahley/vim-manpager', name = 'manpager', lazy = false, },
 	{ 'vim-scripts/BufOnly.vim', name = 'bufonly', lazy = false, },
 	{ 'gioele/vim-autoswap', name = 'autoswap', lazy = false },
+	{ 'christoomey/vim-titlecase', name = 'titlecase', lazy = false},
 }
 
 return M
