@@ -44,33 +44,38 @@ local M = {
 			vim.g.gruvbox_material_foreground = 'material'
 			vim.g.gruvbox_material_better_performance = 1
 		end,
-		config = function()
-			-- require('lualine').setup({
-			-- 	options = { theme = 'gruvbox-material' }
-			-- })
-		end,
+		-- config = function()
+		-- 	-- require('lualine').setup({
+		-- 	-- 	options = { theme = 'gruvbox-material' }
+		-- 	-- })
+		-- end,
 	},
 	{ 
-		'rhysd/vim-color-spring-night', name = 'spring-night', priority = 1000,
+		'rhysd/vim-color-spring-night', name = 'spring-night', 
+		lazy = true,
+		priority = 1000,
 		init = function()
 			vim.g.spring_night_high_contrast = 0
 		end,
 	},
-	{ 'Mofiqul/dracula.nvim', name = 'dracula', lazy = false, priority = 1000, },
-	{ 'catppuccin/nvim', name = "catppuccin", priority = 1000, },
-	{ 'shaunsingh/moonlight.nvim', name = 'moonlight', priority = 1000, },
+	{ 'Mofiqul/dracula.nvim', name = 'dracula', lazy = true, priority = 1000, },
+	{ 'catppuccin/nvim', name = "catppuccin", lazy = true, priority = 1000, },
+	{ 'shaunsingh/moonlight.nvim', name = 'moonlight', lazy=true, priority = 1000, },
 	{ 'rebelot/kanagawa.nvim', name = 'kanagawa', lazy = true, priority = 1000, },
 	{ 'karoliskoncevicius/sacredforest-vim', name = 'sacredforest', lazy=true, priority = 1000, },
 	{ 
-		'xero/miasma.nvim', name = 'miasma', 
+		'xero/miasma.nvim', name = 'miasma',
+		lazy = true,
 		branch = 'dev',
 		dependencies = {
 			"rktjmp/lush.nvim",
 			"rktjmp/shipwright.nvim",
 		},
-		lazy = true,
+		config = function()
+			vim.cmd('colorscheme miasma')
+		end,
 	},
-	{ 'jacoborus/tender.vim', lazy = true, },
+	{ 'jacoborus/tender.vim', name = 'tender', lazy = true, },
 		
 
 }
