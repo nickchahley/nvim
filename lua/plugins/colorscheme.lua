@@ -11,6 +11,7 @@ local M = {
 		config = function()
 			require("everforest").setup({
 				background = 'soft',
+				-- disable_italic_comments = true,
 			})
 			-- require('lualine').setup {
 			-- 	options = { theme = 'everforest' }

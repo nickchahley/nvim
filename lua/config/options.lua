@@ -1,19 +1,7 @@
--- Started making it. Had a breakdown. Bon appetite.
+-- settings that are nvim only, or I otherwise not wanted in remote vim config
+
 vim.cmd.colorscheme('everforest')
-
-vim.opt.number = true
-vim.opt.relativenumber = false
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+vim.opt.inccommand = 'nosplit' -- incremental preview for replace
 vim.opt.wildmode = {'longest', 'list', 'full'}
-vim.opt.mouse = 'a'
-vim.opt.scrolloff = 5
+-- vim.cmd([[hi MatchParen gui=NONE cterm=NONE guibg=NONE  guifg=YELLOW ctermfg=YELLOW]])
 
---  Spelling
---  To add a one-off spellfile use :setlocal spellfile+=.oneoff.utf-8.add
-vim.cmd([[
-	set spelllang=en
-	set spellfile=$VIMHOME/spell/en.utf-8.add 
-	hi SpellBad cterm=underline	
-	nmap <leader>cs :setlocal spell!<CR>
-]])

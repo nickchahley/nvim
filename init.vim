@@ -16,65 +16,37 @@
 lua require('config.env')
 lua require('config.lazy')
 lua require('config.options')
-" {{{ Terminal/GUI Specific
-	" Unsure if this is correct sign for nvim gui on Windows. IIRC it is not on
-	" linux
-	if has("gui_running")
-		set vb t_vb= "Disable error bell (gvim only)
-		
-		" Bars--  menubar, toolbar, scrollbar
-		" '=' replace    '+=' add    '-=' rm
-		set guioptions -=m " menubar 
-		set guioptions -=T " toolbar 
-		set guioptions -=r
-		set guioptions -=L
-		
-		" font selection seem to be handled fine in ginit.vim for now
-		" set guifont=Iosevka\ Term\ Medium:h11
-		" set guifont=Source\ Code\ Pro\ Regular:h11
 
-	else 
-		" This is console Vim.
-		set noeb vb t_vb= " Disable error bell (vim only)
-	endif
+	" This is console Vim.
+	set noeb vb t_vb= " Disable error bell (vim only)
+
 " }}}
 " {{{ General Configuration
-
-	" No idea what we're doing re: color support
 	set background=dark
 	set t_Co=256
-	"colorscheme everforest
-
-	set title             " Don't forget what you're editing
-	set backspace=2       " backspace in i mode, even tho it's 'suboptimal'
-	if &tabstop == 8      " Then probs on initial vimrc load, el don't overwrite
-		set tabstop=4       " Tab width to 4
-		set shiftwidth=4    " indent/outdent by 4
-	endif                 " to stop our ts getting messed up when reloading vimrc
-	set shiftround        " always indent/outdent to the nearest tabstop
-	set foldmethod=marker " will be overwritten by modelines, ftplugins
-
-	" Hilighting
-	hi MatchParen gui=NONE cterm=NONE guibg=NONE  guifg=YELLOW ctermfg=YELLOW
-	" {{{ Highlight current line and allow toggling
-		" Function b/c xml files don't respect our color changes?
-		function! ToggleCursorLine()
-			hi CursorLineNr guifg=#FF5C57 guibg=NONE ctermbg=NONE
-			hi CursorLine guibg=NONE ctermbg=NONE
-			set cursorline! " toggle highlight current line
-		endfunction
-		nnoremap <Leader>C :call ToggleCursorLine()<CR>
-		call ToggleCursorLine()
-	" }}}
-	" Cursor- blinking line in insert, underline for remove, bar otherwise
-	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-				\,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr
-				\,sm:block-blinkwait175-blinkoff150-blinkon175
-	
-	" Copy and paste. Holy shit.
-	"set clipboard=unnamedplus " automatically use sys clipboard for c/p (linux)
-	set clipboard+=unnamed    " automatically use sys clipboard for c/p (win)
-	set pastetoggle=<F10>     " happier clipboard pasting, but turn off after
+	syntax on
+	set relativenumber
+	set title              " Don't forget what you're editing
+	set backspace=2        " backspace in i mode, even tho it's 'suboptimal'
+	if &tabstop == 8       " Then probs on initial vimrc load, el don't overwrite
+		set tabstop=4        " Tab width to 4
+		set shiftwidth=4     " indent/outdent by 4
+	endif                  " to stop our ts getting messed up when reloading vimrc
+	set shiftround         " always indent/outdent to the nearest tabstop
+	set foldmethod=marker  " will be overwritten by modelines, ftplugins
+	set textwidth=79       " For autoformatting
+	set wrapmargin=8       " unsure why we have this set..
+	set wrap
+	set linebreak
+	set breakindent        " preserve indent when wrapping lines
+	set showbreak=..
+	set nolist             " list disables linebreak
+	set formatoptions=cqlj " Softwrap text, except comments. See :h fo-table
+	set mouse=a
+	set scrolloff=5
+	set splitbelow
+	set splitright
+	set wildmode=longest,list,full
 
 	" Search 
 	set ignorecase         " Use case insensitive search
@@ -85,16 +57,23 @@ lua require('config.options')
 	" Clear search highlighting on screen redraw
 	nnoremap <C-l> :nohls<CR><C-l> 
 	
-	set textwidth=79      " For autoformatting
-	" Softwrap text, except comments. See :h fo-table
-	set wrapmargin=8 " unsure why we have this set..
-	set wrap
-	set linebreak
-	set breakindent  " preserve indent when wrapping lines
-	set showbreak=..
-	set nolist       " list disables linebreak
-	set formatoptions=cqlj
-	set formatoptions-=o
+	" Spelling
+	set spelllang=en
+	set spellfile=$VIMHOME/spell/en.utf-8.add 
+	hi SpellBad cterm=underline	
+	nmap <leader>cs :setlocal spell!<CR>
+
+	" }}}
+	" Cursor- blinking line in insert, underline for remove, bar otherwise
+	" guicursor works with many terms
+	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+				\,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr
+				\,sm:block-blinkwait175-blinkoff150-blinkon175
+	
+	" Copy and paste. Holy shit.
+	"set clipboard=unnamedplus " automatically use sys clipboard for c/p (linux)
+	set clipboard+=unnamed    " automatically use sys clipboard for c/p (win)
+	set pastetoggle=<F10>     " happier clipboard pasting, but turn off after
 
 " }}}
 " {{{ Persistent Undo | Backup and Swap 
@@ -120,6 +99,9 @@ lua require('config.options')
 " {{{ Load local functions (bite sized plugins)
 	let $FUNCTIONS = $VIMHOME.'/functions'
 	source $FUNCTIONS/ToggleStatusline.vim
+	source $FUNCTIONS/ToggleCursorline.vim
+		nnoremap <Leader>C :call ToggleCursorLine()<CR>
+		call ToggleCursorLine()
 " }}}
 " {{{ Keybindings
 
