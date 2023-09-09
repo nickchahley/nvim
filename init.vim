@@ -1,4 +1,4 @@
-" 	Started making it. Had a breakdown. Bon appetite.
+" 	Started making it. Had a breakdown. Bon appetite.`
 " 	nikoli's vimrc started 2015
 " {{{ Vim directory as a variable on unix/win
 	if has('win32') || has('win64')
@@ -54,14 +54,6 @@ lua require('config.options')
 	set shiftround        " always indent/outdent to the nearest tabstop
 	set foldmethod=marker " will be overwritten by modelines, ftplugins
 
-	" Absolute line numbers in insert mode, else hybrid relative
-	" set relativenumber 
-	" augroup numbertoggle
-	"   autocmd!
-	"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber nonumber
-	"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
-	" augroup END
-
 	" Hilighting
 	hi MatchParen gui=NONE cterm=NONE guibg=NONE  guifg=YELLOW ctermfg=YELLOW
 	" {{{ Highlight current line and allow toggling
@@ -79,7 +71,6 @@ lua require('config.options')
 				\,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr
 				\,sm:block-blinkwait175-blinkoff150-blinkon175
 	
-
 	" Copy and paste. Holy shit.
 	"set clipboard=unnamedplus " automatically use sys clipboard for c/p (linux)
 	set clipboard+=unnamed    " automatically use sys clipboard for c/p (win)
