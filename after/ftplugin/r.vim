@@ -6,3 +6,5 @@ setlocal tabstop=8 softtabstop=0
 " trying some autoindentation shenans
 setlocal cinoptions=(0
 setlocal cindent
+setlocal foldmethod=indent
+setlocal fo+=cr
