@@ -25,7 +25,6 @@
 	nmap \ <Leader>
 	vmap \ <Leader>
 " }}}
-source $VIMHOME/local.vim
 source $VIMHOME/plugins.vim
 " {{{ Terminal/GUI Specific
 	" Unsure if this is correct sign for nvim gui on Windows. IIRC it is not on
@@ -60,6 +59,14 @@ source $VIMHOME/plugins.vim
 	set termguicolors     " enable truecolor support, sometimes...
 	colorscheme everforest
 
+	" Absolute line numbers in insert mode, else hybrid relative
+	set relativenumber 
+	" augroup numbertoggle
+	"   autocmd!
+	"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber nonumber
+	"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
+	" augroup END
+
 	set title             " Don't forget what you're editing
 	set backspace=2       " backspace in i mode, even tho it's 'suboptimal'
 	if &tabstop == 8      " Then probs on initial vimrc load, el don't overwrite
@@ -71,7 +78,6 @@ source $VIMHOME/plugins.vim
 	set foldmethod=marker " will be overwritten by modelines, ftplugins
 	set autoread          " Update file on change. DTEW?
 	set scrolloff=5       " Keep 5 lines above and below cursor
-	set mouse=a           " Enable mouse click and scroll, if supported
 
 	" Open planes to right and bottom, feels more natural than default
 	set splitbelow
@@ -84,6 +90,7 @@ source $VIMHOME/plugins.vim
 	set wildmenu
 	set wildmode=longest,list,full
 
+<<<<<<< HEAD
 	" Absolute line numbers in insert mode, else hybrid relative
 	" set relativenumber 
 	" augroup numbertoggle
@@ -92,6 +99,17 @@ source $VIMHOME/plugins.vim
 	"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
 	" augroup END
 
+||||||| 4588d88
+	" Absolute line numbers in insert mode, else hybrid relative
+	set relativenumber 
+	augroup numbertoggle
+	  autocmd!
+	  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber nonumber
+	  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
+	augroup END
+
+=======
+>>>>>>> 7af9d7a174b0e98ff0cf1862e905f7de0699fec6
 	" Hilighting
 	hi MatchParen gui=NONE cterm=NONE guibg=NONE  guifg=YELLOW ctermfg=YELLOW
 	" {{{ Highlight current line and allow toggling
@@ -112,9 +130,8 @@ source $VIMHOME/plugins.vim
 	" Spelling
 	" To add a one-off spellfile use :setlocal spellfile+=.oneoff.utf-8.add
 	set spelllang=en
-	set spellfile=$VIMHOME/spell/en.utf-8.add 
+	set spellfile=$HOME/.vim/spell/en.utf-8.add " Default spellfile
 	hi SpellBad cterm=underline	
-	nmap <leader>cs :setlocal spell!<CR>
 
 	" Copy and paste. Holy shit.
 	"set clipboard=unnamedplus " automatically use sys clipboard for c/p (linux)
@@ -162,10 +179,6 @@ source $VIMHOME/plugins.vim
 			\ endif
 	augroup END
 " }}}
-" {{{ Load local functions (bite sized plugins)
-	let $FUNCTIONS = $VIMHOME.'/functions'
-	source $FUNCTIONS/ToggleStatusline.vim
-" }}}
 " {{{ Keybindings
 
 	" Open a list of buffers, tab completion to switch. 
@@ -179,7 +192,7 @@ source $VIMHOME/plugins.vim
 	" Execute current file 
 	" should we have a second binding w/o <cr> so that we can run w/ options
 	nnoremap <Leader>e :w<CR>:!%:p<CR>
-	nnoremap <Leader>E :w<CR>:silent !%:p<CR><C-l>
+	" nnoremap <Leader>E :w<CR>:silent !%:p<CR><C-l>
 	nnoremap <Leader>R :!%:p
 
 	" Insert a timestamp, eg for naming meeting minutes
@@ -199,6 +212,9 @@ source $VIMHOME/plugins.vim
 	nnoremap <leader>ha :topleft split<CR>
 
 	syn match myExNonWords +\<\p*[^A-Za-z \t]\p*\>+ contains=@NoSpell
+	set spellfile=$VIMHOME/spell/en.utf-8.add 
+	nmap <leader>cs :setlocal spell!<CR>
+
 	" Do this AFTER PLUGINS to override any mapping changes
 	"source $VIMHOME/nikoli/date.vim
 	source $VIMHOME/colemak.vim
