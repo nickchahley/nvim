@@ -1,5 +1,0 @@
-require('config.env')
-require('config.lazy')
-require('config.options')
--- require('config.functions_augroups')
-require('config.keybinds')

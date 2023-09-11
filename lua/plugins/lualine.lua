@@ -50,12 +50,12 @@ local M = {
 		config = function()
 			local nbuff = function() 
 				-- #<var> is length operator
-				n = #vim.fn.getbufinfo({buflisted = 1})
-				n = n .. 'b'
+				local n = #vim.fn.getbufinfo({buflisted = 1})
+				n = tostring(n) .. 'b'
 				return n
 			end 
 			local nline = function()
-				n = vim.api.nvim_buf_line_count(0)
+				local n = vim.api.nvim_buf_line_count(0)
 				return n .. 'L'
 			end
 			local nbuff_nline = function()
