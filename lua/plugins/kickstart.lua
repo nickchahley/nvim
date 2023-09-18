@@ -1,6 +1,5 @@
 local M = {
-	{
-		'numToStr/Comment.nvim',
+	{ 'numToStr/Comment.nvim',
 		opts = {
 			basic = true,
 		}
@@ -11,11 +10,9 @@ local M = {
 	{'sindrets/diffview.nvim', lazy = true,
 		-- dependencies = {'nvim-tree/nvim-web-devicons',}
 	},
-  {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
+  {-- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim', lazy = true,
     opts = {
-      -- See `:help gitsigns.txt`
       signs = {
         add = { text = '+' },
         change = { text = '~' },
@@ -43,8 +40,7 @@ local M = {
   },
 
 	-- LSP Configuration & Plugins
-	{
-		'neovim/nvim-lspconfig',
+	{ 'neovim/nvim-lspconfig',
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
 			{ 'williamboman/mason.nvim', config = true },
@@ -124,11 +120,7 @@ local M = {
 			'nvim-treesitter/nvim-treesitter-textobjects',
 		},
 		build = ':TSUpdate',
-	}
+	},
 }
-
--- Can we just put the regular config here? Yes.
-
-
 
 return M
