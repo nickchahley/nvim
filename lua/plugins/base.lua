@@ -12,6 +12,11 @@ local M = {
 	{ 'christoomey/vim-titlecase', name = 'titlecase', lazy = false },
 	{ 'triglav/vim-visual-increment', name = 'visual-increment', lazy = false },
 	{ 'nickchahley/colemak-vim', name = 'colemak', lazy = false },
+	{ 'numToStr/Comment.nvim',
+		opts = {
+			basic = true,
+		}
+	},
 }
 
 return M

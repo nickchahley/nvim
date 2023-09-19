@@ -1,16 +1,12 @@
 local M = {
-	{ 'numToStr/Comment.nvim',
-		opts = {
-			basic = true,
-		}
-	},
 	{ 'tpope/vim-sleuth', lazy = true },
 	{ 'tpope/vim-fugitive' },
 	{ 'tpope/vim-rhubarb' },
-	{'sindrets/diffview.nvim', lazy = true,
-		-- dependencies = {'nvim-tree/nvim-web-devicons',}
+	{ 'sindrets/diffview.nvim', lazy = true,
+		dependencies = {'nvim-tree/nvim-web-devicons',}
 	},
-  {-- Adds git related signs to the gutter, as well as utilities for managing changes
+	-- Adds git related signs to the gutter, as well as utilities for managing changes
+  {
     'lewis6991/gitsigns.nvim', lazy = true,
     opts = {
       signs = {
@@ -46,12 +42,15 @@ local M = {
 			{ 'williamboman/mason.nvim', config = true },
 			'williamboman/mason-lspconfig.nvim',
 
+
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
 			-- Additional lua configuration, makes nvim stuff amazing!
 			{ 'folke/neodev.nvim', opts = {} },
+
+			'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
 		},
 		config = function()
 			require 'plugins.config.lspconfig'
@@ -61,7 +60,19 @@ local M = {
 			--  use symbols in the gutter, maybe underlines, to identify diagnostic flags
 			--  maybe be able to toggle virtual text
 			--  I would like it if the gutter just stayed expanded the whole time so that my
-			vim.diagnostic.config({ virtual_text = false })
+			-- vim.diagnostic.config({ virtual_text = false })
+			require('toggle_lsp_diagnostics').init({
+				virtual_text = false
+			})
+			vim.keymap.set('n', "<leader>tlv", "<Plug>(toggle-lsp-diag-vtext)")
+			vim.cmd([[
+				nmap <leader>tlu <Plug>(toggle-lsp-diag-underline)
+				nmap <leader>tlp <Plug>(toggle-lsp-diag-update_in_insert)
+				nmap <leader>tld  <Plug>(toggle-lsp-diag)
+				nmap <leader>tldd <Plug>(toggle-lsp-diag-default)
+				nmap <leader>tldo <Plug>(toggle-lsp-diag-off)
+				nmap <leader>tldf <Plug>(toggle-lsp-diag-on)
+			]])
 			vim.opt.signcolumn = 'yes'
 		end,
 	},
