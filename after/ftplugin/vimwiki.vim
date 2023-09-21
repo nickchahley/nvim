@@ -40,3 +40,4 @@ vmap <F13> @<Plug>VimwikiTextObjTableCellV
 vmap <F13> @<Plug>VimwikiTextObjColumnV
 vmap <F13> @<Plug>VimwikiTextObjListChildrenV
 
+nmap <F13> @<Plug>VimwikiTableAlignQ
