@@ -1,3 +1,3 @@
-autocmd! numbertoggle
-set number
-set norelativenumber
+set expandtab
+set tabstop=2
+set shiftwidth=2
