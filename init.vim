@@ -40,7 +40,7 @@ lua require('config.options')
 	set showbreak=..
 	set nolist             " list disables linebreak
 	set formatoptions=cqlj
-	set formatoptions-=o
+	set formatoptions-=or
 
 	" Buffers and splits
 	set splitbelow
@@ -84,8 +84,8 @@ lua require('config.options')
 	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr,sm:block-blinkwait175-blinkoff150-blinkon175
 	
 	" Copy and paste. Holy shit.
-	"set clipboard=unnamedplus " automatically use sys clipboard for c/p (linux)
-	set clipboard+=unnamed    " automatically use sys clipboard for c/p (win)
+	set clipboard=unnamedplus " automatically use sys clipboard for c/p (linux)
+	" set clipboard+=unnamed    " automatically use sys clipboard for c/p (win/wsl)
 	set pastetoggle=<F10>     " happier clipboard pasting, but turn off after
 	
 
