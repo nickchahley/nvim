@@ -1,11 +1,9 @@
 local M = {
 	{
 		'vimwiki/vimwiki',
-		-- lazy = true,
 		init = function()
 			vim.cmd([[nmap <Leader>w<Space> <Plug>VimwikiIndex]])
-			vim.env.SIMMUNOMEWIKI = '/mnt/c/Users/nikoli/Simmunome/vimwiki'
-			-- vim.cmd([[let $SIMMUNOMEWIKI = '/mnt/c/Users/nikoli/Simmunome/vimwiki']])
+			vim.env.SIMMUNOMEWIKI = '~/vimwiki'
 			vim.cmd([[let g:vimwiki_list = [
 				\{
 				\ 'path': '$SIMMUNOMEWIKI',
