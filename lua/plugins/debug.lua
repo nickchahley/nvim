@@ -4,6 +4,7 @@ local M = {
 			-- 'jay-babu/mason-nvim-dap.nvim',
 			'mfussenegger/nvim-dap-python',
 			'rcarriga/nvim-dap-ui',
+			'Weissle/persistent-breakpoints.nvim',
 		},
 		config = function()
 			require 'plugins.config.dap'
@@ -11,7 +12,7 @@ local M = {
 	},
 	-- Please let pyright lsp use my correct conda env
 	{
-		'linux-cultist/venv-selector.nvim', lazy = false,
+		'linux-cultist/venv-selector.nvim', lazy = true,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-telescope/telescope.nvim",

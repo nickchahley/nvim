@@ -65,13 +65,14 @@ local M = {
 				virtual_text = false
 			})
 			vim.keymap.set('n', "<leader>tlv", "<Plug>(toggle-lsp-diag-vtext)")
+			-- "Toggle Lsp diagnostics
+			-- "No" = off, "Yes" = on
 			vim.cmd([[
 				nmap <leader>tlu <Plug>(toggle-lsp-diag-underline)
 				nmap <leader>tlp <Plug>(toggle-lsp-diag-update_in_insert)
 				nmap <leader>tld  <Plug>(toggle-lsp-diag)
-				nmap <leader>tldd <Plug>(toggle-lsp-diag-default)
-				nmap <leader>tldo <Plug>(toggle-lsp-diag-off)
-				nmap <leader>tldf <Plug>(toggle-lsp-diag-on)
+				nmap <leader>tln <Plug>(toggle-lsp-diag-off)
+				nmap <leader>tly <Plug>(toggle-lsp-diag-on)
 			]])
 			vim.opt.signcolumn = 'yes'
 		end,
@@ -169,7 +170,7 @@ local M = {
 		config = function()
 			require('nvim-treesitter.configs').setup {
 				-- Add languages to be installed here that you want installed for treesitter
-				ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'r' },
+				ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'vimdoc', 'vim', 'r' },
 
 				-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 				auto_install = false,
