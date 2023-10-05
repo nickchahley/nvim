@@ -56,10 +56,11 @@ local M = {
 		priority = 1000,
 		init = function()
 			vim.g.spring_night_high_contrast = 0
+			vim.cmd.colorscheme('spring-night')
 		end,
 	},
 	{ 'Mofiqul/dracula.nvim', name = 'dracula', lazy = true, priority = 1000, },
-	{ 'catppuccin/nvim', name = "catppuccin", lazy = true, priority = 1000, },
+	{ 'catppuccin/nvim', name = "catppuccin", lazy = false, priority = 1000, },
 	{ 'shaunsingh/moonlight.nvim', name = 'moonlight', lazy=true, priority = 1000, },
 	{ 'rebelot/kanagawa.nvim', name = 'kanagawa', lazy = true, priority = 1000, },
 	{ 'karoliskoncevicius/sacredforest-vim', name = 'sacredforest', lazy=true, priority = 1000, },
@@ -80,4 +81,8 @@ local M = {
 
 }
 
+Everforest_bg = function(bg)
+	require('everforest').setup({background = bg})
+	require('everforest').load()
+end
 return M

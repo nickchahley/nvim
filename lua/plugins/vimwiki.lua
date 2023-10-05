@@ -2,14 +2,14 @@ local M = {
 	{
 		'vimwiki/vimwiki',
 		init = function()
+			vim.env.SIMMUNOMEWIKI = vim.env.HOME .. '/projects/simmunome-wiki'
 			vim.cmd([[nmap <Leader>w<Space> <Plug>VimwikiIndex]])
-			vim.env.SIMMUNOMEWIKI = '~/vimwiki'
 			vim.cmd([[let g:vimwiki_list = [
 				\{
 				\ 'path': '$SIMMUNOMEWIKI',
 				\ 'ext': '.wiki',
 				\ 'diary_rel_path': '',
-				\ 'nested_syntaxes': {'python': 'python', 'r': 'r'},
+				\ 'nested_syntaxes': {'python': 'python', 'r': 'r', 'bash': 'bash', 'go': 'go'},
 				\ 'path_html': '$SIMMUNOMEWIKI/site_html/',
 				\ 'auto_diary_index' : 1
 				\ }] 

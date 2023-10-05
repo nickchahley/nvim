@@ -2,9 +2,11 @@ local M = {
 	{ 'mfussenegger/nvim-dap',
 		dependencies = {
 			-- 'jay-babu/mason-nvim-dap.nvim',
-			'mfussenegger/nvim-dap-python',
 			'rcarriga/nvim-dap-ui',
 			'Weissle/persistent-breakpoints.nvim',
+			'nvim-treesitter/nvim-treesitter' ,
+			'theHamsta/nvim-dap-virtual-text',
+			'mfussenegger/nvim-dap-python',
 		},
 		config = function()
 			require 'plugins.config.dap'
@@ -20,8 +22,8 @@ local M = {
 		},
 		opts = {
 			-- path = '/home/nikoli/.minicona3',
-			anaconda_base_path = '/home/nikoli/.miniconda3',
-			anaconda_envs_path = 'home/nikoli/.miniconda3/envs',
+			-- anaconda_base_path = '/home/nikoli/.miniconda3',
+			-- anaconda_envs_path = 'home/nikoli/.miniconda3/envs',
 		},
 		keys = {{
 			'<leader>vs', '<cmd>:VenvSelect<cr>',

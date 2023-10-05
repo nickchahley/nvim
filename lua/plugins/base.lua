@@ -11,12 +11,13 @@ local M = {
 	{ 'gioele/vim-autoswap', name = 'autoswap', lazy = false },
 	{ 'christoomey/vim-titlecase', name = 'titlecase', lazy = false },
 	{ 'triglav/vim-visual-increment', name = 'visual-increment', lazy = false },
-	{ 'nickchahley/colemak-vim', name = 'colemak', lazy = false },
+	{ 'mbbill/undotree', lazy = false},
 	{ 'numToStr/Comment.nvim',
 		opts = {
 			basic = true,
 		}
 	},
+	{ 'nickchahley/colemak-vim', name = 'colemak', lazy = false },
 }
 
 return M
