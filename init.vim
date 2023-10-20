@@ -1,17 +1,5 @@
 " 	Started making it. Had a breakdown. Bon appetite.`
 " 	nikoli's vimrc started 2015
-" {{{ Vim directory as a variable on unix/win
-	if has('win32') || has('win64')
-		" '.' is a join operator for let statements?
-		" not necessarily the cannonical Windows vimdir location
-		let $VIMHOME = $HOME.'/Neovim/nvim'
-		let $VIMRC = $VIMHOME.'/init.vim'
-		let $VIMSHARE = $HOME.'/Neovim/share/nvim'
-		let $BACKUNDOSWAP = $HOME.'/Neovim/vim-backundoswap/'
-		" Don't know what I'm doing here.
-		set runtimepath+='$VIMSHARE/runtime'
-	endif
-" }}}
 lua require('config.env')
 lua require('config.lazy')
 lua require('config.options')
