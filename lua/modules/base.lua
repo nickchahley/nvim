@@ -11,12 +11,17 @@ local M = {
 	{ 'gioele/vim-autoswap', name = 'autoswap', lazy = false },
 	{ 'christoomey/vim-titlecase', name = 'titlecase', lazy = false },
 	{ 'triglav/vim-visual-increment', name = 'visual-increment', lazy = false },
-	{ 'mbbill/undotree', lazy = false},
+	{ 'mbbill/undotree', lazy = false,
+		config = function()
+			vim.keymap.set('n', '<leader>ut', vim.cmd.UndotreeToggle)
+		end,
+	},
 	{ 'numToStr/Comment.nvim',
 		opts = {
 			basic = true,
 		}
 	},
+	{ 'Fymyte/rasi.vim' },
 	{ 'nickchahley/colemak-vim', name = 'colemak', lazy = false },
 }
 

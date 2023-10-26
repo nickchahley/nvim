@@ -12,7 +12,7 @@ setlocal linespace=2 " windows gui req resize window to see command bar
 redraw
 
 " <C-Space> does not work in tmux for some reason
-nnoremap <leader>t :VimwikiToggleListItem<CR>
+nnoremap <leader>tt :VimwikiToggleListItem<CR>
 
 " Override vimwiki's default o/O vimwiki#lst#kbd_o(), see ftplugin/vimwiki.vim 487
 " Restore the o/O maps to movement

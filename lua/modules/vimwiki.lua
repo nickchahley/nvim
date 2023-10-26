@@ -1,6 +1,6 @@
 local M = {
 	{
-		'vimwiki/vimwiki',
+		'vimwiki/vimwiki', lazy=false,
 		init = function()
 			vim.env.SIMMUNOMEWIKI = vim.env.HOME .. '/projects/simmunome-wiki'
 			vim.cmd([[nmap <Leader>w<Space> <Plug>VimwikiIndex]])
@@ -9,7 +9,7 @@ local M = {
 				\ 'path': '$SIMMUNOMEWIKI',
 				\ 'ext': '.wiki',
 				\ 'diary_rel_path': '',
-				\ 'nested_syntaxes': {'python': 'python', 'r': 'r', 'bash': 'bash', 'go': 'go'},
+				\ 'nested_syntaxes': {'python':'python', 'py':'python', 'r':'r', 'bash':'bash', 'go':'go', 'config':'config', 'i3':'i3config', 'sway':'i3config', 'md':'markdown', 'markdown':'markdown'},
 				\ 'path_html': '$SIMMUNOMEWIKI/site_html/',
 				\ 'auto_diary_index' : 1
 				\ }] 
@@ -34,6 +34,7 @@ local M = {
 				nmap <Leader>wa :call VimwikiFindAllIncompleteTasks()<CR>
 				nmap <Leader>wx :call VimwikiFindIncompleteTasks()<CR>
 			]])
+			-- try to disable annoying things clobbering my maps
 			vim.cmd([[
 				vmap <F13> @<Plug>VimwikiTextObjListSingleV
 				vmap <F13> @<Plug>VimwikiTextObjColumnInnerV

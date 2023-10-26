@@ -63,8 +63,8 @@ local M = {
 			end
 			require('lualine').setup ({
 				sections = { 
-					lualine_c = {'filename',},
-					lualine_x = {'encoding', 'fileformat', 'filetype', nbuff},
+					lualine_c = {nbuff, 'filename',},
+					lualine_x = {'encoding', 'fileformat', 'filetype',},
 					lualine_y = {nline,},
 				}
 			})

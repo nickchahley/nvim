@@ -42,7 +42,6 @@ local M = {
 			{ 'williamboman/mason.nvim', config = true },
 			'williamboman/mason-lspconfig.nvim',
 
-
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
@@ -53,17 +52,9 @@ local M = {
 			'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
 		},
 		config = function()
-			require 'plugins.config.lspconfig'
+			require 'config.lspconfig'
 
-			-- config of diagnostic and virtual text
-			-- what I am after:
-			--  use symbols in the gutter, maybe underlines, to identify diagnostic flags
-			--  maybe be able to toggle virtual text
-			--  I would like it if the gutter just stayed expanded the whole time so that my
-			-- vim.diagnostic.config({ virtual_text = false })
-			require('toggle_lsp_diagnostics').init({
-				virtual_text = false
-			})
+			require('toggle_lsp_diagnostics').init({ virtual_text = false })
 			vim.keymap.set('n', "<leader>tlv", "<Plug>(toggle-lsp-diag-vtext)")
 			-- "Toggle Lsp diagnostics
 			-- "No" = off, "Yes" = on
@@ -162,7 +153,6 @@ local M = {
 			vim.keymap.set('n', '<leader>sb', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[S]earch [b]uffer' })
 		end,
 	},
-
 	-- Highlight, edit, and navigate code
 	{
 		'nvim-treesitter/nvim-treesitter',
@@ -234,15 +224,42 @@ local M = {
 					},
 				},
 			}
-
 			-- Diagnostic keymaps
 			vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 			vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 			vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 			vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
-
 		end,
+	},
+	-- Debug Adapters
+	{ 'mfussenegger/nvim-dap',
+		dependencies = {
+			-- 'jay-babu/mason-nvim-dap.nvim',
+			'rcarriga/nvim-dap-ui',
+			'Weissle/persistent-breakpoints.nvim',
+			'nvim-treesitter/nvim-treesitter' ,
+			'theHamsta/nvim-dap-virtual-text',
+			'mfussenegger/nvim-dap-python',
+		},
+		config = function() require('config.dap') end,
+	},
+	-- Please let pyright lsp use my correct conda env
+	{
+		'linux-cultist/venv-selector.nvim', lazy = true,
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"nvim-telescope/telescope.nvim",
+			"mfussenegger/nvim-dap-python"
+		},
+		opts = {
+			-- path = '/home/nikoli/.minicona3',
+			-- anaconda_base_path = '/home/nikoli/.miniconda3',
+			-- anaconda_envs_path = 'home/nikoli/.miniconda3/envs',
+		},
+		keys = {{
+			'<leader>vs', '<cmd>:VenvSelect<cr>',
+			'<leader>vc', '<cmd>:VenvSelectCached<cr>'
+		}},
 	},
 }
 

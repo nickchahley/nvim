@@ -1,8 +1,8 @@
 " 	Started making it. Had a breakdown. Bon appetite.`
 " 	nikoli's vimrc started 2015
-lua require('config.env')
-lua require('config.lazy')
-lua require('config.options')
+lua require('init.env')
+lua require('init.lazy')
+lua require('init.options')
 " {{{ General Configuration
 
 	" No idea what we're doing re: color support
@@ -67,7 +67,7 @@ lua require('config.options')
 	syn match myExNonWords +\<\p*[^A-Za-z \t]\p*\>+ contains=@NoSpell
 
 	" Hilighting
-	hi MatchParen gui=NONE cterm=NONE guibg=NONE  guifg=YELLOW ctermfg=YELLOW
+	" hi MatchParen gui=NONE cterm=NONE guibg=NONE  guifg=YELLOW ctermfg=YELLOW
 	" Cursor- blinking line in insert, underline for remove, bar otherwise
 	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr,sm:block-blinkwait175-blinkoff150-blinkon175
 	
@@ -109,9 +109,8 @@ lua require('config.options')
 
 	" Execute current file 
 	" should we have a second binding w/o <cr> so that we can run w/ options
-	nnoremap <Leader>e :w<CR>:!%:p<CR>
-	nnoremap <Leader>E :w<CR>:silent !%:p<CR><C-l>
-	nnoremap <Leader>R :!%:p
+	nnoremap <Leader>R :w<CR>!%:p<CR>
+	" nnoremap <Leader>E :w<CR>:silent !%:p<CR><C-l>
 
 	" Insert a timestamp, eg for naming meeting minutes
 	nmap <F3> i<C-R>=strftime("%Y-%m-%d")<CR><Esc>
