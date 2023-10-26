@@ -1,20 +1,28 @@
+local time = require('utils.time')
 local M = {
+	{
+		'RRethy/vim-hexokinase', name='hexokinase', lazy=false, build = 'make hexokinase',
+		init = function()
+			-- vim.g.Hexokinase_highlighters = { 'virtual', 'sign_column', 'background', 'backgroundfull', 'foreground', 'foregroundfull' }
+			vim.g.Hexokinase_highlighters = {'virtual', 'foreground'}
+			vim.g.Hexokinase_optInPatterns = {'full_hex,rgb,rgba,hsl,hsla'}
+		end,
+	},
+	-- nvim-colorizer is maintained, but no virtual or signcoloumn opts
+	-- {'norcalli/nvim-colorizer.lua', name='nvim-colorizer', lazy=false},
 	{
 		'neanias/everforest-nvim',
 		name = 'everforest',
 		version = false,
 		lazy = false,
-		priority = 1000, -- make sure to load this before all the other start plugins
-		-- TODO adjust cusorline hilight to be diff color from vscode bg (/soft
-		-- bg)
+		priority = 1000, 
 		-- TODO set color for listchars tab
 		config = function()
+			local bg = 'soft'
+			if time.is_night() then bg = 'hard' end
 			require("everforest").setup({
-				background = 'soft',
+				background = bg,
 			})
-			-- require('lualine').setup {
-			-- 	options = { theme = 'everforest' }
-			-- }
 		end,
 	},
 	{
@@ -22,12 +30,7 @@ local M = {
 		name = 'tokyonight',
 		lazy = false,
 		priority = 1000,
-		opts = {},
-		config = function()
-			-- require('lualine').setup {
-			-- 	options = { theme = 'tokyonight' }
-			-- }
-		end,
+		opts = {style = 'moon'},
 	},
 	{
 		'sainnhe/sonokai',
@@ -44,14 +47,8 @@ local M = {
 			vim.g.gruvbox_material_foreground = 'material'
 			vim.g.gruvbox_material_better_performance = 1
 		end,
-		-- config = function()
-		-- 	-- require('lualine').setup({
-		-- 	-- 	options = { theme = 'gruvbox-material' }
-		-- 	-- })
-		-- end,
 	},
-	{ 
-		'rhysd/vim-color-spring-night', name = 'spring-night', 
+	{ 'rhysd/vim-color-spring-night', name = 'spring-night',
 		lazy = true,
 		priority = 1000,
 		init = function()
@@ -59,12 +56,14 @@ local M = {
 			vim.cmd.colorscheme('spring-night')
 		end,
 	},
-	{ 'Mofiqul/dracula.nvim', name = 'dracula', lazy = true, priority = 1000, },
+	{ 'Mofiqul/dracula.nvim', name = 'dracula',
+		lazy = true, init = function() vim.cmd.colorscheme('dracula') end
+	},
 	{ 'catppuccin/nvim', name = "catppuccin", lazy = false, priority = 1000, },
 	{ 'shaunsingh/moonlight.nvim', name = 'moonlight', lazy=true, priority = 1000, },
 	{ 'rebelot/kanagawa.nvim', name = 'kanagawa', lazy = true, priority = 1000, },
 	{ 'karoliskoncevicius/sacredforest-vim', name = 'sacredforest', lazy=true, priority = 1000, },
-	{ 
+	{
 		'xero/miasma.nvim', name = 'miasma',
 		lazy = true,
 		branch = 'dev',
@@ -77,12 +76,11 @@ local M = {
 		end,
 	},
 	{ 'jacoborus/tender.vim', name = 'tender', lazy = true, },
-		
-
 }
 
 Everforest_bg = function(bg)
 	require('everforest').setup({background = bg})
-	require('everforest').load()
+	-- using require('everforest').load() changes listchars (tab) color
+	vim.cmd.colorscheme('everforest')
 end
 return M
