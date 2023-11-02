@@ -15,6 +15,7 @@ local M = {
 			nmap('<C-o>', 'Right')
 		end,
 	},
+  { 'vimpostor/vim-tpipeline', lazy=false }
 }
 
 return M
