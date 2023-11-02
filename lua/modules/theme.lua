@@ -79,8 +79,21 @@ local M = {
 }
 
 Everforest_bg = function(bg)
-	require('everforest').setup({background = bg})
-	-- using require('everforest').load() changes listchars (tab) color
+	local everforest = require('everforest')
+	everforest.setup({background = bg})
 	vim.cmd.colorscheme('everforest')
 end
+local Everforest_cycle_bg = function()
+	local everforest = require('everforest')
+	local cycle = {
+		['soft'] = 'medium',
+		['medium'] = 'hard',
+		['hard'] = 'soft'
+	}
+	local bg = everforest.config.background
+	everforest.config.background = cycle[bg]
+	vim.cmd.colorscheme('everforest')
+end
+vim.keymap.set('n', '<leader>ctb', Everforest_cycle_bg, { desc = '[C]ycle [T]heme [B]ackground' })
+
 return M

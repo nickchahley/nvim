@@ -102,7 +102,7 @@ lua require('init.options')
 	let $FUNCTIONS = $VIMHOME.'/functions'
 	source $FUNCTIONS/ToggleCursorline.vim
 	nnoremap <Leader>C :call ToggleCursorLine()<CR>
-	call ToggleCursorLine()
+	" call ToggleCursorLine()
 	source $FUNCTIONS/ToggleStatusline.vim
 " }}}
 " {{{ Misc Keybindings

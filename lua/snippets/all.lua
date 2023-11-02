@@ -8,13 +8,5 @@ local t = ls.text_node
 
 local S = {
 	s('trig', t('node') ),
-	s({trig='vdw', dscr='vimwiki diary work'},
-		{t({
-			'[[inbox]]',
-			'= Work =', '',
-			'== TODO ==', '- [ ]',
-			})
-		}
-	),
 }
 return S
