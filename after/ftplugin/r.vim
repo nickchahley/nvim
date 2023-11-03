@@ -8,3 +8,8 @@ setlocal cinoptions=(0
 setlocal cindent
 setlocal foldmethod=indent
 setlocal fo+=cr
+
+" R insert pipe operator
+autocmd FileType r inoremap <buffer> >> <Esc>:normal! a%>%<CR>a 
+" autocmd FileType rnoweb inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 
+" autocmd FileType rmd inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 

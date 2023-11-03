@@ -101,9 +101,8 @@ lua require('init.options')
 " {{{ Load local functions (bite sized plugins)
 	let $FUNCTIONS = $VIMHOME.'/functions'
 	source $FUNCTIONS/ToggleCursorline.vim
-	nnoremap <Leader>C :call ToggleCursorLine()<CR>
-	" call ToggleCursorLine()
-	source $FUNCTIONS/ToggleStatusline.vim
+	source $FUNCTIONS/Titlecase.vim
+	source $FUNCTIONS/substitutions.vim
 " }}}
 " {{{ Misc Keybindings
 
@@ -117,8 +116,3 @@ lua require('init.options')
 	imap <F3> <C-R>=strftime("%Y-%m-%d")<CR>
 
 " }}}
-
-" R insert pipe operator
-autocmd FileType r inoremap <buffer> >> <Esc>:normal! a%>%<CR>a 
-" autocmd FileType rnoweb inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 
-" autocmd FileType rmd inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 

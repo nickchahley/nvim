@@ -6,3 +6,4 @@
 		hi CursorLine guibg=NONE ctermbg=NONE
 		set cursorline! " toggle highlight current line
 	endfunction
+	nnoremap <Leader>C :call ToggleCursorLine()<CR>
