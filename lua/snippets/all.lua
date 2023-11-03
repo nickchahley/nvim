@@ -7,6 +7,4 @@ local t = ls.text_node
 -- local d = ls.dynamic_node
 
 local S = {
-	s('trig', t('node') ),
 }
-return S
