@@ -156,12 +156,22 @@ local M = {
 	-- Debug Adapters
 	{ 'mfussenegger/nvim-dap',
 		dependencies = {
-			-- 'jay-babu/mason-nvim-dap.nvim',
+			{'jay-babu/mason-nvim-dap.nvim',
+				config = function()
+					require('mason-nvim-dap').setup({
+						-- ensure_installed = {'bash-debug-adapter'},
+						handlers = {} -- sets up dap in "the" predefined manner
+					})
+				end
+			},
 			'rcarriga/nvim-dap-ui',
 			'Weissle/persistent-breakpoints.nvim',
 			'nvim-treesitter/nvim-treesitter' ,
 			'theHamsta/nvim-dap-virtual-text',
 			'mfussenegger/nvim-dap-python',
+			{'nvim-tree/nvim-tree.lua',
+				config = function() require('config.nvim-tree') end,
+			},
 		},
 		config = function() require('config.dap') end,
 	},

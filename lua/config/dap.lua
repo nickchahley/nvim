@@ -1,9 +1,7 @@
 local dap  = require('dap')
 local dap_py = require('dap-python')
+local k = vim.keymap
 local lmap = require('utils.keys').leader_map
-local desc = function(string)
-	return {desc = '[d]ap ' .. string}
-end
 -- global for debugging
 dapui = require('dapui')
 
@@ -14,46 +12,54 @@ vim.api.nvim_create_user_command(
 )
 
 -- dap binds
-vim.keymap.set('n', '<leader>dc', ":lua require'dap'.continue()<CR>")
-vim.keymap.set('n', '<leader>dR', ":lua require'dap'.restart()<CR>")
-vim.keymap.set('n', '<leader>dT', ":lua require'dap'.terminate()<CR>")
-lmap('dsov', dap.step_over, { desc = '[D]ap [S]tep [OV]er'} )
-lmap('dsi',  dap.step_into, { desc = '[D]ap [S]tep [I]nto'} )
-lmap('dsou', dap.step_out,  { desc = '[D]ap [S]tep [O]ut' } )
+lmap('dc', dap.continue,  { desc = '[D]ap [C]ontinue' })
+lmap('dR', dap.restart,   { desc = '[D]ap [R]estart' })
+lmap('dT', dap.terminate, { desc = '[D]ap [T]erminate' })
+lmap('dL', dap.run_last,  { desc = '[D]ap run [L]ast' })
+lmap('do', dap.step_over, { desc = '[D]ap step [O]ver'} )
+lmap('di', dap.step_into, { desc = '[D]ap step [I]nto'} )
+lmap('dO', dap.step_out,  { desc = '[D]ap step [O]ut' } )
 lmap('db', dap.toggle_breakpoint, { desc = '[D]ap toggle [B]reakpoint'})
-vim.keymap.set('n', '<leader>dB', ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
-vim.keymap.set('n', '<leader>dr', ":lua require'dap'.repl.open()<CR>")
-lmap('dlm', function()
-	dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-end, { noremap = true, desc = '[d]ap [l]og point [m]essage' })
+lmap('dB', function()
+		dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+	end, { desc = '[D]ap set [B]reakpoint condition' })
+lmap('dl', function()
+		dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+	end, { noremap = true, desc = '[D]ap toggle [L]ogpoint' })
 
 -- dapui binds
-vim.keymap.set('v', '<M-k>', ":lua require 'dapui').eval()<CR>")
-vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
-vim.keymap.set('n', '<leader>dui', dapui.toggle)
-vim.keymap.set('n', '<leader>df', dapui.float_element, { desc = '[D]apui [F]loat element' })
-vim.keymap.set('n', '<leader>dfr', function() dapui.float_element('repl') end, { desc = '[D]apui [F]loat [R]epl' })
+lmap('dui', dapui.toggle, { desc = '[D]ap [UI] toggle' })
+-- still need to figure out nvim-tree binds
+lmap('dut', [[:NvimTreeToggle<CR> :lua dapui.toggle()<CR>]], { desc = '[D]ap [U]I nvim[T]ree toggle' })
+k.set('v', '<M-k>', ":lua require 'dapui').eval()<CR>")
+lmap('dr', dap.repl.open, { desc = '[D]ap [R]epl open' })
+lmap('df',  dapui.float_element, { desc = '[D]apui [F]loat element' })
+lmap('dfr', function() dapui.float_element('repl') end, { desc = '[D]apui [F]loat [R]epl' })
 
 dapui.setup({
 	layouts = {
 	{
 		elements = {
 			-- elements can be strings or table with id and size keys.
-			"scopes",
-			"breakpoints",
-			"stacks",
-			"watches",
+			{id = "scopes", size = 0.4},
+			{id = "breakpoints", size=0.2},
+			-- "stacks",
+			-- "watches",
 			{id = "console", size = 0.4},
 		},
 		size = 0.2,
 		position = "left",
 	},
 	{ -- do not include console and outputs appear in repl!
-		elements = {{id =  "repl", size=0.9}}, size = 20, position = "bottom",
+		elements = {
+			{id =  "repl", size=0.9},
+		},
+		size = 20,
+		position = "bottom",
 	},
 	},
 	mappings = {
-		-- use a table to apply multiple mappings
+		-- use a {table, to} apply multiple mappings
 		edit = {'s', 'cc'},
 		expand = { 'za', '<Tab>', '<CR>', '<2-LeftMouse>'},
 		open = 'h',
@@ -70,9 +76,7 @@ dapui.setup({
 })
 -- No auto exit? I find it easier to just toggle dapui for all then times I want to see an
 -- error message but then everything automatically shuts down
-dap.listeners.after.event_initialized['dapui_config'] = function() 
-	dapui.open()
-end
+dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
 
 -- dap-python
 -- register the "adapter and configurations"
@@ -106,7 +110,6 @@ table.insert(require('dap').configurations.python, {
 require("neodev").setup({
   library = { plugins = { "nvim-dap-ui" }, types = true },
 })
-
 
 -- FUTURE
 -- require("nvim-dap-virtual-text").setup {commented = true,}
