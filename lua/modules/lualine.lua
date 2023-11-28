@@ -56,7 +56,7 @@ local M = {
 			end 
 			local nline = function()
 				local n = vim.api.nvim_buf_line_count(0)
-				return n .. 'L'
+				return 'ln ' .. n
 			end
 			local nbuff_nline = function()
 				return nbuff() .. ' ' .. nline()

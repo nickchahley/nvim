@@ -7,6 +7,15 @@ ls.config.set_config {
 	autosnippets = false,
 	updateevents = "TextChanged,TextChangedI",
 }
+
+ls.setup({
+	load_ft_func =
+		-- Also load r snips when rmd file is opened
+		require("luasnip.extras.filetype_functions").extend_load_ft({
+			rmd = {'r'},
+			lua = {'r'},
+	})
+})
 local load_snippets = function ()
 	require('luasnip.loaders.from_lua').load({paths = snippets_path})
 end

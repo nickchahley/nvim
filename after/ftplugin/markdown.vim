@@ -10,7 +10,7 @@ set nonumber
 
 "" Config of vim-markdown runtime files (see tpope/vim-markdown)
 "let g:markdown_folding=1
-"let g:markdown_fenced_languages = ['html', 'python', 'bash']
+"let g:markdown_fenced_languages = ['python', 'bash', 'r', 'css', 'fish']
 "silent! :%foldopen!
 
 "" Highlight trailing spaces
@@ -23,3 +23,4 @@ syntax match Error  "\s\{3,}$"
 "highlight MarkdownTrailingSpaces ctermbg=green guibg=green
 "syntax match MarkdownTrailingSpaces "\s\{2}$"
 
+source $VIMHOME/after/ftplugin/markup-shared.vim

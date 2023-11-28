@@ -29,26 +29,8 @@ lua require('init.options')
 	set nolist             " list disables linebreak
 	set formatoptions=cqlj
 	set formatoptions-=or
-
-	" Buffers and splits
 	set splitbelow
 	set splitright
-
-	" switch to alternative buffer
-	nnoremap <c-\> <c-^>
-
-	" cd to that of current buffer
-	nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-
-	" Open a list of buffers, tab completion to switch. 
-	" :sb split, :vert sb vsplit
-	nnoremap <leader>b :ls<cr>:b<space>
-
-	" open full width/height splits besides preexisting splits 
-	nnoremap <leader>vr :botright vsplit<CR>
-	nnoremap <leader>vl :topleft vsplit<CR>
-	nnoremap <leader>hb :botright split<CR>
-	nnoremap <leader>ha :topleft split<CR>
 
 	" Search 
 	set ignorecase         " Use case insensitive search
@@ -72,7 +54,7 @@ lua require('init.options')
 	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-CursorLineNr,sm:block-blinkwait175-blinkoff150-blinkon175
 	
 	" Copy and paste. Holy shit.
-	set clipboard=unnamedplus " automatically use sys clipboard for c/p (linux)
+	set clipboard+=unnamedplus " automatically use sys clipboard for c/p (linux)
 	" set clipboard+=unnamed    " automatically use sys clipboard for c/p (win/wsl)
 	set pastetoggle=<F10>     " happier clipboard pasting, but turn off after
 	
@@ -106,6 +88,24 @@ lua require('init.options')
 " }}}
 " {{{ Misc Keybindings
 
+	" switch to alternative buffer
+	nnoremap <c-\> <c-^>
+
+	" cd to that of current buffer
+	nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+	" Open a list of buffers, tab completion to switch. 
+	" :sb split, :vert sb vsplit
+	nnoremap <leader>b :ls<cr>:b<space>
+
+	" open full width/height splits besides preexisting splits 
+	" [V]split [R]ight/[L]eft
+	" [H]split [A]bove/[B]elow
+	nnoremap <leader>vr :botright vsplit<CR>
+	nnoremap <leader>vl :topleft vsplit<CR>
+	nnoremap <leader>hb :botright split<CR>
+	nnoremap <leader>ha :topleft split<CR>
+
 	" Execute current file 
 	" should we have a second binding w/o <cr> so that we can run w/ options
 	nnoremap <Leader>R :w<CR>!%:p<CR>
@@ -114,5 +114,38 @@ lua require('init.options')
 	" Insert a timestamp, eg for naming meeting minutes
 	nmap <F3> i<C-R>=strftime("%Y-%m-%d")<CR><Esc>
 	imap <F3> <C-R>=strftime("%Y-%m-%d")<CR>
+
+lua << EOF
+-- copy current buffer info to clipboard 
+-- TODO: yank file with relative path with `../` if parent (ex. for vimwiki)
+local register = '@+'
+local expmap = function(keys, arg, description)
+	keys = '<leader>' .. keys
+	description = description or keys
+	command = ':let ' .. register .. ' = expand("'..arg..'")<CR>'
+	opts = {noremap = true, desc = description}
+	vim.keymap.set('n', keys, command, opts)
+end
+expmap('yf', '%:t', '[Y]ank [F]ile tail')
+expmap('yp', '%:p', '[Y]ank [P]ath')
+expmap('yd', '%:p:h', '[Y]ank [D]irname')
+expmap('ys', '%:t:r', '[Y]ank [S]tem')
+vim.keymap.set('n', '<leader>yr', ':let '..register..' = @%<CR>', 
+	{noremap = true, desc = '[Y]ank [R]elative path'})
+EOF
+
+" }}}
+" {{{ Autocmds 
+
+" R insert pipe and assignment opers
+autocmd FileType r inoremap <buffer> >> <Esc>:normal! a%>%<CR>a 
+autocmd FileType rmd inoremap <buffer> >> <Esc>:normal! a%>%<CR>a 
+autocmd FileType r inoremap <buffer> << <Esc>:normal! a<-<CR>a 
+autocmd FileType rmd inoremap <buffer> << <Esc>:normal! a<-<CR>a 
+
+"[H]ope this shuts up rland lsp diagnostics"
+" autocmd FileType r inoremap <buffer> <C-> <Esc>:normal! a<-<CR>a 
+" autocmd FileType rmd inoremap <buffer> <C-> <Esc>:normal! a<-<CR>a 
+" autocmd FileType rnoweb inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 
 
 " }}}

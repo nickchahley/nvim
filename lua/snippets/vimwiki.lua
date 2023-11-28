@@ -4,6 +4,9 @@ local t = ls.text_node
 local i = ls.insert_node
 local newline = t({"",""})
 local S = {
+	-- unicode alias
+	s("\\d", t("Δ")),
+	s(",d", t("Δ")),
 	-- codeblocks
 	s("cb",{
 		t("{{{"), i(1, ""),
@@ -21,6 +24,7 @@ local S = {
 	s("r",{
 		t({"{{{r", ""}), i(1, ""), t({ "", "}}}"}),
 	}),
+	-- templates
 	s({trig='vdw', dscr='vimwiki diary work'},
 		{t({
 			'[[inbox]]', '',

@@ -76,6 +76,7 @@ local M = {
 		end,
 	},
 	{ 'jacoborus/tender.vim', name = 'tender', lazy = true, },
+	{ 'fladson/vim-kitty' },
 }
 
 Everforest_bg = function(bg)

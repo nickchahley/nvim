@@ -49,11 +49,14 @@ local servers = {
 			},
 		}
 	},
-	--[[ r_language_server = {
+	r_language_server = {
 		cmd = { "R", "--slave", "-e", "languageserver::run()" },
 		filetypes = { "r", "rmd", "Rmd" },
 		log_level = 2
-	}, ]]
+	},
+	-- bashls = {},
+	vimls = {},
+	cssmodules_ls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
