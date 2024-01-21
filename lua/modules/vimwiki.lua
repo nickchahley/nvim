@@ -15,6 +15,7 @@ local M = {
 					nested_syntaxes = {
 						python = 'python', py = 'python', r = 'r', bash = 'bash', go = 'go', config = 'config', i3 = 'i3config', cpp = 'cpp',
 						sway = 'i3config', md = 'markdown', markdown = 'markdown', css = 'css', vim = 'vim',
+						js = 'javascript',
 					},
 					path_html = vim.env.SIMMUNOMEWIKI .. '/site_html/',
 					auto_diary_index = 1,

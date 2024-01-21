@@ -4,6 +4,23 @@ local t = ls.text_node
 local i = ls.insert_node
 
 local S = {
+	s({ trig = "imimp", dscr = "importlib" },
+		{ t("import importlib")
+		}
+	),
+	s({ trig = "mod", dscr = "importlib import module" },
+		{ i(0,''), t(" = importlib.import_module('"), i(1, ''), t(")")
+		}
+	),
+	s({ trig = "ds", dscr = "docstring" },
+		{
+			t('""" '), i(0,''), t(' """')
+		}
+	),
+	s({ trig = "#", dscr = "shebang" },
+		{ t("#!/usr/bin/env python3")
+		}
+	),
 	-- guts replacements
 	s({ trig = "pwhoami", dscr = "decorate print that this output came from this fx" },
 		{ t("print('\\n---- {sys._getframe().f_code.co_name} ----')")
@@ -22,6 +39,10 @@ local S = {
 		}
 	),
 	-- aliases
+	s({ trig = "cs", dscr = "commentstring" },
+		{ t("''' "), i(0, ''), t(" '''")
+		}
+	),
 	s({ trig = "p", dscr = "print" },
 		{ t("print(f'"), i(1), t("')"),
 		}
@@ -57,15 +78,31 @@ local S = {
 	),
 	-- imports and library specific
 	s({ trig = "impol", dscr = "import polars" },
-		{ t("import polars as pl")
+		{ t({"import polars as pl", "import polars.selectors as cs"})
+		}
+	),
+	s({ trig = "p[l]*c", regTrig=true, dscr = "polars col" },
+		{ t("pl.col('"), i(0,''), t("')")
+		}
+	),
+	s({ trig = "*wc", regTrig=true, dscr = ".with_columns" },
+		{ t(".with_columns("), i(0, ''), t(")")
+		}
+	),
+	s({ trig = "impan", dscr = "import pandas" },
+		{ t("import pandas as pd")
 		}
 	),
 	s({ trig = "pld", dscr = "polars dataframe" },
 		{ t("pl.DataFrame")
 		}
 	),
+	s({ trig = "pdd", dscr = "pandas dataframe" },
+		{ t("pd.DataFrame")
+		}
+	),
 	s({ trig = "impat[h]*", regTrig=true, dscr = "import pathlib Path" },
-		{ t({"from pathlib import Path", ""})
+		{ t({"from pathlib import Path"})
 		}
 	),
 	s({ trig = "imarg", dscr = "import argparse" },
@@ -78,6 +115,14 @@ local S = {
 	),
 	s({ trig = "parser.", dscr = "add arg" }, {
 			t("parser.add_argument("), i(1, "arg"), t(", help='"), i(2, ""), t("')"),
+		}
+	),
+	s({ trig = "ast", dscr = "action store true" },
+		{ t("action='store_true'")
+		}
+	),
+	s({ trig = "asf", dscr = "action store false" },
+		{ t("action='store_false'")
 		}
 	),
 	s({ trig = "cline", dscr = "commandline fx bp" }, {

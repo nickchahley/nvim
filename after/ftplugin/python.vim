@@ -12,8 +12,8 @@ setlocal fileformat=unix
 "set nosmartindent
 
 " Preview folded docstrings in py SimpylFold
-let g:SimpylFold_docstring_preview = 1
+" let g:SimpylFold_docstring_preview = 1
 
-" Make code look pretty
-"let python_highlight_all=1
-"syntax on
+" Use treesitter folding (any nvim-treesitter-pyfold)
+set foldmethod=expr
+set foldexpr=nvim_treesitter#fold_expr()
