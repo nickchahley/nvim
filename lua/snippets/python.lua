@@ -4,6 +4,16 @@ local t = ls.text_node
 local i = ls.insert_node
 
 local S = {
+	s({ trig = "pt", dscr = "process_time start" },
+		{
+			t("t = process_time()")
+		}
+	),
+	s({ trig = "ptt", dscr = "process_time end" },
+		{
+			t("print(f'process_time ["), i(0,""), t("]: {process_time() - t}')")
+		}
+	),
 	s({ trig = "imimp", dscr = "importlib" },
 		{ t("import importlib")
 		}
@@ -106,15 +116,11 @@ local S = {
 		}
 	),
 	s({ trig = "imarg", dscr = "import argparse" },
-		{ t("import argparse")
+		{ t("import argparse, sys")
 		}
 	),
 	s({ trig = "arg", dscr = "add arg" }, {
-			t("p.add_argument("), i(1, "arg"), t(", help='"), i(2, ""), t("')"),
-		}
-	),
-	s({ trig = "parser.", dscr = "add arg" }, {
-			t("parser.add_argument("), i(1, "arg"), t(", help='"), i(2, ""), t("')"),
+			t("p.add_argument('"), i(1, "arg"), t("', help = '"), i(2, ""), t("')"),
 		}
 	),
 	s({ trig = "ast", dscr = "action store true" },
@@ -125,11 +131,16 @@ local S = {
 		{ t("action='store_false'")
 		}
 	),
-	s({ trig = "cline", dscr = "commandline fx bp" }, {
-			t({"def cline():", ""}),
-			t({"\tp = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)", ""}),
-			t("\tp.add_argument("), i(1, "arg"), t(", help='"), i(2, ""), t("')"),
-			t({"","\treturn p.parse_args()"}),
+	s({ trig = "cline", dscr = "commandline fx bp" },
+		{
+			t({"def cline(args_ls = sys.argv[1:]):", ""}),
+			t({"\tp = argparse.ArgumentParser("}),
+			t({"", "\t\tformatter_class = argparse.ArgumentDefaultsHelpFormatter"}),
+			t({"", "\t\tdescription = '"}), i(1), t("',"),
+			t({"", "\t)"}),
+			t({"", "\tp.add_argument('"}), i(1, "arg"), t("', help = '"), i(2, ""), t("')"),
+			t({"", "\targs = p.parse_args(args_ls)"}),
+			t({"", "\treturn args"}),
 		}
 	),
 }

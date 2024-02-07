@@ -13,6 +13,8 @@ redraw
 " <C-Space> does not work in tmux for some reason
 nnoremap <buffer> <leader>tt :VimwikiToggleListItem<CR>
 
+nnoremap <buffer> <Leader>wT :VimwikiTOC<CR>
+
 " Override vimwiki's default o/O vimwiki#lst#kbd_o(), see ftplugin/vimwiki.vim 487
 " Restore the o/O maps to movement
 silent! nunmap <silent> <buffer> o

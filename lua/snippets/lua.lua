@@ -20,10 +20,11 @@ local newtab = function(n) return t({"", tab(n)}) end
 local S = {
 	s({ trig = "s[( ]", regTrig=true, dscr = "lua snippet" },
 		{
-			t("s({ trig = \""), i(1, "trigger"),
-			t("\", dscr = \""), i(2, ""), t("\" },"), newtab(1),
+			t("s({ trig = \""), i(0, "trigger"), t({"\""}),
+			t(", regTrig = "), i(1, "false"),
+			t(", dscr = \""), i(2, ""), t("\" },"), newtab(1),
 			t("{"), newtab(2),
-			i(3, "t"), t("(\""), i(4, ""), t("\")"), newtab(1),
+			t("t(\""), i(3, ""), t("\")"), newtab(1),
 			t({"}","),"}),
 		}
 	),
@@ -42,9 +43,19 @@ local S = {
 			})
 		}
 	),
+	s({ trig = "t", dscr = "text node" },
+		{
+			t("t({\""), i(0, ''), t("\"}),")
+		}
+	),
+	s({ trig = "i", dscr = "insert node" },
+		{
+			t({"i("}), i(0, '0'), t({", '"}), i(1, ''), t({"'),"}),
+		}
+	),
 	s({ trig = "regt", dscr = "regTrig" },
 		{
-			t("regTring=true, ")
+			t("regTring=true, "), t({""})
 		}
 	),
 	s("map",
@@ -56,6 +67,14 @@ local S = {
 		}
 	),
 	s({trig="des[c]*", regTrig=true },
-		{ t("{ desc = '"), i(1, ""), t("' }") }),
+		{
+			t("{ desc = '"), i(1, ""), t("' }")
+		}
+	),
+	s({ trig = "{[ ]*", regTrig=true, dscr = "table par" },
+		{
+			t("{ "), i(''), t(" },")
+		}
+	),
 }
 return S
