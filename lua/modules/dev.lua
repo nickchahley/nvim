@@ -1,42 +1,27 @@
 local M = {
-	-- Don't think I've every actually used a git-related plugin other than diff
-	-- view, and am suspicious that it could be slowing things down in large repos
-	-- { 'tpope/vim-sleuth', lazy = true },
-	-- { 'tpope/vim-fugitive', lazy = true },
-	-- { 'tpope/vim-rhubarb', lazy = true },
-	--[[ { 'sindrets/diffview.nvim', lazy = true,
-		dependencies = {'nvim-tree/nvim-web-devicons',}
-	}, ]]
-  -- {-- Adds git related signs to the gutter and utilities for managing changes
-  --   'lewis6991/gitsigns.nvim', lazy = true,
-  --   opts = {
-  --     signs = {
-  --       add = { text = '+' },
-  --       change = { text = '~' },
-  --       delete = { text = '_' },
-  --       topdelete = { text = '‾' },
-  --       changedelete = { text = '~' },
-  --     },
-		-- 	-- why is this part of opts? Could I put this into config = function
-  --     on_attach = function(bufnr)
-  --       vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
-  --
-  --       -- don't override the built-in and fugitive keymaps
-  --       local gs = package.loaded.gitsigns
-  --       vim.keymap.set({'n', 'v'}, ']c', function()
-  --         if vim.wo.diff then return ']c' end
-  --         vim.schedule(function() gs.next_hunk() end)
-  --         return '<Ignore>'
-  --       end, {expr=true, buffer = bufnr, desc = "Jump to next hunk"})
-  --       vim.keymap.set({'n', 'v'}, '[c', function()
-  --         if vim.wo.diff then return '[c' end
-  --         vim.schedule(function() gs.prev_hunk() end)
-  --         return '<Ignore>'
-  --       end, {expr=true, buffer = bufnr, desc = "Jump to previous hunk"})
-  --     end,
-  --   },
-  -- },
-
+	-- Highlight and quickfix todo comments
+	{ 'folke/todo-comments.nvim', lazy = false,
+		dependencies = { 'nvim-lua/plenary.nvim' },
+		opts = {
+			highlight = {
+				keyword = 'wide', after = 'fg',
+				comments_only = false,
+			},
+		},
+		config = function()
+			-- :TodoTelescope :TodoLocList :TodoTrouble
+		-- 	vim.keymap.set('n', ']t', function()
+		-- 		require('todo-comments').jump_next()
+		-- 	end, { desc = 'Next todo comment' })
+		--
+		-- 	vim.keymap.set('n', '[t', function()
+		-- 		require('todo-comments').jump_prev()
+		-- 	end, { desc = 'Previous todo comment' })
+		end,
+	},
+	{'folke/trouble.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' }, opts = { }
+	},
 	-- LSP Configuration & Plugins
 	{ 'neovim/nvim-lspconfig',
 		dependencies = {
@@ -72,22 +57,6 @@ local M = {
 			vim.opt.signcolumn = 'yes'
 		end,
 	},
-	-- Autocompletion
-	--[[ {
-		'hrsh7th/nvim-cmp',
-		dependencies = {
-			-- Snippet Engine & its associated nvim-cmp source
-			'L3MON4D3/LuaSnip',
-			'saadparwaiz1/cmp_luasnip',
-
-			-- Adds LSP completion capabilities
-			'hrsh7th/cmp-nvim-lsp',
-
-			-- Adds a number of user-friendly snippets
-			'rafamadriz/friendly-snippets',
-			},
-	}, ]]
-
 	-- Useful plugin to show you pending keybinds.
 	{ 'folke/which-key.nvim', opts = {} },
 
@@ -142,6 +111,17 @@ local M = {
 			vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 		end,
 	},
+	{ 'eddiebergman/nvim-treesitter-pyfold',
+		config = function()
+			require('nvim-treesitter.configs').setup {
+				pyfold = {
+					enable = true,
+					-- Sets provided foldtext on window where module is active
+					custom_foldtext = true
+				}
+			}
+		end,
+	},
 	{-- Debug Adapters
 		'mfussenegger/nvim-dap',
 		dependencies = {
@@ -187,6 +167,50 @@ local M = {
 			'<leader>vc', '<cmd>:VenvSelectCached<cr>'
 		}},
 	},
+--[[
+	-- git things
+	-- Don't think I've every actually used a git-related plugin other than diff
+	-- view, and am suspicious that it could be slowing things down in large repos
+	{ 'tpope/vim-sleuth', lazy = true },
+	{ 'tpope/vim-fugitive', lazy = true },
+	{ 'tpope/vim-rhubarb', lazy = true },
+	{ 'sindrets/diffview.nvim', lazy = true,
+		dependencies = {'nvim-tree/nvim-web-devicons',}
+	},
+]]
+--[[
+	-- gitsigns (gutter)
+  {-- Adds git related signs to the gutter and utilities for managing changes
+    'lewis6991/gitsigns.nvim', lazy = true,
+    opts = {
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+			-- why is this part of opts? Could I put this into config = function
+      on_attach = function(bufnr)
+        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+
+        -- don't override the built-in and fugitive keymaps
+        local gs = package.loaded.gitsigns
+        vim.keymap.set({'n', 'v'}, ']c', function()
+          if vim.wo.diff then return ']c' end
+          vim.schedule(function() gs.next_hunk() end)
+          return '<Ignore>'
+        end, {expr=true, buffer = bufnr, desc = "Jump to next hunk"})
+        vim.keymap.set({'n', 'v'}, '[c', function()
+          if vim.wo.diff then return '[c' end
+          vim.schedule(function() gs.prev_hunk() end)
+          return '<Ignore>'
+        end, {expr=true, buffer = bufnr, desc = "Jump to previous hunk"})
+      end,
+    },
+  }, 
+	]]
+
 }
 
 return M

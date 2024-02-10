@@ -73,7 +73,7 @@ local S = {
 	),
 	s({ trig = "{[ ]*", regTrig=true, dscr = "table par" },
 		{
-			t("{ "), i(''), t(" },")
+			t("{ "), i(0,''), t(" },")
 		}
 	),
 }

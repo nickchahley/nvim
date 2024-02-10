@@ -336,3 +336,6 @@ PATH
 ,
 simmunome
 if
+configs
+queryable
+GPU

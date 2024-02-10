@@ -11,11 +11,14 @@ local M = {
 				{
 					path = vim.env.SIMMUNOMEWIKI,
 					ext = '.wiki',
-					diary_rel_path = '',
+					diary_rel_path = '', -- Keep diary entries flat in the root dir
 					nested_syntaxes = {
-						python = 'python', py = 'python', r = 'r', bash = 'bash', go = 'go', config = 'config', i3 = 'i3config', cpp = 'cpp',
-						sway = 'i3config', md = 'markdown', markdown = 'markdown', css = 'css', vim = 'vim',
-						js = 'javascript',
+						vim = 'vim', lua = 'lua',
+						python = 'python', py = 'python', r = 'r', go = 'go', cpp = 'cpp',
+						bash = 'bash', zsh = 'zsh', fish = 'fish',
+						config = 'config', i3 = 'i3config', sway = 'i3config',
+						md = 'markdown', markdown = 'markdown', rmd = 'rmd', tex = 'tex',
+						css = 'css', html = 'html', js = 'javascript',
 					},
 					path_html = vim.env.SIMMUNOMEWIKI .. '/site_html/',
 					auto_diary_index = 1,
@@ -25,8 +28,10 @@ local M = {
 			vim.g.vimwiki_hl_cb_checked = 2 -- " Hilighting for checked list items	
 			vim.g.vimwiki_table_mappings = 0 -- " don't take over tab in insert mode 
 			vim.g.vimwiki_folding = 'syntax'
-			vim.cmd([[
-				" Find incomplete tasks << I have never used this once
+
+			-- Should this (mapping at least) be put inside of after/ftplugin/vimwiki.vim?
+			-- Find incomplete tasks is super powerful actually, and I should use it more often.
+			vim.cmd([[ 
 				" Open a QuickFix window with incomplete tasks that are in a hyphenated list
 				function! VimwikiFindIncompleteTasks()
 				lvimgrep /- \[ \]/ %:p
@@ -40,8 +45,9 @@ local M = {
 
 				nmap <Leader>wa :call VimwikiFindAllIncompleteTasks()<CR>
 				nmap <Leader>wx :call VimwikiFindIncompleteTasks()<CR>
-				]])
-			-- try to disable annoying things clobbering my maps
+			]])
+
+			-- Here I try to disable annoying things clobbering my maps
 			-- if these are still being bound, try putting in after/ftplugin
 			vim.cmd([[
 				vmap <F13> @<Plug>VimwikiTextObjListSingleV
@@ -64,7 +70,7 @@ local M = {
 				vmap <F13> <Plug>VimwikiTextObjTableCellV
 				vmap <F13> <Plug>VimwikiTextObjColumnV
 				vmap <F13> <Plug>VimwikiTextObjListChildrenV
-				]])
+			]])
 		end,
 	},
 }
