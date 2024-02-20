@@ -4,13 +4,13 @@ local t = ls.text_node
 local i = ls.insert_node
 local newline = t({"",""})
 local S = {
-	-- unicode alias
+	-- unicode aliases
 	s("\\d", t("Δ")),
 	s(",d", t("Δ")),
 	-- codeblocks
 	s("cb",{
-		t("{{{"), i(1, ""),
-		newline, i(2, "<verbose/code>"), t({ "", "}}}"}),
+		t("{{{"), i(2, ""),
+		newline, i(1), t({ "", "}}}"}),
 	}),
 	s({trig="[b]*[a]*sh", regTrig=true},{
 		t({"{{{bash", ""}), i(1, ""), t({ "", "}}}"}),
@@ -30,7 +30,7 @@ local S = {
 			'[[inbox]]', '',
 			'= Work =', '',
 			'== Brief ==', '',
-			'== TODO ==', '- [ ]',
+			'== TODO ==', '- [ ] start pompodoro', '- [ ] check calendar', '- [ ] check emails',
 			})
 		}
 	),

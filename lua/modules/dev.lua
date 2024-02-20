@@ -1,26 +1,29 @@
 local M = {
-	-- Highlight and quickfix todo comments
-	{ 'folke/todo-comments.nvim', lazy = false,
-		dependencies = { 'nvim-lua/plenary.nvim' },
+	-- Fuzzy Finder (files, lsp, etc)
+	{ 'nvim-telescope/telescope.nvim',
+		branch = '0.1.x',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			{ 'nvim-telescope/telescope-fzf-native.nvim',
+				-- Fuzzy Finder Algorithm which requires local dependencies to be built.
+			  -- Only load if `make` is available. Make sure you have the system
+			  -- requirements installed.
+				build = 'make',
+				cond = function()
+					return vim.fn.executable 'make' == 1
+				end,
+			},
+		},
 		opts = {
-			highlight = {
-				keyword = 'wide', after = 'fg',
-				comments_only = false,
+			defaults = {
+				mappings = {
+					i = { ['<C-u>'] = false, ['<C-d>'] = false, },
+				},
 			},
 		},
 		config = function()
-			-- :TodoTelescope :TodoLocList :TodoTrouble
-		-- 	vim.keymap.set('n', ']t', function()
-		-- 		require('todo-comments').jump_next()
-		-- 	end, { desc = 'Next todo comment' })
-		--
-		-- 	vim.keymap.set('n', '[t', function()
-		-- 		require('todo-comments').jump_prev()
-		-- 	end, { desc = 'Previous todo comment' })
+			require('config.telescope')
 		end,
-	},
-	{'folke/trouble.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' }, opts = { }
 	},
 	-- LSP Configuration & Plugins
 	{ 'neovim/nvim-lspconfig',
@@ -30,7 +33,6 @@ local M = {
 			{'williamboman/mason-lspconfig.nvim'},
 
 			-- Useful status updates for LSP
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
 			-- Additional lua configuration, "makes nvim stuff amazing!"
@@ -57,9 +59,47 @@ local M = {
 			vim.opt.signcolumn = 'yes'
 		end,
 	},
-	-- Useful plugin to show you pending keybinds.
-	{ 'folke/which-key.nvim', opts = {} },
+	-- Highlight, edit, and navigate code
+	{ 'nvim-treesitter/nvim-treesitter',
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter-textobjects',
+			'eddiebergman/nvim-treesitter-pyfold' ,
+		},
+		build = ':TSUpdate',
+		config = function()
+			require('config.treesitter')
 
+			-- enable treesitter folding
+			vim.cmd.foldmethod = 'expr'
+			vim.cmd.foldexpr = 'nvim_treesitter#fold_expr()'
+		end,
+	},
+	-- Highlight and quickfix todo comments
+	{ 'folke/todo-comments.nvim', lazy = false,
+		dependencies = { 'nvim-lua/plenary.nvim' },
+		opts = {
+			highlight = {
+				keyword = 'wide', after = 'fg',
+				comments_only = false,
+			},
+		},
+		config = function()
+			-- :TodoTelescope :TodoLocList :TodoTrouble
+		-- 	vim.keymap.set('n', ']t', function()
+		-- 		require('todo-comments').jump_next()
+		-- 	end, { desc = 'Next todo comment' })
+		--
+		-- 	vim.keymap.set('n', '[t', function()
+		-- 		require('todo-comments').jump_prev()
+		-- 	end, { desc = 'Previous todo comment' })
+		end,
+	},
+	{'folke/trouble.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' }, opts = { }
+	},
+	-- Useful plugin to show you pending keybinds.
+	{ 'folke/which-key.nvim', opts = {}
+	},
 	-- Add indentation guides even on blank lines
 	{ 'lukas-reineke/indent-blankline.nvim',
 		-- opts = {char = '┊', show_trailing_blankline_indent = false, },
@@ -70,60 +110,8 @@ local M = {
 			}
 		end,
 	},
-	{ -- Fuzzy Finder (files, lsp, etc)
-		'nvim-telescope/telescope.nvim',
-		branch = '0.1.x',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			{ -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-			  -- Only load if `make` is available. Make sure you have the system
-			  -- requirements installed.
-				'nvim-telescope/telescope-fzf-native.nvim',
-				build = 'make',
-				cond = function()
-					return vim.fn.executable 'make' == 1
-				end,
-			},
-		},
-		opts = {
-			defaults = {
-				mappings = {
-					i = { ['<C-u>'] = false, ['<C-d>'] = false, },
-				},
-			},
-		},
-		config = function()
-			require('config.telescope')
-		end,
-	},
-	-- Highlight, edit, and navigate code
-	{ 'nvim-treesitter/nvim-treesitter',
-		dependencies = {
-			'nvim-treesitter/nvim-treesitter-textobjects',
-		},
-		build = ':TSUpdate',
-		config = function()
-			require('config.treesitter')
-			-- Diagnostic keymaps
-			vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-			vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-			vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-			vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-		end,
-	},
-	{ 'eddiebergman/nvim-treesitter-pyfold',
-		config = function()
-			require('nvim-treesitter.configs').setup {
-				pyfold = {
-					enable = true,
-					-- Sets provided foldtext on window where module is active
-					custom_foldtext = true
-				}
-			}
-		end,
-	},
-	{-- Debug Adapters
-		'mfussenegger/nvim-dap',
+	-- Debug Adapters
+	{ 'mfussenegger/nvim-dap',
 		dependencies = {
 			{-- auto install debug adapters
 				'jay-babu/mason-nvim-dap.nvim',
@@ -150,8 +138,8 @@ local M = {
 		},
 		config = function() require('config.dap') end,
 	},
-	{-- Please let pyright lsp use my correct conda env
-		'linux-cultist/venv-selector.nvim', lazy = true,
+	-- Please let pyright lsp use my correct conda env (haven't needed lately)
+	{ 'linux-cultist/venv-selector.nvim', lazy = true,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-telescope/telescope.nvim",
