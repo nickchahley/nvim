@@ -23,6 +23,7 @@ local M = {
 	},
 	{ 'chase/vim-ansible-yaml' },
 	{ 'Fymyte/rasi.vim' },
+	{ '/lambdalisue/suda.vim', },
 	{ 'nickchahley/colemak-vim', name = 'colemak', lazy = false },
 }
 
