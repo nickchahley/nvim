@@ -16,7 +16,7 @@ lua require('init.options')
 	set wildmode=longest,list,full
 	set title              " Don't forget what you're editing
 	set backspace=2        " backspace in i mode, even if it's suboptimal
-	set tabstop=4          " Tab width to 4
+	set tabstop=4          " Display tabs as width 4 
 	set shiftwidth=4       " indent/outdent by 4
 	set shiftround         " always indent/outdent to the nearest tabstop
 	set foldmethod=marker  " will be overwritten by modelines, ftplugins
@@ -58,7 +58,6 @@ lua require('init.options')
 	" set clipboard+=unnamed    " automatically use sys clipboard for c/p (win/wsl)
 	set pastetoggle=<F10>     " happier clipboard pasting, but turn off after
 	
-
 " }}}
 " {{{ Persistent Undo | Backup and Swap 
 	" Must make these dirs, vim will not create them!

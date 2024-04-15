@@ -14,6 +14,12 @@ local M = {
 	{ 'mbbill/undotree', lazy = false,
 		config = function()
 			vim.keymap.set('n', '<leader>ut', vim.cmd.UndotreeToggle)
+			vim.api.nvim_exec2([[
+				function g:Undotree_CustomMap()
+					nmap <buffer> I <plug>UndotreeNextState
+					nmap <buffer> E <plug>UndotreePreviousState
+				endfunc
+			]], {})
 		end,
 	},
 	{ 'numToStr/Comment.nvim',

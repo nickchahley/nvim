@@ -4,7 +4,7 @@ local M = {
 		'RRethy/vim-hexokinase', name='hexokinase', lazy=false, build = 'make hexokinase',
 		init = function()
 			-- vim.g.Hexokinase_highlighters = { 'virtual', 'sign_column', 'background', 'backgroundfull', 'foreground', 'foregroundfull' }
-			vim.g.Hexokinase_highlighters = {'virtual', 'foreground'}
+			vim.g.Hexokinase_highlighters = {'virtual'}
 			vim.g.Hexokinase_optInPatterns = {'full_hex,rgb,rgba,hsl,hsla'}
 		end,
 	},

@@ -77,14 +77,15 @@ local M = {
 	-- Highlight and quickfix todo comments
 	{ 'folke/todo-comments.nvim', lazy = false,
 		dependencies = { 'nvim-lua/plenary.nvim' },
-		opts = {
-			highlight = {
-				keyword = 'wide', after = 'fg',
-				comments_only = false,
-			},
-		},
 		config = function()
-			require('todo-comments').setup()
+			require('todo-comments').setup({
+				-- this table could go in opts = {} if we were not also calling
+				-- additional config lines after
+				highlight = {
+					keyword = 'wide_fg', after = 'fg',
+					comments_only = false,
+				},
+			})
 			-- :TodoTelescope :TodoLocList :TodoTrouble
 			vim.keymap.set('n', ']t', function()
 				require('todo-comments').jump_next()
@@ -130,6 +131,7 @@ local M = {
 			},
 			'nvim-treesitter/nvim-treesitter' ,
 			'theHamsta/nvim-dap-virtual-text',
+			'nvim-neotest/nvim-nio',
 			'rcarriga/nvim-dap-ui',
 			'mfussenegger/nvim-dap-python',
 			-- {-- file explorer

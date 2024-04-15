@@ -17,3 +17,6 @@ setlocal fileformat=unix
 " Use treesitter folding (any nvim-treesitter-pyfold)
 set foldmethod=expr
 set foldexpr=nvim_treesitter#fold_expr()
+
+
+inoremap <buffer> >> <Esc>:normal! a-><CR>a

@@ -24,7 +24,7 @@ local S = {
 	),
 	s({ trig = "ds", dscr = "docstring" },
 		{
-			t('""" '), i(0,''), t(' """')
+			t("''' "), i(0,''), t(" '''")
 		}
 	),
 	s({ trig = "#", dscr = "shebang" },

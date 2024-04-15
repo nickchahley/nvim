@@ -7,4 +7,11 @@ local t = ls.text_node
 -- local d = ls.dynamic_node
 
 local S = {
+	s({ trig = "sbash", regTrig = false, dscr = "bash shebang" },
+		{
+			t({"#!/bin/bash", ""})
+		}
+	),
 }
+
+return S

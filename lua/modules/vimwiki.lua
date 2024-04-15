@@ -10,8 +10,12 @@ local M = {
 			vim.g.vimwiki_list = {
 				{
 					path = vim.env.SIMMUNOMEWIKI,
+					path_html = vim.env.SIMMUNOMEWIKI .. '/site_html/',
 					ext = '.wiki',
 					diary_rel_path = '', -- Keep diary entries flat in the root dir
+					auto_diary_index = 1,
+					links_space_char = '-', -- my link >> my-link.wiki
+					bullet_types = {'-', '*', '+'},
 					nested_syntaxes = {
 						vim = 'vim', lua = 'lua',
 						python = 'python', py = 'python', r = 'r', go = 'go', cpp = 'cpp',
@@ -19,15 +23,15 @@ local M = {
 						config = 'config', i3 = 'i3config', sway = 'i3config',
 						md = 'markdown', markdown = 'markdown', rmd = 'rmd', tex = 'tex',
 						css = 'css', html = 'html', js = 'javascript',
+						yaml = 'yaml', toml = 'toml'
 					},
-					path_html = vim.env.SIMMUNOMEWIKI .. '/site_html/',
-					auto_diary_index = 1,
 				}
 			}
 			vim.g.vimwiki_hl_headers = 1 -- " Color header levels	
 			vim.g.vimwiki_hl_cb_checked = 2 -- " Hilighting for checked list items	
 			vim.g.vimwiki_table_mappings = 0 -- " don't take over tab in insert mode 
 			vim.g.vimwiki_folding = 'syntax'
+			vim.g.vimwiki_toc_header_level = 4
 
 			-- Should this (mapping at least) be put inside of after/ftplugin/vimwiki.vim?
 			-- Find incomplete tasks is super powerful actually, and I should use it more often.
