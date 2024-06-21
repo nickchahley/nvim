@@ -116,7 +116,7 @@ lua require('init.options')
 
 lua << EOF
 -- copy current buffer info to clipboard 
--- TODO: yank file with relative path with `../` if parent (ex. for vimwiki)
+-- TODO: yank file with relative path, with `../` if parent (ex. for vimwiki)
 local register = '@+'
 local expmap = function(keys, arg, description)
 	keys = '<leader>' .. keys
@@ -131,20 +131,30 @@ expmap('yd', '%:p:h', '[Y]ank [D]irname')
 expmap('ys', '%:t:r', '[Y]ank [S]tem')
 vim.keymap.set('n', '<leader>yr', ':let '..register..' = @%<CR>', 
 	{noremap = true, desc = '[Y]ank [R]elative path'})
-EOF
 
+-- Resize Splits
+local res_factor = 4/3
+vim.keymap.set('n',
+	'<C-up>', ':exe "resize " . (winheight(0) * '..res_factor..')<CR>',
+	{noremap = true, silent = true, desc = 'grow split'})
+vim.keymap.set('n',
+	'<C-down>', ':exe "resize " . (winheight(0) * '..1/res_factor..')<CR>',
+	{noremap = true, silent = true, desc = 'shrink split'})
+vim.keymap.set('n',  
+	'<C-right>', ':exe "vert resize " . (winwidth(0) * '..res_factor..')<CR>',
+	{noremap = true, silent = true, desc = 'grow vsplit'})
+vim.keymap.set('n',  
+	'<C-left>', ':exe "vert resize " . (winwidth(0) * '..1/res_factor..')<CR>',
+	{noremap = true, silent = true, desc = 'shrink vsplit'})
+
+EOF
 " }}}
 " {{{ Autocmds 
 
-" R insert pipe and assignment opers
-autocmd FileType r inoremap <buffer> >> <Esc>:normal! a%>%<CR>a 
+" R insert pipe and assignment ops
+autocmd FileType r   inoremap <buffer> >> <Esc>:normal! a%>%<CR>a 
 autocmd FileType rmd inoremap <buffer> >> <Esc>:normal! a%>%<CR>a 
-autocmd FileType r inoremap <buffer> << <Esc>:normal! a<-<CR>a 
+autocmd FileType r   inoremap <buffer> << <Esc>:normal! a<-<CR>a 
 autocmd FileType rmd inoremap <buffer> << <Esc>:normal! a<-<CR>a 
-
-"[H]ope this shuts up rland lsp diagnostics"
-" autocmd FileType r inoremap <buffer> <C-> <Esc>:normal! a<-<CR>a 
-" autocmd FileType rmd inoremap <buffer> <C-> <Esc>:normal! a<-<CR>a 
-" autocmd FileType rnoweb inoremap <buffer> <C-M> <Esc>:normal! a%>%<CR>a 
 
 " }}}

@@ -60,13 +60,13 @@ dapui.setup({
 	{
 		elements = {
 			-- elements can be strings or table with id and size keys.
-			{id = "scopes", size = 0.4},
-			{id = "breakpoints", size=0.2},
+			{id = "scopes", size = 0.5},
+			{id = "breakpoints", size=0.1},
 			-- "stacks",
 			-- "watches",
 			{id = "console", size = 0.4},
 		},
-		size = 0.2,
+		size = 0.4,
 		position = "left",
 	},
 	{ -- do not include console and outputs appear in repl!

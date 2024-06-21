@@ -5,3 +5,6 @@
 vim.cmd.colorscheme('everforest')
 vim.opt.inccommand = 'nosplit' -- Incremental hilight for replace
 vim.g.netrw_winsize = 20 -- ex for :Lexplore
+
+-- vim.keymap.set('n', '<leader>id', 'r!date<CR>', {})
+-- vim.cmd([[]])

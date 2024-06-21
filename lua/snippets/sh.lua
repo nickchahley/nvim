@@ -5,6 +5,10 @@ local i = ls.insert_node
 local newline = t({"",""})
 
 local S = {
+	s({ trig = "scriptdir", regTrig = false, dscr = "full dirname of current script" },
+		{ t('SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )')
+		}
+	),
 	s({ trig = "usage", regTrig = false, dscr = "usage help" },
 		{
 			t('if [[ ($# == 0 ) || ( $@ == "--help" ) || ( $@ == "-h" ) ]]; then'), newline,
@@ -15,8 +19,7 @@ local S = {
 		}
 	),
 	s({ trig = "#", dscr = "shebang" },
-		{
-			t("#!/bin/bash")
+		{ t("#!/usr/bin/env bash")
 		}
 	),
 }

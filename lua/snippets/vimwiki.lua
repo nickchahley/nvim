@@ -12,6 +12,9 @@ local S = {
 		t("{{{"), i(2, ""),
 		newline, i(1), t({ "", "}}}"}),
 	}),
+	s({trig="console", regTrig=true},{
+		t({"{{{console", ""}), i(1, ""), t({ "", "}}}"}),
+	}),
 	s({trig="yaml", regTrig=true},{
 		t({"{{{yaml", ""}), i(1, ""), t({ "", "}}}"}),
 	}),

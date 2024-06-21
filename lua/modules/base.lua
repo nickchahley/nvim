@@ -5,7 +5,14 @@ local M = {
 	{ 'tpope/vim-eunuch',  name = 'eunuch', lazy = false },
 	{ 'tpope/vim-unimpaired',  name = 'unimpaired', lazy = true },
 	{ 'tpope/vim-speeddating',  name = 'speeddating', lazy = true },
-	{ 'godlygeek/tabular', lazy = false, },
+	{ 'godlygeek/tabular', lazy = false,
+		config = function()
+			vim.api.nvim_exec2([[				
+				AddTabularPattern comma /,\zs/l0l1
+				AddTabularPattern first_comma /^[^,]*\zs,/r0c0l0
+			]], {})
+		end,
+	},
 	{ 'nickchahley/vim-manpager', name = 'manpager', lazy = false, },
 	{ 'vim-scripts/BufOnly.vim', name = 'bufonly', lazy = false, },
 	{ 'gioele/vim-autoswap', name = 'autoswap', lazy = false },
@@ -22,11 +29,13 @@ local M = {
 			]], {})
 		end,
 	},
-	{ 'numToStr/Comment.nvim',
-		opts = {
-			basic = true,
-		}
+	{ 'numToStr/Comment.nvim', opts = { basic = true, } },
+	{ 'stevearc/oil.nvim',
+		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function() require('config.oil') end,
 	},
+	{ 'mileszs/ack.vim'}, -- combine w/ :cdo for project-wide replacements?
 	{ 'chase/vim-ansible-yaml' },
 	{ 'Fymyte/rasi.vim' },
 	{ '/lambdalisue/suda.vim', },

@@ -82,7 +82,7 @@ local M = {
 				-- this table could go in opts = {} if we were not also calling
 				-- additional config lines after
 				highlight = {
-					keyword = 'wide_fg', after = 'fg',
+					keyword = 'fg', after = 'fg',
 					comments_only = false,
 				},
 			})
@@ -134,10 +134,6 @@ local M = {
 			'nvim-neotest/nvim-nio',
 			'rcarriga/nvim-dap-ui',
 			'mfussenegger/nvim-dap-python',
-			-- {-- file explorer
-			-- 	'nvim-tree/nvim-tree.lua', lazy=true,
-			-- 	config = function() require('config.nvim-tree') end,
-			-- },
 		},
 		config = function() require('config.dap') end,
 	},

@@ -4,6 +4,14 @@ local t = ls.text_node
 local i = ls.insert_node
 
 local S = {
+	s({ trig = "kwg", regTrig = false, dscr = "kwargs get" },
+		{ t("kwargs.get("), i(1), t(", "), i(2), t(")")
+		}
+	),
+	s({ trig = "strnone", regTrig = false, dscr = "" },
+		{ t("str|None = None,")
+		}
+	),
 	s({ trig = "pt", dscr = "process_time start" },
 		{
 			t("t = process_time()")
@@ -50,7 +58,7 @@ local S = {
 	),
 	-- aliases
 	s({ trig = "cs", dscr = "commentstring" },
-		{ t("''' "), i(0, ''), t(" '''")
+		{ t('""" '), i(0, ""), t(' """')
 		}
 	),
 	s({ trig = "p", dscr = "print" },
@@ -80,7 +88,10 @@ local S = {
 		}
 	),
 	s({trig = 'main', dscr = 'if name main'},
-		{ t({ 'if __name__ == "__main__":', '\tmain()', }), }
+		{
+			t({ 'def main(args):', '\tpass', '', ''}),
+			t({ 'if __name__ == "__main__":', '\tmain(cline())', }),
+		}
 	),
 	s({ trig = "from", dscr = "import from" }, {
 			t("from "), i(1), t(" import "), i(2)
@@ -95,8 +106,12 @@ local S = {
 		{ t("pl.col('"), i(0,''), t("')")
 		}
 	),
-	s({ trig = "*wc", regTrig=true, dscr = ".with_columns" },
+	s({ trig = ".wc", regTrig=true, dscr = ".with_columns" },
 		{ t(".with_columns("), i(0, ''), t(")")
+		}
+	),
+	s({ trig = ".mkdir", regTrig=true, dscr = "Path mkdir" },
+		{ t(".mkdir(parents=True, exists_ok=True)")
 		}
 	),
 	s({ trig = "impan", dscr = "import pandas" },
@@ -104,8 +119,13 @@ local S = {
 		}
 	),
 	s({ trig = "pld", dscr = "polars dataframe" },
-		{ t("pl.DataFrame")
-		}
+		{ t("pl.DataFrame") }
+	),
+	s({ trig = "plf", dscr = "polars lazyframe" },
+		{ t("pl.LazyFrame") }
+	),
+	s({ trig = "plrs", dscr = "polars read csv" },
+		{ t("pl.read_csv("), i(1), t(")")}
 	),
 	s({ trig = "pdd", dscr = "pandas dataframe" },
 		{ t("pd.DataFrame")
@@ -135,7 +155,7 @@ local S = {
 		{
 			t({"def cline(args_ls = sys.argv[1:]):", ""}),
 			t({"\tp = argparse.ArgumentParser("}),
-			t({"", "\t\tformatter_class = argparse.ArgumentDefaultsHelpFormatter"}),
+			t({"", "\t\tformatter_class = argparse.ArgumentDefaultsHelpFormatter,"}),
 			t({"", "\t\tdescription = '"}), i(1), t("',"),
 			t({"", "\t)"}),
 			t({"", "\tp.add_argument('"}), i(1, "arg"), t("', help = '"), i(2, ""), t("')"),
