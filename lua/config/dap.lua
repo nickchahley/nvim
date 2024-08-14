@@ -62,9 +62,9 @@ dapui.setup({
 			-- elements can be strings or table with id and size keys.
 			{id = "scopes", size = 0.5},
 			{id = "breakpoints", size=0.1},
-			-- "stacks",
+			{id = "stacks", size=0.1},
 			-- "watches",
-			{id = "console", size = 0.4},
+			{id = "console", size = 0.3},
 		},
 		size = 0.4,
 		position = "left",
@@ -97,7 +97,7 @@ dapui.setup({
 -- error message but then everything automatically shuts down
 dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
 
--- dap-python
+-- DAP-PYTHON
 -- register the "adapter and configurations"
 dap_py.setup('~/.virtualenvs/debugpy/bin/python', {
 	console = 'integratedTerminal',
@@ -109,7 +109,6 @@ dap_py.resolve_python = function()
 end
 
 -- AIM: want to be able to run a single test in a file by toggling breakpoint
-
 table.insert(require('dap').configurations.python, {
     name= "Pytest: Current File",
     type= "python",
@@ -124,7 +123,26 @@ table.insert(require('dap').configurations.python, {
     console= "integratedTerminal",
 })
 
+-- DAP-LUA
 
+-- Open a lua file
+-- Place breakpoint
+-- Invoke require"osv".run_this()
+dap.configurations.lua = {
+  {
+    type = 'nlua',
+    request = 'attach',
+    name = "Attach to running Neovim instance",
+  }
+}
+
+dap.adapters.nlua = function(callback, config)
+  callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
+end
+
+local Dlua = function() require("osv").run_this() end
+
+-- NEODEV
 -- enable type checking for nvim-dap-ui to get type checking, documentation and autocompletion for all API functions.
 require("neodev").setup({
   library = { plugins = { "nvim-dap-ui" }, types = true },

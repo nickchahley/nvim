@@ -5,9 +5,6 @@ local M = {
 		dependencies = {
 			'nvim-lua/plenary.nvim',
 			{ 'nvim-telescope/telescope-fzf-native.nvim',
-				-- Fuzzy Finder Algorithm which requires local dependencies to be built.
-			  -- Only load if `make` is available. Make sure you have the system
-			  -- requirements installed.
 				build = 'make',
 				cond = function()
 					return vim.fn.executable 'make' == 1
@@ -134,6 +131,7 @@ local M = {
 			'nvim-neotest/nvim-nio',
 			'rcarriga/nvim-dap-ui',
 			'mfussenegger/nvim-dap-python',
+			'jbyuki/one-small-step-for-vimkind',
 		},
 		config = function() require('config.dap') end,
 	},
@@ -146,8 +144,6 @@ local M = {
 		},
 		opts = {
 			path = '/home/nikoli/.miniconda3',
-			-- anaconda_base_path = '/home/nikoli/.miniconda3',
-			-- anaconda_envs_path = 'home/nikoli/.miniconda3/envs',
 		},
 		keys = {{
 			'<leader>vs', '<cmd>:VenvSelect<cr>',
