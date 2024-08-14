@@ -140,7 +140,7 @@ dap.adapters.nlua = function(callback, config)
   callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
 end
 
-Dlua = require("osv").run_this()
+local Dlua = function() require("osv").run_this() end
 
 -- NEODEV
 -- enable type checking for nvim-dap-ui to get type checking, documentation and autocompletion for all API functions.
