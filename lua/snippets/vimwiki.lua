@@ -3,6 +3,9 @@ local s = ls.s
 local t = ls.text_node
 local i = ls.insert_node
 local newline = t({"",""})
+
+local function date() return os.date("%a %d %b %Y") end
+
 local S = {
 	-- unicode aliases
 	s("\\d", t("Δ")),
@@ -33,10 +36,11 @@ local S = {
 	-- templates
 	s({trig='vdw', dscr='vimwiki diary work'},
 		{t({
+			'= ' .. date() .. ' =', '',
 			'[[inbox]]', '',
 			'= Work =', '',
 			'== Brief ==', '',
-			'== TODO ==', '- [ ] start pompodoro', '- [ ] check calendar', '- [ ] check emails',
+			'== TODO ==', '- [ ] check calendar', '- [ ] check emails', '- [ ]', '- [ ] fill timesheet'
 			})
 		}
 	),

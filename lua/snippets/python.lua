@@ -3,6 +3,16 @@ local s = ls.s
 local t = ls.text_node
 local i = ls.insert_node
 
+local tab = function(n)
+	n = n or 1
+	local tabs = ""
+	for j=1, n do tabs = tabs .. "\t" end
+	return tabs
+end
+
+local newline = t({"",""})
+local newtab = function(n) return t({"", tab(n)}) end
+
 local S = {
 	s({ trig = "kwg", regTrig = false, dscr = "kwargs get" },
 		{ t("kwargs.get("), i(1), t(", "), i(2), t(")")
@@ -10,6 +20,10 @@ local S = {
 	),
 	s({ trig = "strnone", regTrig = false, dscr = "" },
 		{ t("str|None = None,")
+		}
+	),
+	s({ trig = "sp", regTrig = false, dscr = "" },
+		{ t("str|Path")
 		}
 	),
 	s({ trig = "pt", dscr = "process_time start" },
@@ -28,11 +42,6 @@ local S = {
 	),
 	s({ trig = "mod", dscr = "importlib import module" },
 		{ i(0,''), t(" = importlib.import_module('"), i(1, ''), t(")")
-		}
-	),
-	s({ trig = "ds", dscr = "docstring" },
-		{
-			t("''' "), i(0,''), t(" '''")
 		}
 	),
 	s({ trig = "#", dscr = "shebang" },
@@ -57,10 +66,6 @@ local S = {
 		}
 	),
 	-- aliases
-	s({ trig = "cs", dscr = "commentstring" },
-		{ t('""" '), i(0, ""), t(' """')
-		}
-	),
 	s({ trig = "p", dscr = "print" },
 		{ t("print(f'"), i(1), t("')"),
 		}
@@ -153,6 +158,8 @@ local S = {
 	),
 	s({ trig = "cline", dscr = "commandline fx bp" },
 		{
+			t({"import argparse, sys"}), newline,
+			newline,
 			t({"def cline(args_ls = sys.argv[1:]):", ""}),
 			t({"\tp = argparse.ArgumentParser("}),
 			t({"", "\t\tformatter_class = argparse.ArgumentDefaultsHelpFormatter,"}),
@@ -161,6 +168,43 @@ local S = {
 			t({"", "\tp.add_argument('"}), i(1, "arg"), t("', help = '"), i(2, ""), t("')"),
 			t({"", "\targs = p.parse_args(args_ls)"}),
 			t({"", "\treturn args"}),
+		}
+	),
+	s({ trig = "cpucount", regTrig = false, dscr = "Cpu count w/ default" },
+		{
+      t("(int(os.cpu_count() or 1) - 1) if os.cpu_count() else 0"),
+		}
+	),
+	s({ trig = "rve", regTrig = false, dscr = "raise ValueError" },
+		{ t("raise ValueError(f\""), i(0), t("\")")
+		}
+	),
+	s({ trig = "cs", dscr = "commentstring" },
+		{ t('""" '), i(0, ""), t(' """')
+		}
+	),
+	s({ trig = "ret", regTrig = false, dscr = "docstring returns" },
+		{ t({"Returns", "-------", ""})
+		}
+	),
+	s({ trig = "args", regTrig = false, dscr = "docstring args" },
+		{ t({"Args", "----", ""})
+		}
+	),
+	s({ trig = "ds", regTrig = false, dscr = "docstring template" },
+		{
+			t({'""" '}), i(1, ""), t({"","",""}),
+			t({"Args", "----", ""}), i(2, ""), t({"",""}),
+			t({"Returns", "-------", ""}), i(3, ""), t({"",""}),
+			t({'"""'}),
+		}
+	),
+	s({ trig = "ad", regTrig = false, dscr = "AnnData" },
+		{ t("AnnData")
+		}
+	),
+	s({ trig = "imann", dscr = "import argparse" },
+		{ t("from anndata import AnnData")
 		}
 	),
 }

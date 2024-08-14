@@ -22,6 +22,28 @@ local S = {
 		{ t("#!/usr/bin/env bash")
 		}
 	),
+	s({ trig = "all", regTrig = false, dscr = "all args macro" },
+		{ t('"$@"')
+		}
+	),
+	s({ trig = "allbut", regTrig = false, dscr = "all args except first macro" },
+		{ t('"${@:2}"')
+		}
+	),
+	s({ trig = "ifdir", regTrig = false, dscr = "if dir exists" },
+		{
+			t("if [[ -d \""), i(1,''), t({"\" ]]; then", ""}),
+			t({"fi"}),
+		}
+	),
+	s({ trig = "ind", regTrig = false, dscr = "INSTALL_DIR" },
+		{ t("\"${INSTALL_DIR}\"")
+		}
+	),
+	s({ trig = "outf", regTrig = false, dscr = "OUTFILs" },
+		{ t("\"${OUTFILE}\"")
+		}
+	),
 }
 
 return S
