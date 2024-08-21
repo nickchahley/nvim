@@ -42,26 +42,26 @@ end
 --  define the property 'filetypes' to the map in question.
 local servers = {
   pyright = {
-		settings = {
-			python = {
-				disableLanguageServices = true,
-				diagnostics = { globals = {'config'} },
-			},
-		}
-	},
-	r_language_server = {
-		cmd = { "R", "--slave", "-e", "languageserver::run()" },
-		filetypes = { "r", "rmd", "Rmd" },
-		log_level = 2
-	},
-	-- bashls = {},
-	vimls = {},
-	cssmodules_ls = {},
+    settings = {
+      python = {
+        disableLanguageServices = true,
+        diagnostics = { globals = {'config'} },
+      },
+    }
+  },
+  r_language_server = {
+    cmd = { "R", "--slave", "-e", "languageserver::run()" },
+    filetypes = { "r", "rmd", "Rmd" },
+    log_level = 2
+  },
+  -- bashls = {},
+  vimls = {},
+  cssmodules_ls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
-			diagnostics = { globals = {'vim'} },
+      diagnostics = { globals = {'vim'} },
     },
   },
 }

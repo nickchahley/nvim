@@ -28,22 +28,22 @@ lmap('dO', dap.step_out,  { desc = '[D]ap step [O]ut' } )
 lmap('db', dap.toggle_breakpoint, { desc = '[D]ap toggle [B]reakpoint'})
 lmap('dxb', dap.clear_breakpoints, { desc = '[D]ap [X]lear [B]reakpoints'})
 lmap('dB', function()
-		dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
-	end, { desc = '[D]ap set [B]reakpoint condition' })
+    dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+  end, { desc = '[D]ap set [B]reakpoint condition' })
 lmap('dl', function()
-		dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-	end, { noremap = true, desc = '[D]ap toggle [L]ogpoint' })
+    dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+  end, { noremap = true, desc = '[D]ap toggle [L]ogpoint' })
 
 -- new from dap help
 vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
-	require('dap.ui.widgets').preview()
+  require('dap.ui.widgets').preview()
 end)
 vim.keymap.set('n', '<Leader>df', function()
-	local widgets = require('dap.ui.widgets')
-	widgets.centered_float(widgets.frames)
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.frames)
 end)
 vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
-	require('dap.ui.widgets').hover()
+  require('dap.ui.widgets').hover()
 end)
 
 -- Dap UI binds
@@ -56,42 +56,42 @@ lmap('dF',  dapui.float_element, { desc = '[D]apui [F]loat element' })
 lmap("dw", function() require("dap.ui.widgets").hover() end, { desc = "Widgets" } )
 
 dapui.setup({
-	layouts = {
-	{
-		elements = {
-			-- elements can be strings or table with id and size keys.
-			{id = "scopes", size = 0.5},
-			{id = "breakpoints", size=0.1},
-			{id = "stacks", size=0.1},
-			-- "watches",
-			{id = "console", size = 0.3},
-		},
-		size = 0.4,
-		position = "left",
-	},
-	{ -- do not include console and outputs appear in repl!
-		elements = {
-			{id =  "repl", size=0.9},
-		},
-		size = 20,
-		position = "bottom",
-	},
-	},
-	mappings = {
-		-- use a {table, to} apply multiple mappings
-		edit = {'s', 'cc'},
-		expand = { 'za', '<Tab>', '<CR>', '<2-LeftMouse>'},
-		open = {'h'},
-		remove = {'dd', 'x'},
-		repl = 'r',
-		toggle = 't'
-	},
-	floating = {
-		border = 'single',
-		mappings = {
-			close = '<leader>dfc',
-		},
-	}
+  layouts = {
+  {
+    elements = {
+      -- elements can be strings or table with id and size keys.
+      {id = "scopes", size = 0.5},
+      {id = "breakpoints", size=0.1},
+      {id = "stacks", size=0.1},
+      -- "watches",
+      {id = "console", size = 0.3},
+    },
+    size = 0.4,
+    position = "left",
+  },
+  { -- do not include console and outputs appear in repl!
+    elements = {
+      {id =  "repl", size=0.9},
+    },
+    size = 20,
+    position = "bottom",
+  },
+  },
+  mappings = {
+    -- use a {table, to} apply multiple mappings
+    edit = {'s', 'cc'},
+    expand = { 'za', '<Tab>', '<CR>', '<2-LeftMouse>'},
+    open = {'h'},
+    remove = {'dd', 'x'},
+    repl = 'r',
+    toggle = 't'
+  },
+  floating = {
+    border = 'single',
+    mappings = {
+      close = '<leader>dfc',
+    },
+  }
 })
 -- No auto exit? I find it easier to just toggle dapui for all then times I want to see an
 -- error message but then everything automatically shuts down
@@ -100,7 +100,7 @@ dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() 
 -- DAP-PYTHON
 -- register the "adapter and configurations"
 dap_py.setup('~/.virtualenvs/debugpy/bin/python', {
-	console = 'integratedTerminal',
+  console = 'integratedTerminal',
 })
 
 -- force python path "for now"

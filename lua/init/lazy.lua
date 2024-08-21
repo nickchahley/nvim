@@ -18,7 +18,7 @@ vim.g.maplocalleader = ' '
 -- load lazy Lazy: Load plugin specs and their configuration
 -- syntax: require('lazy').setup(plugins, opts)
 require('lazy').setup(
-	{import = 'modules'}, {})
+  {import = 'modules'}, {})
 
 
 -- Just dumping the rest of kickstart.nvim here so i can try until i

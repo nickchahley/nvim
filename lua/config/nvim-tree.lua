@@ -6,13 +6,13 @@ local api = require('nvim-tree.api')
 lmap('nt', ':NvimTreeToggle<CR>', { desc = 'NvimTreeToggle' })
 
 local function my_on_attach(bufnr)
-	local function opts(desc)
-		desc = '' or desc
-		return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-	end
+  local function opts(desc)
+    desc = '' or desc
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
 
-	-- Don't load defaults because it is overwritting a bunch of my nav maps
-	-- Instead, just copy all default mappings from help and remove ones I don't want
+  -- Don't load defaults because it is overwritting a bunch of my nav maps
+  -- Instead, just copy all default mappings from help and remove ones I don't want
   vim.keymap.set('n', '<C-]>',   api.tree.change_root_to_node,        opts('CD'))
   vim.keymap.set('n', '<C-e>',   api.node.open.replace_tree_buffer,   opts('Open: In Place'))
   vim.keymap.set('n', '<C-k>',   api.node.show_info_popup,            opts('Info'))
@@ -61,7 +61,7 @@ local function my_on_attach(bufnr)
   vim.keymap.set('n', '<2-LeftMouse>',  api.node.open.edit,           opts('Open'))
   vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
 
-	-- removed default binds that may or may not be replaced
+  -- removed default binds that may or may not be replaced
   -- vim.keymap.set('n', 'E',       api.tree.expand_all,                 opts('Expand All'))
   -- vim.keymap.set('n', 'e',       api.fs.rename_basename,              opts('Rename: Basename'))
   -- vim.keymap.set('n', 'H',       api.tree.toggle_hidden_filter,       opts('Toggle Filter: Dotfiles'))
@@ -71,30 +71,30 @@ local function my_on_attach(bufnr)
   -- vim.keymap.set('n', 'o',       api.node.open.edit,                  opts('Open'))
   -- vim.keymap.set('n', 'O',       api.node.open.no_window_picker,      opts('Open: No Window Picker'))
 
-	-- non-default binds
+  -- non-default binds
   k.set('n', 'E', api.node.navigate.sibling.last,  opts('Last Sibling'))
   k.set('n', 'I', api.node.navigate.sibling.first, opts('First Sibling'))
   k.set('n', 'K', api.tree.expand_all,             opts('Ex[K]pand All'))
   k.set('n', 'h', api.node.open.edit,              opts('Open'))
   k.set('n', 'H', api.node.open.no_window_picker,  opts('Open: No Window Picker'))
-	k.set('n', '<leader>rb', api.fs.rename_basename, opts('Rename: Basename'))
+  k.set('n', '<leader>rb', api.fs.rename_basename, opts('Rename: Basename'))
 
-	-- filters
+  -- filters
   k.set('n', '<leader>fh', api.tree.toggle_hidden_filter,    opts('[F]ilter [H]idden files'))
   k.set('n', '<leader>fi', api.tree.toggle_gitignore_filter, opts('[F]ilter git [I]gnore'))
 
-	-- Restore navigation. I do still need to do this, apparently	
-	-- E/I jump to top and bottom within a parent, but that's fine. N/O seem as expected.
-	k.set('n', 'n', 'h', opts())
-	k.set('n', 'e', 'j', opts())
-	k.set('n', 'i', 'k', opts())
-	k.set('n', 'o', 'l', opts())
+  -- Restore navigation. I do still need to do this, apparently  
+  -- E/I jump to top and bottom within a parent, but that's fine. N/O seem as expected.
+  k.set('n', 'n', 'h', opts())
+  k.set('n', 'e', 'j', opts())
+  k.set('n', 'i', 'k', opts())
+  k.set('n', 'o', 'l', opts())
 
 end
 
 
 nvimtree.setup({
-	---
-	on_attach = my_on_attach,
-	---
+  ---
+  on_attach = my_on_attach,
+  ---
 })

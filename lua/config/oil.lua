@@ -71,9 +71,9 @@ require("oil").setup({
     ["g."] = "actions.toggle_hidden",
     ["g\\"] = "actions.toggle_trash",
   },
-	vim.keymap.set('n', '-', "<CMD>Oil<CR>", {desc = 'Open parent dir'}),
-	vim.keymap.set('n', '<Bslash>', "<CMD>Oil<CR>", {desc = 'Open parent dir'}),
-	vim.keymap.set('n', '<leader>-', require('oil').toggle_float),
+  vim.keymap.set('n', '-', "<CMD>Oil<CR>", {desc = 'Open parent dir'}),
+  vim.keymap.set('n', '<Bslash>', "<CMD>Oil<CR>", {desc = 'Open parent dir'}),
+  vim.keymap.set('n', '<leader>-', require('oil').toggle_float),
 
   -- Set to false to disable all of the above keymaps
   use_default_keymaps = true,

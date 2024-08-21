@@ -9,11 +9,11 @@ pcall(ts.load_extension, 'fzf')
 lmap('?', tsb.oldfiles, { desc = '[?] Find recently opened files' })
 lmap('<space>', tsb.buffers, { desc = '[ ] Find existing buffers' })
 lmap('/', function()
-	-- You can pass additional configuration to telescope to change theme, layout, etc.
-	tsb.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-		winblend = 10,
-		previewer = false,
-	})
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  tsb.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
 end, { desc = '[/] Fuzzily search in current buffer' })
 lmap('sb', tsb.current_buffer_fuzzy_find, { desc = '[S]earch [b]uffer' })
 lmap('gf', tsb.git_files, { desc = 'Search [G]it [F]iles' })

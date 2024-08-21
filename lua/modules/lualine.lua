@@ -44,32 +44,32 @@ require('lualine').setup {
 }
 --]]
 local M = {
-	{
-		'nvim-lualine/lualine.nvim',
-		requires = { 'nvim-tree/nvim-web-devicons', opt = true },
-		config = function()
-			local nbuff = function() 
-				-- #<var> is length operator
-				local n = #vim.fn.getbufinfo({buflisted = 1})
-				n = tostring(n) .. 'b'
-				return n
-			end 
-			local nline = function()
-				local n = vim.api.nvim_buf_line_count(0)
-				return 'ln ' .. n
-			end
-			local nbuff_nline = function()
-				return nbuff() .. ' ' .. nline()
-			end
-			require('lualine').setup ({
-				sections = { 
-					lualine_c = {nbuff, 'filename',},
-					lualine_x = {'encoding', 'fileformat', 'filetype',},
-					lualine_y = {nline,},
-				}
-			})
-		end,
-	},
+  {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    config = function()
+      local nbuff = function() 
+        -- #<var> is length operator
+        local n = #vim.fn.getbufinfo({buflisted = 1})
+        n = tostring(n) .. 'b'
+        return n
+      end 
+      local nline = function()
+        local n = vim.api.nvim_buf_line_count(0)
+        return 'ln ' .. n
+      end
+      local nbuff_nline = function()
+        return nbuff() .. ' ' .. nline()
+      end
+      require('lualine').setup ({
+        sections = { 
+          lualine_c = {nbuff, 'filename',},
+          lualine_x = {'encoding', 'fileformat', 'filetype',},
+          lualine_y = {nline,},
+        }
+      })
+    end,
+  },
 }
 
 return M
