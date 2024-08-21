@@ -1,3 +1,5 @@
+local lmap = require('utils.keys').leader_map
+
 local M = {
 	-- Fuzzy Finder (files, lsp, etc)
 	{ 'nvim-telescope/telescope.nvim',
@@ -163,9 +165,14 @@ local M = {
 			]])
 		end
 	},
-	-- { 'tpope/vim-rhubarb', lazy = true },
+	{ 'tpope/vim-rhubarb', lazy = false,
+		config = function()
+			lmap('gg', ':GBrowse<cr>')
+			lmap('gb', ':Git blame<cr>')
+		end
+	},
 	-- { 'sindrets/diffview.nvim', lazy = true,
-	-- 	dependencies = {'nvim-tree/nvim-web-devicons',}
+	--	dependencies = {'nvim-tree/nvim-web-devicons',}
 	-- },
 --[[
 	-- git things
