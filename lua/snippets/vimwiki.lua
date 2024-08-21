@@ -39,7 +39,7 @@ local S = {
 			'= ' .. date() .. ' =', '',
 			'[[inbox]]', '',
 			'= Work =', '',
-			'== Brief ==', '',
+			-- '== Brief ==', '',
 			'== TODO ==', '- [ ] check calendar', '- [ ] check emails', '- [ ]', '- [ ] fill timesheet'
 			})
 		}

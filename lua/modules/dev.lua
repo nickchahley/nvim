@@ -79,7 +79,7 @@ local M = {
 				-- this table could go in opts = {} if we were not also calling
 				-- additional config lines after
 				highlight = {
-					keyword = 'fg', after = 'fg',
+					keyword = 'fg', after = 'none',
 					comments_only = false,
 				},
 			})
@@ -150,16 +150,17 @@ local M = {
 			'<leader>vc', '<cmd>:VenvSelectCached<cr>'
 		}},
 	},
+
+	{ 'tpope/vim-fugitive', lazy = false },
+	-- { 'tpope/vim-rhubarb', lazy = true },
+	-- { 'sindrets/diffview.nvim', lazy = true,
+	-- 	dependencies = {'nvim-tree/nvim-web-devicons',}
+	-- },
 --[[
 	-- git things
 	-- Don't think I've every actually used a git-related plugin other than diff
 	-- view, and am suspicious that it could be slowing things down in large repos
 	{ 'tpope/vim-sleuth', lazy = true },
-	{ 'tpope/vim-fugitive', lazy = true },
-	{ 'tpope/vim-rhubarb', lazy = true },
-	{ 'sindrets/diffview.nvim', lazy = true,
-		dependencies = {'nvim-tree/nvim-web-devicons',}
-	},
 ]]
 --[[
 	-- gitsigns (gutter)

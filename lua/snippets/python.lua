@@ -14,8 +14,16 @@ local newline = t({"",""})
 local newtab = function(n) return t({"", tab(n)}) end
 
 local S = {
-	s({ trig = "kwg", regTrig = false, dscr = "kwargs get" },
-		{ t("kwargs.get("), i(1), t(", "), i(2), t(")")
+	s({ trig = "scriptdir", regTrig = false, dscr = "scriptdir, dir of current file" },
+		{ t("Path(__file__).parent.resolve()")
+		}
+	),
+	s({ trig = "kwg", regTrig = false, dscr = "kwargs get stub" },
+		{ t("kwargs.get(\""), i(1), t("\", ")
+		}
+	),
+	s({ trig = "kwge", regTrig = false, dscr = "kwargs get insert" },
+		{ t("kwargs.get(\""), i(1), t("\", "), i(2), t(")")
 		}
 	),
 	s({ trig = "strnone", regTrig = false, dscr = "" },
@@ -188,7 +196,7 @@ local S = {
 		}
 	),
 	s({ trig = "args", regTrig = false, dscr = "docstring args" },
-		{ t({"Args", "----", ""})
+		{ t({"Parameters", "----------", ""})
 		}
 	),
 	s({ trig = "ds", regTrig = false, dscr = "docstring template" },
