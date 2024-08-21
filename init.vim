@@ -110,10 +110,6 @@ lua require('init.options')
 	nnoremap <Leader>R :w<CR>!%:p<CR>
 	" nnoremap <Leader>E :w<CR>:silent !%:p<CR><C-l>
 
-	" Insert a timestamp, eg for naming meeting minutes
-	nmap <F3> i<C-R>=strftime("%Y-%m-%d")<CR><Esc>
-	imap <F3> <C-R>=strftime("%Y-%m-%d")<CR>
-
 lua << EOF
 -- copy current buffer info to clipboard 
 -- TODO: yank file with relative path, with `../` if parent (ex. for vimwiki)

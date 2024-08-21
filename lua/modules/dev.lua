@@ -151,7 +151,18 @@ local M = {
 		}},
 	},
 
-	{ 'tpope/vim-fugitive', lazy = false },
+	{ 'tpope/vim-fugitive', lazy = false,
+		config = function()
+			-- Undocumented interface for supporting alternative layouts explained
+			-- https://github.com/tpope/vim-fugitive/issues/1080#issuecomment-521100430
+			vim.cmd([[
+				" Take o map and make it available on l
+				let g:nremap = {'o': 'l', 'O': 'L', 'i': 'j', 'I': 'J'}
+				let g:xremap = g:nremap
+				let g:oremap = g:nremap
+			]])
+		end
+	},
 	-- { 'tpope/vim-rhubarb', lazy = true },
 	-- { 'sindrets/diffview.nvim', lazy = true,
 	-- 	dependencies = {'nvim-tree/nvim-web-devicons',}
