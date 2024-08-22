@@ -111,6 +111,10 @@ local S = {
     }
   ),
   -- imports and library specific
+  s({ trig = "imand", dscr = "import polars" },
+    { t({"from anndata import AnnData"})
+    }
+  ),
   s({ trig = "impol", dscr = "import polars" },
     { t({"import polars as pl", "import polars.selectors as cs"})
     }
@@ -188,15 +192,11 @@ local S = {
     }
   ),
   s({ trig = "cs", dscr = "commentstring" },
-    { t('""" '), i(0, ""), t(' """')
+    { t({'""" ', ''}), i(0, ""), t({'', '"""'})
     }
   ),
-  s({ trig = "ret", regTrig = false, dscr = "docstring returns" },
-    { t({"Returns", "-------", ""})
-    }
-  ),
-  s({ trig = "args", regTrig = false, dscr = "docstring args" },
-    { t({"Parameters", "----------", ""})
+  s({ trig = "css", dscr = "commentstring inline" },
+    { t({'""" '}), i(0, ""), t({' """'})
     }
   ),
   s({ trig = "ds", regTrig = false, dscr = "docstring template" },
@@ -205,6 +205,30 @@ local S = {
       t({"Args", "----", ""}), i(2, ""), t({"",""}),
       t({"Returns", "-------", ""}), i(3, ""), t({"",""}),
       t({'"""'}),
+    }
+  ),
+  s({ trig = "ret", regTrig = false, dscr = "docstring returns" },
+    { t({"Returns", "-------", ""})
+    }
+  ),
+  s({ trig = "rett", regTrig = false, dscr = "docstring returns no newline" },
+    { t({"Returns", "-------"})
+    }
+  ),
+  s({ trig = "args", regTrig = false, dscr = "docstring args" },
+    { t({"Parameters", "----------", ""})
+    }
+  ),
+  s({ trig = "argss", regTrig = false, dscr = "docstring args no newline" },
+    { t({"Parameters", "----------"})
+    }
+  ),
+  s({ trig = "note", regTrig = false, dscr = "docstring note" },
+    { t({"Notes", "-----", ""})
+    }
+  ),
+  s({ trig = "todo", regTrig = false, dscr = "docstring todo" },
+    { t({"TODO:", "-----", ""})
     }
   ),
   s({ trig = "ad", regTrig = false, dscr = "AnnData" },

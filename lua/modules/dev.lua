@@ -163,6 +163,7 @@ local M = {
         let g:xremap = g:nremap
         let g:oremap = g:nremap
       ]])
+      lmap('gs', ':Git<cr>')
     end
   },
   { 'tpope/vim-rhubarb', lazy = false,
@@ -171,16 +172,13 @@ local M = {
       lmap('gb', ':Git blame<cr>')
     end
   },
-  -- { 'sindrets/diffview.nvim', lazy = true,
-  --  dependencies = {'nvim-tree/nvim-web-devicons',}
-  -- },
---[[
-  -- git things
-  -- Don't think I've every actually used a git-related plugin other than diff
-  -- view, and am suspicious that it could be slowing things down in large repos
-  { 'tpope/vim-sleuth', lazy = true },
-]]
---[[
+  { 'sindrets/diffview.nvim', lazy = false,
+    -- :h diff-mode 
+    -- :DiffviewOpen :DiffviewOpen HEAD~2
+    -- :DiffviewToggleFiles
+    -- :DiffviewFileHistory
+    dependencies = {'nvim-tree/nvim-web-devicons',}
+  },
   -- gitsigns (gutter)
   {-- Adds git related signs to the gutter and utilities for managing changes
     'lewis6991/gitsigns.nvim', lazy = true,
@@ -210,9 +208,7 @@ local M = {
         end, {expr=true, buffer = bufnr, desc = "Jump to previous hunk"})
       end,
     },
-  }, 
-  ]]
-
+  },
 }
 
 return M
