@@ -128,6 +128,11 @@ expmap('ys', '%:t:r', '[Y]ank [S]tem')
 vim.keymap.set('n', '<leader>yr', ':let '..register..' = @%<CR>', 
 	{noremap = true, desc = '[Y]ank [R]elative path'})
 
+-- x delete into black hole register by default
+for _, mode in ipairs({'n','v','x'}) do
+	vim.keymap.set(mode, 'x', '"_x', {noremap = true})
+end
+
 -- Resize Splits
 local res_factor = 4/3
 vim.keymap.set('n',
