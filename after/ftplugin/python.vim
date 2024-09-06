@@ -14,9 +14,11 @@ setlocal fileformat=unix
 " Preview folded docstrings in py SimpylFold
 " let g:SimpylFold_docstring_preview = 1
 
+set foldmethod=indent
+" TODO: would be great if this worked
 " Use treesitter folding (any nvim-treesitter-pyfold)
-set foldmethod=expr
-set foldexpr=nvim_treesitter#fold_expr()
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#fold_expr()
 
 
 inoremap <buffer> >> <Esc>:normal! a-><CR>a

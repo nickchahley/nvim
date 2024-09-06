@@ -111,11 +111,15 @@ local S = {
     }
   ),
   -- imports and library specific
-  s({ trig = "imand", dscr = "import polars" },
+  s({ trig = "imann", dscr = "import anndata" },
     { t({"from anndata import AnnData"})
     }
   ),
   s({ trig = "impol", dscr = "import polars" },
+    { t({"import polars as pl", ""})
+    }
+  ),
+  s({ trig = "impoll", dscr = "import polars and column selectors" },
     { t({"import polars as pl", "import polars.selectors as cs"})
     }
   ),
@@ -127,8 +131,13 @@ local S = {
     { t(".with_columns("), i(0, ''), t(")")
     }
   ),
-  s({ trig = ".mkdir", regTrig=true, dscr = "Path mkdir" },
-    { t(".mkdir(parents=True, exists_ok=True)")
+  -- TODO: fix my trigger
+  s({ trig = "[^\\s-]*\\.mkdir", regTrig=true, dscr = "Path mkdir" },
+    { t(".mkdir(parents=True, exist_ok=True)")
+    }
+  ),
+  s({ trig = "ptet", regTrig=true, dscr = "mkdir boiler params" },
+    { t("parents=True, exist_ok=True )")
     }
   ),
   s({ trig = "impan", dscr = "import pandas" },
@@ -189,6 +198,10 @@ local S = {
   ),
   s({ trig = "rve", regTrig = false, dscr = "raise ValueError" },
     { t("raise ValueError(f\""), i(0), t("\")")
+    }
+  ),
+  s({ trig = "rke", regTrig = false, dscr = "raise KeyError" },
+    { t("raise KeyError(f\""), i(0), t("\")")
     }
   ),
   s({ trig = "cs", dscr = "commentstring" },

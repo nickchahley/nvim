@@ -2,7 +2,12 @@ local map = require('utils.keys').map
 
 local M = {
   {'wesQ3/vim-windowswap', name = 'windowswap', lazy = false, },
-  { 'tpope/vim-surround', name = 'surround', lazy = false, },
+  {'kylechui/nvim-surround', lazy = false,
+    config = function()
+      require("nvim-surround").setup({})
+      require('config.surround')
+    end,
+  },
   { 'tpope/vim-repeat', name = 'repeat', lazy = false },
   { 'tpope/vim-eunuch',  name = 'eunuch', lazy = false },
   { 'tpope/vim-unimpaired',  name = 'unimpaired', lazy = true },

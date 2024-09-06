@@ -40,7 +40,7 @@ local S = {
       '[[inbox]]', '',
       '= Work =', '',
       -- '== Brief ==', '',
-      '== TODO ==', '- [ ] check calendar', '- [ ] check emails', '- [ ]', '- [ ] fill timesheet'
+      '== TODO: ==', '- [ ] check calendar', '- [ ] check emails', '- [ ]', '- [ ] fill timesheet'
       })
     }
   ),
