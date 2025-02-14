@@ -1,8 +1,11 @@
+local map = require('utils.keys').map
+
 return {
-  { "iamcco/markdown-preview.nvim", lazy=true,
+  { "iamcco/markdown-preview.nvim", lazy=false,
     config = function()
       vim.fn["mkdp#util#install"]()
       require('config.markdown-preview')
+      -- map('<leader>mp', '<Plug>MarkdownPreviewToggle')
     end,
   },
   { "hedyhli/markdown-toc.nvim", lazy=true,

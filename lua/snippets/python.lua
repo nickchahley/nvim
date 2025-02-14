@@ -100,6 +100,10 @@ local S = {
       t({"", "\t",}), i(3), t({"", "\tpass"})
     }
   ),
+  s({ trig = "ifname", regTrig = false, dscr = "if name main" },
+    { t({ 'if __name__ == "__main__":', '\tmain(cline())', }),
+    }
+  ),
   s({trig = 'main', dscr = 'if name main'},
     {
       t({ 'def main(args):', '\tpass', '', ''}),
@@ -200,6 +204,10 @@ local S = {
     { t("raise ValueError(f\""), i(0), t("\")")
     }
   ),
+  s({ trig = "rnie", regTrig = false, dscr = "NotImplementedError" },
+    { t("raise NotImplementedError")
+    }
+  ),
   s({ trig = "rke", regTrig = false, dscr = "raise KeyError" },
     { t("raise KeyError(f\""), i(0), t("\")")
     }
@@ -250,6 +258,11 @@ local S = {
   ),
   s({ trig = "imann", dscr = "import argparse" },
     { t("from anndata import AnnData")
+    }
+  ),
+  s({ trig = "iterdir", regTrig = false, dscr = "files in dir pathlib" },
+    {
+      t("[f for f in Path(path).iterdir()]")
     }
   ),
 }

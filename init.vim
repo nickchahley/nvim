@@ -10,7 +10,7 @@ lua require('init.options')
 	set t_Co=256
 
 	set relativenumber
-	set nonumber
+	set number
 	set mouse=a
 	set scrolloff=5
 	set wildmode=longest,list,full
