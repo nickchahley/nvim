@@ -16,6 +16,10 @@ local S = {
       { t(os.date("%Y-%m-%d"))
       }
     ),
+    s({ trig = "nc", regTrig = false, dscr = "Comment signature" },
+      { t("(NC "), t(os.date("%Y-%m-%d")), t(") ")
+      }
+    ),
     s({ trig = "dby", regTrig = false, dscr = "" },
       { t(os.date("%d %b %Y"))
       }

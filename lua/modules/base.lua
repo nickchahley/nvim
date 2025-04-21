@@ -53,7 +53,7 @@ local M = {
     end,
   },
   { 'numToStr/Comment.nvim', opts = { basic = true, } },
-  { 'mileszs/ack.vim', name = 'ack'}, -- combine w/ :cdo for project-wide replacements?
+  { 'mileszs/ack.vim', name = 'ack'}, -- combine w/ :cdo for project-wide
   { 'stevearc/oil.nvim', name = 'oil',
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function() require('config.oil') end,
@@ -61,6 +61,7 @@ local M = {
   { 'chase/vim-ansible-yaml' },
   { 'Fymyte/rasi.vim' },
   { 'lambdalisue/suda.vim', },
+  { 'AndrewRadev/splitjoin.vim' },
   { 'nickchahley/colemak-vim', name = 'colemak', lazy = false },
 }
 

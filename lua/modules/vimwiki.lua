@@ -65,6 +65,12 @@ local M = {
 
         nmap <Leader>wa :call VimwikiFindAllIncompleteTasks()<CR>
         nmap <Leader>wx :call VimwikiFindIncompleteTasks()<CR>
+
+        " [C]onvert
+        nmap <Leader>wCh <Plug>Vimwiki2HTML<CR>
+        nmap <Leader>wCH <Plug>Vimwiki2HTMLBrowse<CR>
+        nmap <Leader>wh <Plug>VimwikiSplitLink<CR>
+        nmap <Leader>wv <Plug>VimwikiVSplitLink<CR>
       ]])
 
       -- Here I try to disable annoying things clobbering my maps

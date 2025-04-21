@@ -56,7 +56,6 @@ lua require('init.options')
 	" Copy and paste. Holy shit.
 	set clipboard+=unnamedplus " automatically use sys clipboard for c/p (linux)
 	" set clipboard+=unnamed    " automatically use sys clipboard for c/p (win/wsl)
-	set pastetoggle=<F10>     " happier clipboard pasting, but turn off after
 	
 " }}}
 " {{{ Persistent Undo | Backup and Swap 

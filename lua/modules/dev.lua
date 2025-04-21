@@ -41,6 +41,9 @@ local M = {
         config = function()
           require('toggle_lsp_diagnostics').init({ virtual_text = false })
           vim.keymap.set('n', "<leader>tlv", "<Plug>(toggle-lsp-diag-vtext)")
+          -- vim.diagnostic.enable(true)
+          -- vim.diagnostic.enable(false)
+
           -- "Toggle Lsp diagnostics
           -- "No" = off, "Yes" = on
           vim.cmd([[
@@ -157,6 +160,14 @@ local M = {
     config = function()
       -- Undocumented interface for supporting alternative layouts explained
       -- https://github.com/tpope/vim-fugitive/issues/1080#issuecomment-521100430
+      --
+      -- Things I want to implement/understand better:
+      -- diff b/t current file and index:
+      -- :Gdiff :0
+      -- current file and rev
+      -- :Gdiff [revision]
+      -- current file and 3 commits ago
+      -- :Gdiff ~3
       vim.cmd([[
         " Take o map and make it available on l
         let g:nremap = {'o': 'l', 'O': 'L', 'i': 'j', 'I': 'J'}
