@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.tex,*.bib,*.sty set filetype=tex
+au BufRead,BufNewFile *.tex,*.sty set filetype=tex
