@@ -79,15 +79,20 @@ for k, v in pairs(servers) do
   vim.lsp.config(k, v)
 end
 
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
+
+require('mason').setup()
+mason_lspconfig.setup {
+  ensure_installed = vim.tbl_keys(servers),
+}
+
+for _, server in ipairs(mason_lspconfig.get_installed_servers()) do
+  vim.lsp.config(server, {
+      on_attach = on_attach,
+  })
+end
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Ensure the servers above are installed
-require('mason').setup()
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
