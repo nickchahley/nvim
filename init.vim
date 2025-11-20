@@ -9,7 +9,6 @@ lua require('init.options')
 	set background=dark
 	set t_Co=256
 
-	set relativenumber
 	set number
 	set mouse=a
 	set scrolloff=5
