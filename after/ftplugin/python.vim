@@ -20,5 +20,12 @@ set foldmethod=indent
 " set foldmethod=expr
 " set foldexpr=nvim_treesitter#fold_expr()
 
-
 inoremap <buffer> >> <Esc>:normal! a-><CR>a
+
+" Exec python. Show output in split
+function! Termpy()
+  exec winheight(0)/4."split" | terminal python3 %
+endfunction
+map <leader>P :call Termpy() <CR>
+" Exec python on current file. Output shows but not in a buffer.
+map <leader>p :w<CR>:!python3 %<CR>

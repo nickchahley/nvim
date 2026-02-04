@@ -5,6 +5,9 @@ local lmap = require('utils.keys').leader_map
 -- global for debugging
 dapui = require('dapui')
 
+-- Avoid "'switchbuf' setting prevented jump to location is buffer open in another window?"
+dap.defaults.fallback.switchbuf = 'usuvisible,usetab,uselast'
+
 vim.api.nvim_create_user_command(
   'DapClear',
   dap.clear_breakpoints,
@@ -33,6 +36,20 @@ lmap('dB', function()
 lmap('dL', function()
     dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
   end, { noremap = true, desc = '[D]ap toggle [L]ogpoint' })
+
+-- 2025-10-23 trying to figure out what sane defaults are for these settings
+-- I THINK it's uncaught (ie I don't want something in a try/catch to create a
+-- breakpoint)
+-- 'x' for eXception, as well as cut/clear ( dxb above)
+lmap('dxr', function()
+    dap.defaults.python.exception_breakpoints = {'raised'}
+  end, { desc = '[D]ap set E[x]ception bp raised'})
+lmap('dxu', function()
+    dap.defaults.python.exception_breakpoints = {'uncaught'}
+  end, { desc = '[D]ap set E[x]ception bp [u]ncaught'})
+lmap('dxA', function()
+    dap.defaults.python.exception_breakpoints = {'raised', 'uncaught'}
+  end, { desc = '[D]ap set E[x]ception bp [a]ll'})
 
 -- new from dap help
 vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
@@ -86,6 +103,14 @@ dapui.setup({
     repl = 'r',
     toggle = 't'
   },
+  element_mappings = {
+    -- active when element is focused
+    stacks = {
+      open = "<CR>",
+      toggle = "t",
+      expand = "h",
+    },
+  },
   floating = {
     border = 'single',
     mappings = {
@@ -97,6 +122,16 @@ dapui.setup({
 -- error message but then everything automatically shuts down
 dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
 
+-- Exceptions defaults can be configured for all or per-adapter
+-- see  help: dap.set_exception_breakpoints()
+-- 'raised': annoying b/c it catches things in try: except: blocks. Looking
+-- for alternative where those are fine, but others get raised
+-- maybe "user uncaught", todo
+-- 2025-10-23 'uncaught' seems to be it, tho I used to say opposite 
+-- I also don't know how to set these on a per-adapter basis yet
+-- {'raised', 'uncaught'}
+require('dap').defaults.fallback.exception_breakpoints = {'uncaught'}
+
 -- DAP-PYTHON
 -- register the "adapter and configurations"
 dap_py.setup('~/.virtualenvs/debugpy/bin/python', {
@@ -107,6 +142,7 @@ dap_py.setup('~/.virtualenvs/debugpy/bin/python', {
 dap_py.resolve_python = function()
   return '~/.miniconda3/bin/python'
 end
+
 
 -- AIM: want to be able to run a single test in a file by toggling breakpoint
 table.insert(require('dap').configurations.python, {

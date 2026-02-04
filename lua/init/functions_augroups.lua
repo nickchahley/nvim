@@ -12,3 +12,14 @@ vim.cmd([[
       \ endif
   augroup END
 ]])
+
+vim.cmd[[
+  function! Idsort()
+    " '<,'>call Idsort()
+    " sort lines, preserving indented groups. Does not sort the indented groups
+    " only works for indent level 1
+    silent '<,'>s/\v\n\t(\S.*)/\\x02\1/
+    '<,'>sort i
+    silent '<,'>s/\\x02/\r\t/g
+  endfunction
+]]

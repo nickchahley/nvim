@@ -14,8 +14,12 @@ local newline = t({"",""})
 local newtab = function(n) return t({"", tab(n)}) end
 
 local S = {
-  s({ trig = "scriptdir", regTrig = false, dscr = "scriptdir, dir of current file" },
+  s({ trig = "here", regTrig = false, dscr = "scriptdir, dir of current file" },
     { t("Path(__file__).parent.resolve()")
+    }
+  ),
+  s({ trig = "scriptdir", regTrig = false, dscr = "scriptdir, dir of current file" },
+    { t("scriptdir = Path(__file__).parent.resolve()")
     }
   ),
   s({ trig = "kwg", regTrig = false, dscr = "kwargs get stub" },
@@ -148,6 +152,10 @@ local S = {
     { t("import pandas as pd")
     }
   ),
+  s({ trig = "imnum", dscr = "import numpy" },
+    { t("import numpy as np")
+    }
+  ),
   s({ trig = "pld", dscr = "polars dataframe" },
     { t("pl.DataFrame") }
   ),
@@ -201,15 +209,23 @@ local S = {
     }
   ),
   s({ trig = "rve", regTrig = false, dscr = "raise ValueError" },
-    { t("raise ValueError(f\""), i(0), t("\")")
+    { t("raise ValueError(f\"{"), i(0), t("}\")")
+    }
+  ),
+  s({ trig = "rte", regTrig = false, dscr = "raise TypeError" },
+    { t("raise TypeError(f\"unsupported {type("), i(0), t(")=}\")")
     }
   ),
   s({ trig = "rnie", regTrig = false, dscr = "NotImplementedError" },
-    { t("raise NotImplementedError")
+    { t("raise NotImplementedError(f\"Unsupported {"), i(0), t("}\")")
     }
   ),
   s({ trig = "rke", regTrig = false, dscr = "raise KeyError" },
     { t("raise KeyError(f\""), i(0), t("\")")
+    }
+  ),
+  s({ trig = "rfnfe", regTrig = false, dscr = "raise FileNotFoundError" },
+    { t("raise FileNotFoundError(f\""), i(0), t("\")")
     }
   ),
   s({ trig = "cs", dscr = "commentstring" },
@@ -248,6 +264,10 @@ local S = {
     { t({"Notes", "-----", ""})
     }
   ),
+  s({ trig = "rais", regTrig = false, dscr = "docstring raises" },
+    { t({"Raises", "------", ""})
+    }
+  ),
   s({ trig = "todo", regTrig = false, dscr = "docstring todo" },
     { t({"TODO:", "-----", ""})
     }
@@ -256,13 +276,38 @@ local S = {
     { t("AnnData")
     }
   ),
-  s({ trig = "imann", dscr = "import argparse" },
+  s({ trig = "imann", dscr = "import AnnData" },
     { t("from anndata import AnnData")
+    }
+  ),
+  s({ trig = "imnet", dscr = "import networkx" },
+    { t("import networkx as nx")
     }
   ),
   s({ trig = "iterdir", regTrig = false, dscr = "files in dir pathlib" },
     {
       t("[f for f in Path(path).iterdir()]")
+    }
+  ),
+  s({ trig = "fmmi", regTrig = false, dscr = "from motif_mining import" },
+    {
+      t("from motif_mining"), i(1, ""), t(" import "), i(2, "")
+    }
+  ),
+  s({ trig = "imfls", regTrig = false, dscr = "import flatls" },
+    {
+      t("from motif_mining.utils import ("), newline,
+      t("\tflatls, "), newline,
+      t(")")
+    }
+  ),
+  s({ trig = "immida", regTrig = false, dscr = "import MIDA and friends" },
+    {
+      t("from motif_mining.miningdata import"), newline,
+      t("\tMiningData, ExtAnn,"), newline,
+      t("\tMotifData, Patterns,"), newline,
+      t("\tStringMapper, StringNetwork,"), i(1, ""), newline,
+      t(")")
     }
   ),
 }

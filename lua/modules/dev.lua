@@ -44,12 +44,20 @@ local M = {
           -- vim.diagnostic.enable(true)
           -- vim.diagnostic.enable(false)
 
-          -- "Toggle Lsp diagnostics
+          local toggle_diagnostics = function()
+            if vim.diagnostic.is_enabled()
+              then vim.diagnostic.enable(false)
+              else vim.diagnostic.enable(true)
+            end
+          end
+          vim.keymap.set('n', '<leader>tld', toggle_diagnostics, {})
+          -- "Toggle Lsp diagnostics for virtual text --- does not apply to
+          -- multiline things ("new" diagnostics)
           -- "No" = off, "Yes" = on
           vim.cmd([[
             nmap <leader>tlu <Plug>(toggle-lsp-diag-underline)
             nmap <leader>tlp <Plug>(toggle-lsp-diag-update_in_insert)
-            nmap <leader>tld  <Plug>(toggle-lsp-diag)
+            nmap <leader>tlD  <Plug>(toggle-lsp-diag)
             nmap <leader>tln <Plug>(toggle-lsp-diag-off)
             nmap <leader>tly <Plug>(toggle-lsp-diag-on)
           ]])

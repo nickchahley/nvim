@@ -27,14 +27,14 @@ local S = {
   s({ trig = "useage", regTrig = false, dscr = "useage help" },
     {
       t('if [[ ($# == 0 ) || ( $@ == "--help" ) || ( $@ == "-h" ) ]]; then'),
-      newtab(1), t('echo "Useage: $0 '), i(1, '<arg>'), t('"'),
+      newtab(1), t('echo "Useage: $(basename $0) '), i(1, '<arg>'), t('"'),
       newtab(1), t('echo "'), i(2, '<description>'), t('"'),
       newtab(1), t('exit 1'),
       nt(0), t('fi'),
     }
   ),
   s({ trig = "#", dscr = "shebang" },
-    { t("#!/usr/bin/env bash")
+    { t("#!/usr/bin/bash")
     }
   ),
   s({ trig = "all", regTrig = false, dscr = "all args macro" },
