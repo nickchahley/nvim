@@ -209,35 +209,35 @@ local S = {
     }
   ),
   s({ trig = "rve", regTrig = false, dscr = "raise ValueError" },
-    { t("raise ValueError(f\"{"), i(0), t("}\")")
+    { t("raise ValueError(f\"{"), i(1), t("}\")")
     }
   ),
   s({ trig = "rte", regTrig = false, dscr = "raise TypeError" },
-    { t("raise TypeError(f\"unsupported {type("), i(0), t(")=}\")")
+    { t("raise TypeError(f\"unsupported {type("), i(1), t(")=}\")")
     }
   ),
   s({ trig = "rnie", regTrig = false, dscr = "NotImplementedError" },
-    { t("raise NotImplementedError(f\"Unsupported {"), i(0), t("}\")")
+    { t("raise NotImplementedError(f\"Unsupported {"), i(1), t("}\")")
     }
   ),
   s({ trig = "rke", regTrig = false, dscr = "raise KeyError" },
-    { t("raise KeyError(f\""), i(0), t("\")")
+    { t("raise KeyError(f\""), i(1), t("\")")
     }
   ),
   s({ trig = "rfnfe", regTrig = false, dscr = "raise FileNotFoundError" },
-    { t("raise FileNotFoundError(f\""), i(0), t("\")")
+    { t("raise FileNotFoundError(f\""), i(1), t("\")")
     }
   ),
   s({ trig = "rioe", regTrig = false, dscr = "raise IOError" },
-    { t("raise IOError(f\""), i(0), t("\")")
+    { t("raise IOError(f\""), i(1), t("\")")
     }
   ),
   s({ trig = "cs", dscr = "commentstring" },
-    { t({'""" ', ''}), i(0, ""), t({'', '"""'})
+    { t({'""" ', ''}), i(1, ""), t({'', '"""'})
     }
   ),
   s({ trig = "css", dscr = "commentstring inline" },
-    { t({'""" '}), i(0, ""), t({' """'})
+    { t({'""" '}), i(1, ""), t({' """'})
     }
   ),
   s({ trig = "ds", regTrig = false, dscr = "docstring template" },
