@@ -45,7 +45,7 @@ local S = {
   ),
   s({ trig = "ptt", dscr = "process_time end" },
     {
-      t("print(f'process_time ["), i(0,""), t("]: {process_time() - t}')")
+      t("print(f'process_time ["), i(1,""), t("]: {process_time() - t}')")
     }
   ),
   s({ trig = "imimp", dscr = "importlib" },
@@ -53,7 +53,7 @@ local S = {
     }
   ),
   s({ trig = "mod", dscr = "importlib import module" },
-    { i(0,''), t(" = importlib.import_module('"), i(1, ''), t(")")
+    { i(1,''), t(" = importlib.import_module('"), i(2, ''), t(")")
     }
   ),
   s({ trig = "#", dscr = "shebang" },
@@ -70,7 +70,7 @@ local S = {
     }
   ),
   s({ trig = "pluc", dscr = "polars Unique Counts (columns)" },
-    {i(0, "df"), t(".with_columns(pl.all().n_unique())[:1, :]")
+    {i(1, "df"), t(".with_columns(pl.all().n_unique())[:1, :]")
     }
   ),
   s({ trig = "pllc", dscr = "PoLars Lowercase Columns" },
@@ -132,11 +132,11 @@ local S = {
     }
   ),
   s({ trig = "p[l]*c", regTrig=true, dscr = "polars col" },
-    { t("pl.col('"), i(0,''), t("')")
+    { t("pl.col('"), i(1,''), t("')")
     }
   ),
   s({ trig = ".wc", regTrig=true, dscr = ".with_columns" },
-    { t(".with_columns("), i(0, ''), t(")")
+    { t(".with_columns("), i(1, ''), t(")")
     }
   ),
   -- TODO: fix my trigger
@@ -198,7 +198,7 @@ local S = {
       t({"", "\t\tformatter_class = argparse.ArgumentDefaultsHelpFormatter,"}),
       t({"", "\t\tdescription = '"}), i(1), t("',"),
       t({"", "\t)"}),
-      t({"", "\tp.add_argument('"}), i(1, "arg"), t("', help = '"), i(2, ""), t("')"),
+      t({"", "\tp.add_argument('"}), i(2, "arg"), t("', help = '"), i(3, ""), t("')"),
       t({"", "\targs = p.parse_args(args_ls)"}),
       t({"", "\treturn args"}),
     }
@@ -226,6 +226,10 @@ local S = {
   ),
   s({ trig = "rfnfe", regTrig = false, dscr = "raise FileNotFoundError" },
     { t("raise FileNotFoundError(f\""), i(0), t("\")")
+    }
+  ),
+  s({ trig = "rioe", regTrig = false, dscr = "raise IOError" },
+    { t("raise IOError(f\""), i(0), t("\")")
     }
   ),
   s({ trig = "cs", dscr = "commentstring" },
