@@ -35,38 +35,24 @@ local M = {
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, "makes nvim stuff amazing!"
-      { 'folke/neodev.nvim', opts = {} },
-
-      {'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
+      { 
+        'folke/neodev.nvim', opts = {}, enabled=false, -- disable for lazydev
         config = function()
-          require('toggle_lsp_diagnostics').init({ virtual_text = false })
-          vim.keymap.set('n', "<leader>tlv", "<Plug>(toggle-lsp-diag-vtext)")
-          -- vim.diagnostic.enable(true)
-          -- vim.diagnostic.enable(false)
-
-          local toggle_diagnostics = function()
-            if vim.diagnostic.is_enabled()
-              then vim.diagnostic.enable(false)
-              else vim.diagnostic.enable(true)
-            end
-          end
-          vim.keymap.set('n', '<leader>tld', toggle_diagnostics, {})
-          -- "Toggle Lsp diagnostics for virtual text --- does not apply to
-          -- multiline things ("new" diagnostics)
-          -- "No" = off, "Yes" = on
-          vim.cmd([[
-            nmap <leader>tlu <Plug>(toggle-lsp-diag-underline)
-            nmap <leader>tlp <Plug>(toggle-lsp-diag-update_in_insert)
-            nmap <leader>tlD  <Plug>(toggle-lsp-diag)
-            nmap <leader>tln <Plug>(toggle-lsp-diag-off)
-            nmap <leader>tly <Plug>(toggle-lsp-diag-on)
-          ]])
-        end,
+          -- enable type checking for nvim-dap-ui to get type checking, documentation and autocompletion for all API functions.
+          require("neodev").setup({
+            library = { plugins = { "nvim-dap-ui" }, types = true },
+          })
+        end
       },
+
     },
     config = function()
       require 'config.lspconfig'
       vim.opt.signcolumn = 'yes'
+      -- toggle all diagnostics on/off, formerly used https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
+      vim.keymap.set('n', '<leader>tld', function()
+        vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+      end, { silent = true, noremap = true })
     end,
   },
   -- Highlight, edit, and navigate code
@@ -148,22 +134,84 @@ local M = {
     },
     config = function() require('config.dap') end,
   },
-  -- Please let pyright lsp use my correct conda env (haven't needed lately)
-  { 'linux-cultist/venv-selector.nvim', lazy = true,
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "nvim-telescope/telescope.nvim",
-      "mfussenegger/nvim-dap-python"
-    },
+
+  -- TRYING new neotest stuff
+  { -- Took from github insallation, put the optionals into it as dependencies
+    -- ensure that neodev is disabled/uninstalled
+    "folke/lazydev.nvim",
+    -- enabled = false,
+    ft = "lua", -- only load on lua files
     opts = {
-      path = '/home/nikoli/.miniconda3',
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
     },
-    keys = {{
-      '<leader>vs', '<cmd>:VenvSelect<cr>',
-      '<leader>vc', '<cmd>:VenvSelectCached<cr>'
-    }},
+    dependencies = {
+      { -- optional cmp completion source for require statements and module annotations
+        "hrsh7th/nvim-cmp",
+        enabled = false,
+        opts = function(_, opts)
+          opts.sources = opts.sources or {}
+          table.insert(opts.sources, {
+            name = "lazydev",
+            group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+          })
+        end,
+      },
+      { -- optional blink completion source for require statements and module annotations
+        "saghen/blink.cmp",
+        enabled = false,
+        opts = {
+          sources = {
+            -- add lazydev to your completion providers
+            default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+            providers = {
+              lazydev = {
+                name = "LazyDev",
+                module = "lazydev.integrations.blink",
+                -- make lazydev completions top priority (see `:h blink.cmp`)
+                score_offset = 100,
+              },
+            },
+          },
+        },
+      }
+    }
+  },
+  { -- getting started with neotest bc I want to do something like 'launch test and attach/open debugger if a test fails'. Saw a comment somewhere from person who had this
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-python"
+    },
+    config = function()
+      local neotest = require('neotest')
+      neotest.setup({
+        adapters = {
+          require("neotest-python")
+        },
+        dap = {
+          justMyCode = false,
+        },
+        runner = 'pytest',
+        python = '~/.miniconda3/bin/python',
+      })
+      local run = function()
+        neotest.run.run()
+      end
+      lmap('td', function()
+          neotest.run.run({strategy = 'dap'})
+        end, { desc = '[t]est [d]ebug'})
+      lmap('tr', run, { desc = '[t]est [run]'})
+    end,
   },
 
+  -- Git
   { 'tpope/vim-fugitive', lazy = false,
     config = function()
       -- Undocumented interface for supporting alternative layouts explained

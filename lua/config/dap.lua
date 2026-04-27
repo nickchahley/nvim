@@ -134,10 +134,10 @@ require('dap').defaults.fallback.exception_breakpoints = {'uncaught'}
 
 -- DAP-PYTHON
 -- register the "adapter and configurations"
+-- FIXME: why/what is this relative to dap_py.resolve_python
 dap_py.setup('~/.virtualenvs/debugpy/bin/python', {
   console = 'integratedTerminal',
 })
-
 -- force python path "for now"
 dap_py.resolve_python = function()
   return '~/.miniconda3/bin/python'
@@ -177,12 +177,6 @@ dap.adapters.nlua = function(callback, config)
 end
 
 local Dlua = function() require("osv").run_this() end
-
--- NEODEV
--- enable type checking for nvim-dap-ui to get type checking, documentation and autocompletion for all API functions.
-require("neodev").setup({
-  library = { plugins = { "nvim-dap-ui" }, types = true },
-})
 
 -- FUTURE
 -- require("nvim-dap-virtual-text").setup {commented = true,}

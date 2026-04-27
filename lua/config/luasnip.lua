@@ -13,7 +13,6 @@ ls.setup({
     -- Also load r snips when rmd file is opened
     require("luasnip.extras.filetype_functions").extend_load_ft({
       rmd = {'r'},
-      lua = {'r'},
   })
 })
 local load_snippets = function()

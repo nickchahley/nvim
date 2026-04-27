@@ -3,15 +3,10 @@ local s = ls.s
 local t = ls.text_node
 local i = ls.insert_node
 
-local tab = function(n)
-  n = n or 1
-  local tabs = ""
-  for j=1, n do tabs = tabs .. "\t" end
-  return tabs
-end
-
-local newline = t({"",""})
-local newtab = function(n) return t({"", tab(n)}) end
+local lsu = require('snippets.utils')
+local tab = lsu.tab
+local newtab = lsu.newtab
+local newline = lsu.newline
 
 local S = {
   s({ trig = "here", regTrig = false, dscr = "scriptdir, dir of current file" },
@@ -191,8 +186,8 @@ local S = {
   ),
   s({ trig = "cline", dscr = "commandline fx bp" },
     {
-      t({"import argparse, sys"}), newline,
-      newline,
+      t({"import argparse, sys"}), newline(),
+      newline(),
       t({"def cline(args_ls = sys.argv[1:]):", ""}),
       t({"\tp = argparse.ArgumentParser("}),
       t({"", "\t\tformatter_class = argparse.ArgumentDefaultsHelpFormatter,"}),
@@ -252,7 +247,7 @@ local S = {
     { t({"Returns", "-------", ""})
     }
   ),
-  s({ trig = "rett", regTrig = false, dscr = "docstring returns no newline" },
+  s({ trig = "rett", regTrig = false, dscr = "docstring returns no newline()" },
     { t({"Returns", "-------"})
     }
   ),
@@ -260,7 +255,7 @@ local S = {
     { t({"Parameters", "----------", ""})
     }
   ),
-  s({ trig = "argss", regTrig = false, dscr = "docstring args no newline" },
+  s({ trig = "argss", regTrig = false, dscr = "docstring args no newline()" },
     { t({"Parameters", "----------"})
     }
   ),
@@ -300,17 +295,17 @@ local S = {
   ),
   s({ trig = "imfls", regTrig = false, dscr = "import flatls" },
     {
-      t("from motif_mining.utils import ("), newline,
-      t("\tflatls, "), newline,
+      t("from motif_mining.utils import ("), newline(),
+      t("\tflatls, "), newline(),
       t(")")
     }
   ),
   s({ trig = "immida", regTrig = false, dscr = "import MIDA and friends" },
     {
-      t("from motif_mining.miningdata import"), newline,
-      t("\tMiningData, ExtAnn,"), newline,
-      t("\tMotifData, Patterns,"), newline,
-      t("\tStringMapper, StringNetwork,"), i(1, ""), newline,
+      t("from motif_mining.miningdata import"), newline(),
+      t("\tMiningData, ExtAnn,"), newline(),
+      t("\tMotifData, Patterns,"), newline(),
+      t("\tStringMapper, StringNetwork,"), i(1, ""), newline(),
       t(")")
     }
   ),

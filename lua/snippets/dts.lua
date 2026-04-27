@@ -3,15 +3,9 @@ local s = ls.s
 local t = ls.text_node
 local i = ls.insert_node
 
-local tab = function(n)
-  n = n or 1
-  local tabs = ""
-  for j=1, n do tabs = tabs .. "\t" end
-  return tabs
-end
-
-local newline = t({"",""})
-local newtab = function(n) return t({"", tab(n)}) end
+local tab = require('snippets.utils').tab
+local newtab = require('snippets.utils').newtab
+local newline = require('snippets.utils').newline
 
 local S = {
   s({ trig = "combo", regTrig = false, dscr = "zmk combo" },
@@ -36,7 +30,7 @@ local S = {
       newtab(1), t({'#binding-cells = <0>;'}),
       newtab(1), t('bindings = <&kp '), i(3,''), t('>, <&kp '), i(4,''), t('>;'),
       newtab(1), t('mods = <(MOD_LSFT|MOD_RSFT)>;'),
-      newline, t({'};'})
+      newline(), t({'};'})
     }
   ),
 }

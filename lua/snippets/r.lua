@@ -2,14 +2,12 @@ local ls = require('luasnip')
 local s = ls.s
 local t = ls.text_node
 local i = ls.insert_node
-local tab = function(n)
-  n = n or 1
-  local tabs = ""
-  for j=1, n do tabs = tabs .. "\t" end
-  return tabs
-end
-local newtab = function(n) return t({"", tab(n)}) end
-local newline = t({"",""})
+
+local lsu = require('snippets.utils')
+local tab = lsu.tab
+local newtab = lsu.newtab
+local newline = lsu.newline
+
 --[[ ideas todo:
 autos
   can use for >> to %>% 
@@ -37,11 +35,11 @@ local S = {
   ),
   s({ trig = "=T", dscr = "TRUE" },  { t("=TRUE ") }),
   s({ trig = "=F", dscr = "FALSE" }, { t("=FALSE ") }),
-  -- would like cleaner "this string or a partial match of this string",
+  -- -- would like cleaner "this string or a partial match of this string",
   s({trig = "= f[u]*[n]*[c]*", regTrig = true},
     {
-      t("<- function("), i(1, ""), t(") {"), newline,
-      t("\t"), i(2, ""), newline,
+      t("<- function("), i(1, ""), t(") {"), newline(),
+      t("\t"), i(2, ""), newline(),
       t("}")
   }),
   s({trig = "infu[n]*[c]*", regTrig = true, dscr = 'inline function'},
@@ -65,13 +63,13 @@ local S = {
   ),
   s({ trig = "setup", regTrig = false, dscr = "supress startup messages" },
     {
-      t("setup <- function(){"), newline,
-      t({"\t"}), i(0, ""), newline,
-      t({"}"}), newline,
-      newline,
-      t({"if (sys.nframe() == 0) {"}), newline,
-      t({"\tsuppressPackageStartupMessages(setup())"}), newline,
-      t({"} else {setup()}"}), newline
+      t("setup <- function(){"), newline(),
+      t({"\t"}), i(1, ""), newline(),
+      t({"}"}), newline(),
+      newline(),
+      t({"if (sys.nframe() == 0) {"}), newline(),
+      t({"\tsuppressPackageStartupMessages(setup())"}), newline(),
+      t({"} else {setup()}"}), newline()
     }
   ),
 }

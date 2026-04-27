@@ -5,6 +5,10 @@ local t = ls.text_node
 -- local f = ls.function_node
 -- local c = ls.choice_node
 -- local d = ls.dynamic_node
+local lsu = require('snippets.utils')
+local tab = lsu.tab
+local newtab = lsu.newtab
+local newline = lsu.newline
 
 local S = {
   s({ trig = "sbash", regTrig = false, dscr = "bash shebang" },
