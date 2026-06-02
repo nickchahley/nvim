@@ -352,3 +352,5 @@ cleanout
 rm
 rm
 inspectable
+devOps
+kubernetes

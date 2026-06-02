@@ -33,7 +33,7 @@ lua require('init.options')
 
 	" Search 
 	set ignorecase         " Use case insensitive search
-	set smartcase          " except when using capital letters
+	set smartcase          " except when using capital letters or \C
 	set incsearch          " do incremental searching
 	set hlsearch           " highlighting last used search pattern
 	set inccommand=nosplit " 

@@ -35,7 +35,7 @@ local M = {
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, "makes nvim stuff amazing!"
-      { 
+      {
         'folke/neodev.nvim', opts = {}, enabled=false, -- disable for lazydev
         config = function()
           -- enable type checking for nvim-dap-ui to get type checking, documentation and autocompletion for all API functions.
@@ -59,15 +59,10 @@ local M = {
   { 'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'eddiebergman/nvim-treesitter-pyfold' ,
     },
     build = ':TSUpdate',
     config = function()
       require('config.treesitter')
-
-      -- enable treesitter folding
-      vim.cmd.foldmethod = 'expr'
-      vim.cmd.foldexpr = 'nvim_treesitter#fold_expr()'
     end,
   },
   -- Highlight and quickfix todo comments
@@ -151,7 +146,7 @@ local M = {
     dependencies = {
       { -- optional cmp completion source for require statements and module annotations
         "hrsh7th/nvim-cmp",
-        enabled = false,
+        -- enabled = false,
         opts = function(_, opts)
           opts.sources = opts.sources or {}
           table.insert(opts.sources, {
@@ -161,6 +156,7 @@ local M = {
         end,
       },
       { -- optional blink completion source for require statements and module annotations
+        -- requires blink installed via package manager
         "saghen/blink.cmp",
         enabled = false,
         opts = {
