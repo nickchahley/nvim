@@ -3,7 +3,7 @@ local lmap = require('utils.keys').leader_map
 local M = {
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+    version = '*', -- fix 'ft_to_lang (a nil value)' error on preview
     dependencies = {
       'nvim-lua/plenary.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim',
