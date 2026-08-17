@@ -1,6 +1,10 @@
 " run with <selection> call Function()<CR>
 " e flag is for silent errors
 
+function! RmCaretM()
+	%s/$//e
+endfunction
+
 function! SwapQuote()
 	s/"/WasDoubleQuote/ge
 	s/'/"/ge
